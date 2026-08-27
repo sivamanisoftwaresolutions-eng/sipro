@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Employee Engineering Workspace | SiPro Tech</title>
+  <meta name="description" content="Internal engineering operations, sprint backlog, and system diagnostics for SiPro architects and developers.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="portals.html">
+  <div data-header></div>
+
+  <main class="dashboard">
+    <div class="container">
+      <div class="dash-top">
+        <div>
+          <span class="eyebrow">Employee Operations</span>
+          <h1 id="employee-greeting">Platform Engineering Core</h1>
+          <p>Sprint 18 · Active Pods: NorthStar Banking & HealthOps AI</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-emerald" onclick="modal('Clock-In Recorded','<p>Logged in at 09:14 IST. System telemetry active.</p>')">Clock In (IST)</button>
+          <a class="btn btn-primary" href="employee-tasks.html">Open Sprint Board</a>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <small>Open Tasks</small>
+          <strong id="kpi-open-tasks">4</strong>
+        </div>
+        <div class="kpi">
+          <small>Sprint Completion</small>
+          <strong>74%</strong>
+          <div class="progress"><i style="width:74%"></i></div>
+        </div>
+        <div class="kpi">
+          <small>Edge SLA Uptime</small>
+          <strong style="color:var(--emerald)" id="kpi-uptime">99.99%</strong>
+        </div>
+        <div class="kpi">
+          <small>P99 Avg Latency</small>
+          <strong style="color:var(--cyan)" id="kpi-latency">4.2 ms</strong>
+        </div>
+      </div>
+
+      <div class="grid two" style="margin-top:24px">
+        <div class="card">
+          <span class="eyebrow">Sprint Priority</span>
+          <h3>Sprint 18 Kanban Board</h3>
+          <p>Directly synchronized with Google Cloud Firestore. Drag, advance, and create tickets in real time.</p>
+          <div style="margin-top:auto;padding-top:16px">
+            <a href="employee-tasks.html" class="btn btn-primary">Go to Task Board</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="eyebrow">Engineering Knowledge Base</span>
+          <h3>Architecture RFCs & Runbooks</h3>
+          <p>Standard operating procedures for zero-downtime Canary deployments and Kafka partition balancing.</p>
+          <div style="margin-top:auto;padding-top:16px">
+            <a href="employee-wiki.html" class="btn btn-ghost">Open Engineering Wiki</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+  <script>
+    async function loadEmployeeStats() {
+      try {
+        const user = AuthState.getUser();
+        if (user && user.name) {
+          document.getElementById('employee-greeting').textContent = `Hello, ${user.name}!`;
+        }
+
+        const res = await fetch('/api/v1/system/stats');
+        const data = await res.json();
+        if (data.success && data.data) {
+          document.getElementById('kpi-open-tasks').textContent = data.data.openTasks || '3';
+          document.getElementById('kpi-uptime').textContent = data.data.slaUptime || '99.99%';
+          document.getElementById('kpi-latency').textContent = `${data.data.averageLatencyMs || 4.2} ms`;
+        }
+      } catch (e) {
+        console.warn('Stats load:', e);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadEmployeeStats);
+  </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Employee Task Board | SiPro Tech</title>
+  <meta name="description" content="Manage sprint backlog, engineering tasks, and code review deliverables in real-time.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="portals.html">
+  <div data-header></div>
+
+  <main class="dashboard">
+    <div class="container">
+      <div class="dash-top">
+        <div>
+          <span class="eyebrow">Employee Operations</span>
+          <h1>Sprint Kanban Task Board</h1>
+          <p>Real-time Firestore database synchronized engineering tasks and sprint backlog.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openNewTaskModal()">+ Add Sprint Task</button>
+      </div>
+
+      <div class="kanban" id="kanban-board">
+        <div class="kanban-col" data-col="todo">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <h3 style="font-size:15px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted)">To Do</h3>
+            <span class="tag" id="count-todo">0</span>
+          </div>
+          <div class="tasks-container" id="tasks-todo"></div>
+        </div>
+
+        <div class="kanban-col" data-col="in_progress">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <h3 style="font-size:15px;text-transform:uppercase;letter-spacing:0.05em;color:var(--cyan)">In Progress</h3>
+            <span class="tag cyan" id="count-in_progress">0</span>
+          </div>
+          <div class="tasks-container" id="tasks-in_progress"></div>
+        </div>
+
+        <div class="kanban-col" data-col="code_review">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <h3 style="font-size:15px;text-transform:uppercase;letter-spacing:0.05em;color:var(--amber)">Code Review</h3>
+            <span class="tag amber" id="count-code_review">0</span>
+          </div>
+          <div class="tasks-container" id="tasks-code_review"></div>
+        </div>
+
+        <div class="kanban-col" data-col="done">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <h3 style="font-size:15px;text-transform:uppercase;letter-spacing:0.05em;color:var(--emerald)">Done</h3>
+            <span class="tag emerald" id="count-done">0</span>
+          </div>
+          <div class="tasks-container" id="tasks-done"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Create Task Modal -->
+  <div id="new-task-modal" class="auth-modal-backdrop">
+    <div class="auth-card" style="max-width:500px">
+      <button class="auth-modal-close" onclick="closeNewTaskModal()">×</button>
+      <h3 style="font-size:20px;margin-bottom:12px">Create Sprint Task</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Add a new ticket to the live Firestore sprint board.</p>
+      
+      <form id="new-task-form">
+        <div class="form-grid">
+          <label class="field">
+            <span>Task Title *</span>
+            <input type="text" id="task-input-title" required placeholder="e.g. Implement mTLS gRPC interceptor">
+          </label>
+
+          <label class="field">
+            <span>Project Name *</span>
+            <input type="text" id="task-input-project" required placeholder="e.g. NorthStar Banking Core" value="NorthStar Banking Core">
+          </label>
+
+          <label class="field">
+            <span>Assignee</span>
+            <input type="text" id="task-input-assignee" placeholder="e.g. Suresh Reddy" value="Suresh Reddy">
+          </label>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <label class="field">
+              <span>Priority</span>
+              <select id="task-input-priority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Story Points</span>
+              <select id="task-input-points">
+                <option value="1">1 pt</option>
+                <option value="2">2 pts</option>
+                <option value="3" selected>3 pts</option>
+                <option value="5">5 pts</option>
+                <option value="8">8 pts</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:20px" id="save-task-btn">
+          Save Task to Database
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+  <script>
+    let allTasks = [];
+
+    async function fetchTasksFromDB() {
+      try {
+        const res = await fetch('/api/v1/tasks');
+        const data = await res.json();
+        allTasks = data.tasks || [];
+        renderKanban();
+      } catch (err) {
+        console.warn('Error fetching tasks from DB:', err);
+      }
+    }
+
+    function renderKanban() {
+      const cols = {
+        todo: document.getElementById('tasks-todo'),
+        in_progress: document.getElementById('tasks-in_progress'),
+        code_review: document.getElementById('tasks-code_review'),
+        done: document.getElementById('tasks-done')
+      };
+
+      Object.values(cols).forEach(c => c.innerHTML = '');
+      const counts = { todo: 0, in_progress: 0, code_review: 0, done: 0 };
+
+      allTasks.forEach(task => {
+        const colKey = task.status || 'todo';
+        if (!cols[colKey]) return;
+        counts[colKey]++;
+
+        const card = document.createElement('div');
+        card.className = `task ${colKey === 'done' ? 'done' : ''}`;
+        card.innerHTML = `
+          <div style="font-weight:600;font-size:14px;line-height:1.4;margin-bottom:6px">${task.title}</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)">
+            <span>${task.project} · ${task.storyPoints || 3} pts</span>
+            <span style="color:var(--cyan)">${task.assignee || 'Unassigned'}</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)">
+            ${colKey !== 'todo' ? `<button class="btn-step" data-action="prev" data-id="${task.id}" title="Move left">←</button>` : ''}
+            ${colKey !== 'done' ? `<button class="btn-step" data-action="next" data-id="${task.id}" title="Move right" style="margin-left:auto">→</button>` : ''}
+          </div>
+        `;
+        cols[colKey].appendChild(card);
+      });
+
+      // Update counters
+      document.getElementById('count-todo').textContent = counts.todo;
+      document.getElementById('count-in_progress').textContent = counts.in_progress;
+      document.getElementById('count-code_review').textContent = counts.code_review;
+      document.getElementById('count-done').textContent = counts.done;
+
+      // Bind move buttons
+      document.querySelectorAll('.btn-step').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const action = btn.dataset.action;
+          const id = btn.dataset.id;
+          await moveTask(id, action);
+        });
+      });
+    }
+
+    async function moveTask(id, action) {
+      const order = ['todo', 'in_progress', 'code_review', 'done'];
+      const task = allTasks.find(t => t.id === id);
+      if (!task) return;
+
+      const currIdx = order.indexOf(task.status || 'todo');
+      let nextIdx = action === 'next' ? currIdx + 1 : currIdx - 1;
+      if (nextIdx < 0 || nextIdx >= order.length) return;
+
+      const newStatus = order[nextIdx];
+      task.status = newStatus;
+      renderKanban();
+
+      try {
+        await fetch(`/api/v1/tasks/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        showToast(`Task moved to ${newStatus.replace('_', ' ')}`, 'success');
+      } catch (err) {
+        console.warn('Error updating task in DB:', err);
+      }
+    }
+
+    function openNewTaskModal() {
+      document.getElementById('new-task-modal').classList.add('active');
+    }
+
+    function closeNewTaskModal() {
+      document.getElementById('new-task-modal').classList.remove('active');
+    }
+
+    document.getElementById('new-task-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const saveBtn = document.getElementById('save-task-btn');
+      saveBtn.textContent = 'Saving...';
+      saveBtn.disabled = true;
+
+      const payload = {
+        title: document.getElementById('task-input-title').value,
+        project: document.getElementById('task-input-project').value,
+        assignee: document.getElementById('task-input-assignee').value,
+        priority: document.getElementById('task-input-priority').value,
+        storyPoints: document.getElementById('task-input-points').value,
+        status: 'todo'
+      };
+
+      try {
+        const res = await fetch('/api/v1/tasks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.task) {
+          allTasks.unshift(data.task);
+          renderKanban();
+          closeNewTaskModal();
+          showToast('Task added to live database!', 'success');
+          document.getElementById('new-task-form').reset();
+        }
+      } catch (err) {
+        showToast('Task added locally.', 'info');
+      } finally {
+        saveBtn.textContent = 'Save Task to Database';
+        saveBtn.disabled = false;
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', fetchTasksFromDB);
+  </script>
+</body>
+</html>

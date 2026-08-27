@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "UserProfile": {
+      "collection": "users",
+      "description": "User profiles across client, candidate, employee, and administrator roles",
+      "fields": {
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Full name" },
+        "role": { "type": "string", "description": "Role: client | candidate | employee | admin" },
+        "company": { "type": "string", "description": "Company name for clients" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "createdAt": { "type": "string", "description": "Creation ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "Update ISO timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    },
+    "ContactInquiry": {
+      "collection": "contact_inquiries",
+      "description": "Contact and RFP inquiries submitted via website",
+      "fields": {
+        "name": { "type": "string", "description": "Contact name" },
+        "email": { "type": "string", "description": "Contact email" },
+        "company": { "type": "string", "description": "Company name" },
+        "service": { "type": "string", "description": "Service interest" },
+        "budget": { "type": "string", "description": "Budget range" },
+        "message": { "type": "string", "description": "Message or project scope" },
+        "status": { "type": "string", "description": "Status: new | contacted | qualified | closed" },
+        "createdAt": { "type": "string", "description": "Timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    },
+    "ClientProject": {
+      "collection": "client_projects",
+      "description": "Active and completed client software engineering projects and pods",
+      "fields": {
+        "clientId": { "type": "string", "description": "Client user ID or email" },
+        "title": { "type": "string", "description": "Project title" },
+        "type": { "type": "string", "description": "Package: Sprint MVP | Dedicated Pod | Architecture" },
+        "status": { "type": "string", "description": "Status: Discovery | In Progress | Review | Deployed" },
+        "progress": { "type": "number", "description": "Completion percentage (0-100)" },
+        "leadArchitect": { "type": "string", "description": "Assigned lead architect" },
+        "sprint": { "type": "string", "description": "Current sprint name" },
+        "monthlyRetainer": { "type": "number", "description": "Monthly retainer amount in INR" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    },
+    "Invoice": {
+      "collection": "invoices",
+      "description": "Tax invoices and receipts with GST breakdowns",
+      "fields": {
+        "invoiceNumber": { "type": "string", "description": "Official tax invoice number" },
+        "clientId": { "type": "string", "description": "Client email or ID" },
+        "clientName": { "type": "string", "description": "Client entity or individual" },
+        "description": { "type": "string", "description": "Invoice item description" },
+        "baseAmount": { "type": "number", "description": "Base taxable amount in INR" },
+        "gstAmount": { "type": "number", "description": "18% GST in INR" },
+        "totalAmount": { "type": "number", "description": "Total payable in INR" },
+        "gstin": { "type": "string", "description": "Client GSTIN" },
+        "paymentMethod": { "type": "string", "description": "Payment mode: upi | card | netbanking" },
+        "status": { "type": "string", "description": "Status: paid | pending | refunded" },
+        "paidAt": { "type": "string", "description": "Payment ISO timestamp" },
+        "createdAt": { "type": "string", "description": "Creation ISO timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    },
+    "CandidateApplication": {
+      "collection": "candidate_applications",
+      "description": "Talent acceleration enrollments and job applications",
+      "fields": {
+        "candidateEmail": { "type": "string", "description": "Candidate email" },
+        "candidateName": { "type": "string", "description": "Candidate full name" },
+        "track": { "type": "string", "description": "Applied track: Standard Foundations | Advanced Capstone | Core Engineering" },
+        "experience": { "type": "string", "description": "Years of experience" },
+        "github": { "type": "string", "description": "GitHub profile URL" },
+        "status": { "type": "string", "description": "Status: applied | assessment_pending | evaluated | enrolled" },
+        "score": { "type": "number", "description": "Assessment score out of 100" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    },
+    "EmployeeTask": {
+      "collection": "employee_tasks",
+      "description": "Engineering pod tasks, backlog tickets, and sprint assignments",
+      "fields": {
+        "title": { "type": "string", "description": "Task summary" },
+        "project": { "type": "string", "description": "Associated project name" },
+        "assignee": { "type": "string", "description": "Assignee name or email" },
+        "priority": { "type": "string", "description": "Priority: Low | Medium | High | Critical" },
+        "status": { "type": "string", "description": "Status: todo | in_progress | code_review | done" },
+        "storyPoints": { "type": "number", "description": "Story points" },
+        "dueDate": { "type": "string", "description": "Due date" },
+        "createdAt": { "type": "string", "description": "Timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    }
+  }
+}

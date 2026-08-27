@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Client Delivery Dashboard | SiPro Tech</title>
+  <meta name="description" content="Real-time workspace for enterprise clients tracking sprints, deliverables, and engineering pods.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="portals.html">
+  <div data-header></div>
+
+  <main class="dashboard">
+    <div class="container">
+      <div class="dash-top">
+        <div>
+          <span class="eyebrow">Client Workspace</span>
+          <h1 id="client-greeting">Good morning, Arjun.</h1>
+          <p id="client-project-subtitle">NorthStar ERP & Cloud Microservices · Delivery SLA is 99.95%.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <a class="btn btn-ghost" href="client-deliverables.html">Sprint Deliverables</a>
+          <a class="btn btn-primary" href="client-billing.html">View Billing Ledger</a>
+        </div>
+      </div>
+
+      <div class="dash-layout">
+        <nav class="side-nav">
+          <a class="active" href="client-dashboard.html">Overview</a>
+          <a href="client-deliverables.html">Deliverables</a>
+          <a href="client-billing.html">Billing Ledger</a>
+          <a href="client-support.html">Support</a>
+        </nav>
+
+        <section>
+          <div class="kpi-row">
+            <div class="kpi">
+              <small>Sprint Milestone</small>
+              <strong id="kpi-milestone">68%</strong>
+              <div class="progress"><i id="kpi-progress-bar" style="width:68%"></i></div>
+            </div>
+            <div class="kpi">
+              <small>Active Pod Velocity</small>
+              <strong>42 pts/sprint</strong>
+            </div>
+            <div class="kpi">
+              <small>Open Sprint Tickets</small>
+              <strong id="kpi-open-tickets">3</strong>
+            </div>
+            <div class="kpi">
+              <small>Retainer Status</small>
+              <strong style="color:var(--emerald)" id="kpi-retainer-status">Active</strong>
+            </div>
+          </div>
+
+          <div style="margin-top:24px">
+            <h3 style="font-size:18px;margin-bottom:16px">Active Projects & Pods (Live Firestore DB)</h3>
+            <div class="grid two" id="client-projects-grid">
+              <div class="card">
+                <span class="eyebrow">Loading Project...</span>
+                <p>Connecting to backend database...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two" style="margin-top:24px">
+            <div class="card">
+              <span class="eyebrow">Sprint Milestones</span>
+              <h3>Upcoming Staging Review</h3>
+              <p>API integration and zero-trust mTLS service-to-service authentication are in peer review.</p>
+              <div style="margin-top:auto;padding-top:16px">
+                <a href="client-deliverables.html" class="btn btn-ghost">Open Deliverables Board</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <span class="eyebrow">Enterprise Support SLA</span>
+              <h3>Dedicated Lead Architect</h3>
+              <p>Rajesh Varma is on-call for your pod. Urgent escalation response within 15 minutes.</p>
+              <div style="margin-top:auto;padding-top:16px">
+                <a href="client-support.html" class="btn btn-primary">Open SLA Ticket</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+  <script>
+    async function loadClientDashboardData() {
+      const user = AuthState.getUser();
+      if (user) {
+        document.getElementById('client-greeting').textContent = `Good day, ${user.name || user.email}.`;
+      }
+
+      try {
+        const res = await fetch('/api/v1/projects');
+        const data = await res.json();
+        const projects = data.projects || [];
+        const grid = document.getElementById('client-projects-grid');
+
+        if (projects.length === 0) {
+          grid.innerHTML = `<div class="card"><p>No active projects found. Contact SiPro to launch your pod.</p></div>`;
+          return;
+        }
+
+        grid.innerHTML = projects.map(p => `
+          <article class="card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <span class="eyebrow">${p.type}</span>
+              <span class="status ${p.status === 'In Progress' ? 'due' : 'paid'}">${p.status}</span>
+            </div>
+            <h3 style="font-size:18px;margin-bottom:8px">${p.title}</h3>
+            <p style="font-size:14px;color:var(--muted);margin-bottom:14px">${p.sprint || 'Sprint 1'}</p>
+            <div style="margin-bottom:16px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                <span>Progress</span>
+                <strong>${p.progress}%</strong>
+              </div>
+              <div class="progress"><i style="width:${p.progress}%"></i></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;border-top:1px solid var(--border);padding-top:12px">
+              <span style="color:var(--muted)">Lead Architect</span>
+              <strong style="color:var(--cyan)">${p.leadArchitect ? p.leadArchitect.split('(')[0] : 'Lead Architect'}</strong>
+            </div>
+          </article>
+        `).join('');
+
+        if (projects[0]) {
+          document.getElementById('kpi-milestone').textContent = `${projects[0].progress}%`;
+          document.getElementById('kpi-progress-bar').style.width = `${projects[0].progress}%`;
+          document.getElementById('client-project-subtitle').textContent = `${projects[0].title} · ${projects[0].sprint}`;
+        }
+      } catch (err) {
+        console.warn('Error loading client projects:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadClientDashboardData);
+  </script>
+</body>
+</html>

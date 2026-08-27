@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Client Billing & Tax Invoices | SiPro Tech</title>
+  <meta name="description" content="Manage enterprise retainers, milestones, and GST compliant tax invoices with SiPro Technologies.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="portals.html">
+  <div data-header></div>
+
+  <main class="dashboard">
+    <div class="container">
+      <div class="dash-top">
+        <div>
+          <span class="eyebrow">Client Workspace</span>
+          <h1>Billing Ledger & Tax Invoices</h1>
+          <p>Official 18% GST compliant invoices, milestone payments, and retainer receipts.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="checkout.html">New Retainer Payment</a>
+        </div>
+      </div>
+
+      <div class="dash-layout">
+        <nav class="side-nav">
+          <a href="client-dashboard.html">Overview</a>
+          <a href="client-deliverables.html">Deliverables</a>
+          <a class="active" href="client-billing.html">Billing Ledger</a>
+          <a href="client-support.html">Support</a>
+        </nav>
+
+        <section>
+          <div class="kpi-row">
+            <div class="kpi">
+              <small>Billing Entity</small>
+              <strong style="font-size:16px" id="billing-client-name">NorthStar Digital Ltd</strong>
+            </div>
+            <div class="kpi">
+              <small>GSTIN Registered</small>
+              <strong style="font-family:monospace;font-size:14px">36AAACS1234A1Z5</strong>
+            </div>
+            <div class="kpi">
+              <small>Retainer Status</small>
+              <strong style="color:var(--emerald)">Active (P99 Pod)</strong>
+            </div>
+            <div class="kpi">
+              <small>Lifetime Settled</small>
+              <strong style="color:var(--cyan)" id="billing-lifetime-total">₹5,28,640</strong>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top:24px">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Engagement / Description</th>
+                  <th>Total (Inc. 18% GST)</th>
+                  <th>Payment Method</th>
+                  <th>Status</th>
+                  <th>Receipt</th>
+                </tr>
+              </thead>
+              <tbody id="invoices-tbody">
+                <tr>
+                  <td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">Loading invoices from live database...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+  <script>
+    async function loadInvoicesFromDB() {
+      const tbody = document.getElementById('invoices-tbody');
+      const lifetimeEl = document.getElementById('billing-lifetime-total');
+      const clientNameEl = document.getElementById('billing-client-name');
+      const user = AuthState.getUser();
+      const emailQuery = user ? `?email=${encodeURIComponent(user.email)}` : '';
+
+      try {
+        const res = await fetch(`/api/v1/invoices${emailQuery}`);
+        const data = await res.json();
+        const invoices = data.invoices || [];
+
+        if (invoices.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted)">No invoices recorded yet.</td></tr>`;
+          return;
+        }
+
+        let lifetime = 0;
+        if (user) {
+          clientNameEl.textContent = user.name || user.email;
+        }
+
+        tbody.innerHTML = invoices.map(inv => {
+          lifetime += (inv.totalAmount || 0);
+          const isPaid = inv.status === 'paid';
+          const badgeClass = isPaid ? 'status paid' : 'status due';
+          const badgeText = isPaid ? 'Paid' : 'Due';
+
+          return `
+            <tr>
+              <td><strong style="font-family:monospace;color:var(--cyan)">${inv.invoiceNumber || inv.id}</strong></td>
+              <td>${inv.description || 'Dedicated Engineering Retainer'}</td>
+              <td><strong>${formatINR.format(inv.totalAmount || inv.baseAmount || 0)}</strong></td>
+              <td><span style="font-size:12px;color:var(--muted)">${inv.paymentMethod || 'UPI / Transfer'}</span></td>
+              <td><span class="${badgeClass}">${badgeText}</span></td>
+              <td>
+                <button type="button" class="btn btn-ghost" style="padding:4px 10px;font-size:12px" onclick="downloadReceipt('${inv.invoiceNumber || inv.id}', '${inv.description}', ${inv.totalAmount})">
+                  PDF Receipt
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        if (lifetimeEl) {
+          lifetimeEl.textContent = formatINR.format(lifetime);
+        }
+      } catch (err) {
+        console.warn('Error loading invoices:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadInvoicesFromDB);
+  </script>
+</body>
+</html>

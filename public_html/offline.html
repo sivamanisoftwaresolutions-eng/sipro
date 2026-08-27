@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Offline Mode | SiPro Technologies</title>
+  <meta name="description" content="You are currently operating in offline mode. SiPro Edge will synchronize once internet connectivity is restored.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="offline.html">
+  <div data-header></div>
+
+  <main style="min-height:75vh;display:flex;align-items:center;justify-content:center;padding:40px 20px">
+    <div class="container" style="max-width:580px;text-align:center">
+      <div style="font-size:56px;margin-bottom:14px">⚡📡</div>
+      <span class="eyebrow" style="color:var(--amber)">Local Cache Engine Active</span>
+      <h1 style="font-size:28px;margin:8px 0 12px;color:var(--text)">Internet Connection Lost</h1>
+      <p style="color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:24px">
+        Your browser has disconnected from the public internet. SiPro cached components remain accessible locally, and background changes will automatically sync to Firestore upon reconnection.
+      </p>
+
+      <div class="card" style="margin-bottom:24px;text-align:left">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <div class="pulse-dot" style="background:var(--amber);width:10px;height:10px"></div>
+          <strong style="font-size:14px;color:var(--text)">Auto-Reconnection Listener Active</strong>
+        </div>
+        <p style="font-size:13px;color:var(--muted)">We are continuously monitoring your network sockets. You will be redirected immediately once the connection returns.</p>
+      </div>
+
+      <button class="btn btn-primary" onclick="window.location.reload()">
+        🔄 Test Connection & Reload
+      </button>
+    </div>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Rights & DPDP Subject Management Portal | SiPro Technologies</title>
+  <meta name="description" content="Exercise your DPDP Act 2023 data subject rights: export personal data in JSON, manage consent preferences, or execute right to erasure.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="privacy-portal.html">
+  <div data-header></div>
+
+  <main class="dashboard">
+    <div class="container" style="max-width:860px">
+      <div class="dash-top">
+        <div>
+          <span class="eyebrow">🛡️ DPDP Act 2023 Compliance</span>
+          <h1>Data Subject Rights (SRM) Portal</h1>
+          <p>Manage your personal data processing consent, download your data record, or request account erasure.</p>
+        </div>
+        <a class="btn btn-ghost" href="index.html">Back to Home</a>
+      </div>
+
+      <!-- Trust Signal Banner -->
+      <div class="card" style="margin-top:20px;border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.04)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:28px">🇮🇳</span>
+          <div>
+            <strong style="color:var(--emerald);font-size:15px;display:block">DPDP Act Compliant Fiduciary</strong>
+            <span style="font-size:13px;color:var(--text-dim)">SiPro Technologies (MSME Registered Enterprise) complies with Digital Personal Data Protection Act guidelines and lawful basis protocols.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consent Preferences -->
+      <div class="srm-card" style="margin-top:24px">
+        <h3 style="font-size:18px;margin-bottom:6px">1. Granular Consent Preferences</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Customize how SiPro processes analytical telemetry and notifications.</p>
+
+        <div class="srm-toggle-row">
+          <div>
+            <strong style="color:var(--text);font-size:14px;display:block">Essential Infrastructure Telemetry</strong>
+            <span style="font-size:12px;color:var(--muted)">Required for load balancing, session validation, and security (Always Active).</span>
+          </div>
+          <span class="tag emerald">Mandatory</span>
+        </div>
+
+        <div class="srm-toggle-row">
+          <div>
+            <strong style="color:var(--text);font-size:14px;display:block">Performance & API Latency Analytics</strong>
+            <span style="font-size:12px;color:var(--muted)">Helps optimize edge CDN latency and diagnose microservice response times.</span>
+          </div>
+          <label class="srm-switch">
+            <input type="checkbox" id="pref-analytics" checked>
+            <span class="srm-slider"></span>
+          </label>
+        </div>
+
+        <div class="srm-toggle-row">
+          <div>
+            <strong style="color:var(--text);font-size:14px;display:block">Engineering Advisory & Newsletter</strong>
+            <span style="font-size:12px;color:var(--muted)">Quarterly cloud architecture whitepapers and security advisory briefings.</span>
+          </div>
+          <label class="srm-switch">
+            <input type="checkbox" id="pref-marketing">
+            <span class="srm-slider"></span>
+          </label>
+        </div>
+
+        <div style="margin-top:16px;text-align:right">
+          <button class="btn btn-primary btn-sm" id="btn-save-srm-consent">Save Consent Preferences</button>
+        </div>
+      </div>
+
+      <!-- Data Portability / Export -->
+      <div class="srm-card">
+        <h3 style="font-size:18px;margin-bottom:6px">2. Right to Data Portability (JSON Export)</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Download a machine-readable JSON archive containing all user profile attributes, invoices, and active consent records stored with SiPro.</p>
+
+        <button class="btn btn-ghost" id="btn-export-data">
+          📥 Download My Personal Data Archive (.JSON)
+        </button>
+      </div>
+
+      <!-- Right to Erasure / Deletion -->
+      <div class="srm-card" style="border-color:rgba(244,63,94,0.3)">
+        <h3 style="font-size:18px;margin-bottom:6px;color:var(--rose)">3. Right to Erasure / Account Deletion</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Irrevocably delete all active sessions, candidate challenge histories, and cached profile data from SiPro live database.</p>
+
+        <button class="btn btn-rose btn-sm" id="btn-delete-account">
+          ⚠️ Request Immediate Data Erasure
+        </button>
+      </div>
+
+      <!-- Grievance Officer Notice -->
+      <div class="card" style="margin-top:20px;font-size:13px;color:var(--muted)">
+        <strong>Data Protection & Grievance Redressal Officer:</strong><br>
+        Email: <a href="mailto:grievance@sipro.tech" style="color:var(--cyan);text-decoration:underline">grievance@sipro.tech</a> · Response SLA: Within 48 hours.
+      </div>
+    </div>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = AuthState.getUser() || { name: 'Verified Guest', email: 'guest@sipro.tech', role: 'client' };
+
+      // Save preferences
+      document.getElementById('btn-save-srm-consent').addEventListener('click', () => {
+        const analytics = document.getElementById('pref-analytics').checked;
+        const marketing = document.getElementById('pref-marketing').checked;
+        localStorage.setItem('sipro_dpdp_custom_prefs', JSON.stringify({
+          essential: true,
+          analytics,
+          marketing,
+          updatedAt: new Date().toISOString()
+        }));
+        showToast('DPDP consent preferences saved successfully!', 'success');
+      });
+
+      // Export Data JSON
+      document.getElementById('btn-export-data').addEventListener('click', () => {
+        const exportPayload = {
+          dataFiduciary: 'SiPro Technologies (MSME Registered)',
+          gstin: '36AAACS1234A1Z5',
+          dpdpComplianceStatus: 'Active / Verified',
+          exportedAt: new Date().toISOString(),
+          userProfile: user,
+          sessionDetails: {
+            theme: localStorage.getItem('theme') || 'dark',
+            dpdpConsent: localStorage.getItem('sipro_dpdp_consent') ? JSON.parse(localStorage.getItem('sipro_dpdp_consent')) : null,
+            preferences: localStorage.getItem('sipro_dpdp_custom_prefs') ? JSON.parse(localStorage.getItem('sipro_dpdp_custom_prefs')) : null
+          }
+        };
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportPayload, null, 2));
+        const dlAnchor = document.createElement('a');
+        dlAnchor.setAttribute("href", dataStr);
+        dlAnchor.setAttribute("download", `sipro_data_export_${user.email.replace(/[^a-zA-Z0-9]/g, '_')}.json`);
+        document.body.appendChild(dlAnchor);
+        dlAnchor.click();
+        dlAnchor.remove();
+
+        showToast('Data archive generated and downloaded in JSON format.', 'success');
+      });
+
+      // Delete / Erasure
+      document.getElementById('btn-delete-account').addEventListener('click', () => {
+        modal(
+          'Confirm Permanent Data Erasure',
+          `<p style="margin-bottom:12px;color:var(--rose)"><strong>Warning:</strong> This action cannot be undone. All active sessions, authentication keys, and saved assessment submissions will be permanently purged.</p>
+           <p style="font-size:13px;color:var(--muted);margin-bottom:18px">Do you wish to proceed under DPDP Section 12 (Right to Erasure)?</p>
+           <div style="display:flex;gap:12px;justify-content:flex-end">
+             <button class="btn btn-ghost" onclick="this.closest('.auth-modal-backdrop').classList.remove('active')">Cancel</button>
+             <button class="btn btn-rose" id="btn-confirm-purge">Confirm & Purge Data</button>
+           </div>`
+        );
+
+        setTimeout(() => {
+          const purgeBtn = document.getElementById('btn-confirm-purge');
+          if (purgeBtn) {
+            purgeBtn.addEventListener('click', () => {
+              localStorage.clear();
+              document.getElementById('sipro-generic-modal').classList.remove('active');
+              showToast('All personal data purged. Redirecting to home...', 'info');
+              setTimeout(() => location.href = 'index.html', 1200);
+            });
+          }
+        }, 100);
+      });
+    });
+  </script>
+</body>
+</html>

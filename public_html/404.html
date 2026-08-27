@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>404 - Page Not Found | SiPro Technologies</title>
+  <meta name="description" content="The requested engineering resource or endpoint was not found on the SiPro Edge network.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="404.html">
+  <div data-header></div>
+
+  <main style="min-height:75vh;display:flex;align-items:center;justify-content:center;padding:40px 20px">
+    <div class="container" style="max-width:620px;text-align:center">
+      <div style="font-size:72px;font-weight:900;letter-spacing:-0.04em;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">
+        404
+      </div>
+      <div style="font-size:40px;margin:12px 0 6px">🧭</div>
+      <h1 style="font-size:24px;margin-bottom:8px;color:var(--text)">Endpoint Route Not Found</h1>
+      <p style="color:var(--muted);font-size:15px;margin-bottom:28px">
+        The cluster route you requested does not exist or has been relocated to a newer microservice version.
+      </p>
+
+      <div class="card" style="background:var(--navy-surface);text-align:left;padding:18px 22px;margin-bottom:24px">
+        <div style="font-size:12px;font-family:monospace;color:var(--cyan);margin-bottom:6px">HTTP Status: 404 Not Found · Edge PoP: HYD-01</div>
+        <div style="font-size:13px;color:var(--text-dim)">Recommended destinations:</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <a href="index.html" class="btn btn-primary btn-sm">🏠 Home Page</a>
+          <a href="services.html" class="btn btn-ghost btn-sm">⚡ Services</a>
+          <a href="pricing.html" class="btn btn-ghost btn-sm">💳 Pricing & Retainers</a>
+          <a href="portals.html" class="btn btn-ghost btn-sm">🔐 Client & Talent Portals</a>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn btn-primary">
+        ← Return to Safe Harbor (Homepage)
+      </a>
+    </div>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+</body>
+</html>

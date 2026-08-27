@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us | SiPro Technologies</title>
+  <meta name="description" content="Get in touch with SiPro Technologies for cloud architecture, enterprise web platforms, and engineering inquiries.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="contact.html">
+  <div data-header></div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Direct Engineering Channel</span>
+        <h1>Bring us your <em>complex architecture.</em></h1>
+        <p class="lead">Tell us what you are building, scaling, or migrating. Our senior technical team will respond with an architectural review and actionable delivery estimate.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid two">
+        <form class="form-card" data-contact>
+          <h2 style="font-size:22px;margin-bottom:20px">Send an Engineering Inquiry</h2>
+          <div class="form-grid">
+            <label class="field">
+              <span>Full Name *</span>
+              <input name="name" required placeholder="e.g. Arjun Sharma">
+            </label>
+            <label class="field">
+              <span>Work Email *</span>
+              <input name="email" type="email" required placeholder="you@company.com">
+            </label>
+            <label class="field">
+              <span>Company / Organization</span>
+              <input name="company" placeholder="e.g. Acme Corp">
+            </label>
+            <label class="field">
+              <span>Domain of Interest</span>
+              <select name="service">
+                <option>Cloud Architecture & Microservices</option>
+                <option>Enterprise Web Development</option>
+                <option>Intelligent Automation & AI</option>
+                <option>Cybersecurity & DevOps Audits</option>
+                <option>Talent Acceleration Programs</option>
+              </select>
+            </label>
+            <label class="field full">
+              <span>Project Scope & Requirements *</span>
+              <textarea name="message" required minlength="10" placeholder="Please outline your technical stack, timeline, or current bottlenecks."></textarea>
+            </label>
+          </div>
+          <button class="btn btn-primary btn-lg" type="submit">Submit Inquiry</button>
+        </form>
+
+        <aside class="card" style="height:fit-content">
+          <span class="eyebrow">Global Operations</span>
+          <h2>SiPro Technologies</h2>
+          <p style="margin-bottom:24px">Hanamkonda, Telangana, India</p>
+
+          <div class="signal-list">
+            <div class="signal">
+              <span>General & Business</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <strong><a href="mailto:contact@sipro.tech" style="color:var(--cyan);font-size:15px">contact@sipro.tech</a></strong>
+                <button type="button" class="copy-pill" data-copy="contact@sipro.tech" data-copy-label="Email" title="Copy Email">Copy</button>
+              </div>
+            </div>
+            <div class="signal">
+              <span>Technical & SLA Support</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <strong><a href="mailto:support@sipro.tech" style="color:var(--cyan);font-size:15px">support@sipro.tech</a></strong>
+                <button type="button" class="copy-pill" data-copy="support@sipro.tech" data-copy-label="Support Email" title="Copy Email">Copy</button>
+              </div>
+            </div>
+            <div class="signal">
+              <span>GST Identification Number</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <strong style="font-family:monospace;font-size:14px">36AAACS1234A1Z5</strong>
+                <button type="button" class="copy-pill" data-copy="36AAACS1234A1Z5" data-copy-label="GSTIN" title="Copy GSTIN">Copy</button>
+              </div>
+            </div>
+            <div class="signal">
+              <span>Response Window</span>
+              <strong style="font-size:15px">Within 24 Hours</strong>
+            </div>
+            <div class="signal">
+              <span>Operating Hours</span>
+              <strong style="font-size:15px">Mon–Fri · 9am–7pm IST</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Interactive Scope Estimator -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Interactive Estimator</span>
+            <h2>Estimate your dedicated delivery pod.</h2>
+          </div>
+          <p>Adjust dedicated engineers and engagement length to preview monthly retainer costs.</p>
+        </div>
+        <div class="estimator">
+          <div class="estimate-row">
+            <label for="engineers">Dedicated Full-Stack Engineers: <strong id="engineers-value" style="color:var(--cyan)">2</strong></label>
+            <output id="estimate-total" class="estimate-total">₹1,35,000</output>
+            <input id="engineers" type="range" min="1" max="8" value="2">
+          </div>
+          <div class="estimate-row">
+            <label for="months">Project Duration: <strong id="months-value" style="color:var(--cyan)">3 months</strong></label>
+            <input id="months" type="range" min="1" max="12" value="3">
+          </div>
+          <p style="font-size:13px;color:var(--muted);margin-top:14px">Base model: engineers × duration with 10% discount on 3+ month commitments. GST calculated at checkout.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+</body>
+</html>

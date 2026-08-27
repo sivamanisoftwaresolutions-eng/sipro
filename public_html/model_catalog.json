@@ -1,0 +1,60 @@
+{
+  "models": [
+    {
+      "slug": "qwen2.5-coder:1.5b",
+      "display_name": "Qwen 2.5 Coder 1.5B (Fast)",
+      "description": "Lightweight local coding model via Ollama",
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 1,
+      "base_instructions": "",
+      "context_window": 8192,
+      "max_context_window": 8192,
+      "effective_context_window_percent": 95,
+      "supported_reasoning_levels": [],
+      "supports_reasoning_summaries": false,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "default_verbosity": null,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "tokens",
+        "limit": 4096
+      },
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "qwen2.5-coder:7b",
+      "display_name": "Qwen 2.5 Coder 7B",
+      "description": "Standard local coding model via Ollama",
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "context_window": 8192,
+      "max_context_window": 8192,
+      "effective_context_window_percent": 95,
+      "supported_reasoning_levels": [],
+      "supports_reasoning_summaries": false,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "default_verbosity": null,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "tokens",
+        "limit": 4096
+      },
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    }
+  ]
+}

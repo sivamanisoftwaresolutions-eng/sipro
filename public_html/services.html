@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services & Solutions | SiPro Technologies</title>
+  <meta name="description" content="Explore SiPro Technologies enterprise capabilities: Cloud Architecture, Enterprise Web Development, Microservices, and Intelligent Automation.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="services.html">
+  <div data-header></div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Enterprise Capabilities</span>
+        <h1>Architecture & engineering for the <em>modern enterprise.</em></h1>
+        <p class="lead">A trusted technical partner for robust cloud infrastructure, high-concurrency web platforms, microservices, and AI-driven workflow automation.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="pricing.html">Estimate Scope & Retainers</a>
+          <a class="btn btn-ghost" href="contact.html">Consult with an Architect</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="solutions">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Engineering Offerings</span>
+            <h2>Modular capabilities for enterprise growth.</h2>
+          </div>
+          <p>Search or filter our production competencies across cloud, web platforms, intelligence, and cybersecurity.</p>
+        </div>
+
+        <!-- Interactive Search and Filter Bar -->
+        <div class="filter-search-container">
+          <input type="text" id="capabilities-search-input" class="filter-search-input" placeholder="🔍 Search capabilities, tech stacks (e.g. Kubernetes, RAG, React, Go)...">
+          <div class="filter-chip-group" id="capabilities-filter-chips">
+            <button class="filter-chip active" data-filter="all">All Capabilities</button>
+            <button class="filter-chip" data-filter="cloud">Cloud & Microservices</button>
+            <button class="filter-chip" data-filter="web">Enterprise Web</button>
+            <button class="filter-chip" data-filter="ai">AI & Automation</button>
+            <button class="filter-chip" data-filter="security">Security & DevOps</button>
+          </div>
+        </div>
+
+        <div class="grid two" id="solutions-cards-grid">
+          <article class="card" data-category="cloud microservices devops kubernetes go docker">
+            <div class="icon">⌘</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span class="tag">Cloud Infrastructure</span>
+              <span style="font-size:12px;color:var(--cyan);font-family:monospace">SLA: 99.95%</span>
+            </div>
+            <h3>Cloud Architecture & Microservices</h3>
+            <p>Design and deploy resilient, distributed cloud environments on GCP, AWS, and Azure. We specialize in container orchestration (Kubernetes), event-driven microservices, serverless backends, and zero-downtime CI/CD pipelines.</p>
+            <div style="margin-top:auto;display:flex;gap:10px;align-items:center">
+              <a class="btn btn-primary" href="pricing.html">Review Architecture Plans</a>
+              <button class="btn btn-ghost" data-auth-trigger="signup">Engage Pod</button>
+            </div>
+          </article>
+
+          <article class="card" data-category="web frontend backend react typescript node postgres nextjs">
+            <div class="icon">✦</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span class="tag indigo">Full-Stack Web</span>
+              <span style="font-size:12px;color:var(--indigo);font-family:monospace">Next.js / TypeScript</span>
+            </div>
+            <h3>Enterprise Web Development</h3>
+            <p>Scalable, modular full-stack web platforms built with React, TypeScript, Node.js, Next.js, and high-performance databases. Crafted for speed, security, WCAG accessibility, and maintainable domain-driven architecture.</p>
+            <div style="margin-top:auto;display:flex;gap:10px;align-items:center">
+              <a class="btn btn-primary" href="pricing.html">Review Development Retainers</a>
+              <button class="btn btn-ghost" data-auth-trigger="signup">Engage Pod</button>
+            </div>
+          </article>
+
+          <article class="card" data-category="ai machine-learning rag vector llm automation python">
+            <div class="icon">☁</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span class="tag amber">Applied Intelligence</span>
+              <span style="font-size:12px;color:var(--amber);font-family:monospace">RAG & LLMs</span>
+            </div>
+            <h3>Intelligent Automation & AI Integration</h3>
+            <p>Empower your business workflows with applied machine learning, retrieval-augmented generation (RAG), vector database integrations, intelligent document parsing, and real-time operational assistants.</p>
+            <div style="margin-top:auto;display:flex;gap:10px;align-items:center">
+              <a class="btn btn-primary" href="pricing.html">Explore AI Automation</a>
+              <button class="btn btn-ghost" data-auth-trigger="signup">Engage Pod</button>
+            </div>
+          </article>
+
+          <article class="card" data-category="security devops audit compliance mtls prometheus grafana">
+            <div class="icon">◈</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span class="tag rose">Security & SRE</span>
+              <span style="font-size:12px;color:var(--rose);font-family:monospace">Zero-Trust / IAM</span>
+            </div>
+            <h3>Cybersecurity Audits & DevOps Operations</h3>
+            <p>Comprehensive vulnerability assessments, automated compliance checks, penetration testing, IAM hardening, observability dashboards (Prometheus/Grafana), and 24/7 reliability engineering.</p>
+            <div style="margin-top:auto;display:flex;gap:10px;align-items:center">
+              <a class="btn btn-primary" href="contact.html">Request Security Audit</a>
+              <button class="btn btn-ghost" data-auth-trigger="signup">Engage Pod</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Scope Calculator on Services Page -->
+    <section class="section alt">
+      <div class="container">
+        <div id="interactive-scope-calculator"></div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">How We Deliver</span>
+            <h2>The SiPro Delivery Framework</h2>
+          </div>
+          <p>Iterative, transparent sprints governed by strict code quality gates, automated testing, and shared staging access.</p>
+        </div>
+
+        <div class="grid three">
+          <article class="card">
+            <span class="tag">01. Discovery & Design</span>
+            <h3>System Architecture</h3>
+            <p>Domain modeling, API contract specifications, database schema definition, and security posture alignment.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag indigo">02. Sprint Execution</span>
+            <h3>Continuous Delivery</h3>
+            <p>Two-week development cycles with live staging deployments, pull request reviews, and end-to-end automated testing.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag amber">03. Production Scale</span>
+            <h3>SLA & Support</h3>
+            <p>Load testing, telemetry configuration, runbook documentation, and handover to dedicated operational pods.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+</body>
+</html>

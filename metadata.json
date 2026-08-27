@@ -1,0 +1,8 @@
+{
+  "name": "Remix sipro",
+  "description": "SiPro Technologies - MSME registered enterprise cloud architecture, custom software development, and DPDP-compliant engineering pods.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
