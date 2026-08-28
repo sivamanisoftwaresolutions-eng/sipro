@@ -72,20 +72,18 @@
 
   <main>
     <!-- Hero Section -->
-    <section class="hero bg-pattern">
+    <section class="hero bg-pattern" id="hero">
       <div class="container hero-grid">
         <div>
           <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,0.12);padding:6px 14px;border-radius:20px;border:1px solid rgba(99,102,241,0.3);margin-bottom:16px">
             <span style="font-size:13px;font-weight:600;color:var(--cyan)">⚡ DPDP Act 2023 Compliant · Enterprise Cloud Pods</span>
           </div>
-          <h1>Build the system. <br><em>Scale the enterprise.</em></h1>
-          <p class="lead">SiPro Technologies architects, deploys, and manages high-throughput cloud infrastructure, microservices clusters, and intelligent automation for high-growth enterprises worldwide.</p>
+          <h1>Engineering Scalable Cloud &amp; Software Systems for Modern Enterprises</h1>
+          <p class="lead">SiPro Technologies architects, deploys, and manages high-throughput cloud infrastructure, microservices clusters, and custom intelligent automation for modern enterprises worldwide.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" href="services.html">🚀 Explore Capabilities</a>
+            <a class="btn btn-primary btn-lg" href="#services">🚀 Explore Capabilities</a>
+            <a class="btn btn-secondary btn-lg" href="contact.html">💬 Schedule Consultation</a>
             <button type="button" class="btn btn-ghost btn-lg" data-auth-trigger="signup">✨ Get Started</button>
-            <button type="button" class="btn btn-ghost btn-sm" onclick="triggerNamasteCelebration({name:'Explorer', role:'client'})" style="margin-left:4px" title="Preview Welcome Celebration">
-              🙏 Test Namaste Welcome
-            </button>
           </div>
         </div>
 
@@ -144,7 +142,7 @@
     </section>
 
     <!-- Core Capabilities Grid -->
-    <section class="section">
+    <section class="section" id="services">
       <div class="container">
         <div class="section-head">
           <div>
@@ -204,18 +202,19 @@
       </div>
     </section>
 
-    <!-- Client Testimonials & Social Proof -->
-    <section class="section alt">
+    <!-- Client Testimonials & Social Proof & Interactive Review System -->
+    <section class="section alt" id="reviews-section">
       <div class="container">
         <div class="section-head">
           <div>
             <span class="eyebrow">Enterprise Validation</span>
-            <h2>Trusted by Engineering Leaders</h2>
+            <h2>Client Feedback & Verified Reviews</h2>
           </div>
-          <p>See how engineering leaders deploy mission-critical systems with SiPro managed pods.</p>
+          <p>Read authenticated experiences from engineering leaders and submit your feedback on SiPro deliverables.</p>
         </div>
 
-        <div class="grid three">
+        <!-- Dynamic Reviews Grid -->
+        <div class="grid three" id="client-reviews-list">
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-quote">"SiPro architected our entire Kubernetes cluster and reduced our database query latency by 64%. The pod integrated seamlessly with our internal sprint cadence."</p>
@@ -251,6 +250,64 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Interactive Review Submission Box -->
+        <div class="interactive-panel" style="margin-top:36px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:28px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
+            <div>
+              <span class="eyebrow" style="margin-bottom:4px">Client Engagement</span>
+              <h3 style="font-size:20px;margin-top:2px;">Submit Client Review or Engagement Rating</h3>
+              <p style="font-size:13px;color:var(--muted);margin-top:4px;">Have you partnered with SiPro Technologies? Share your experience with our engineering leadership.</p>
+            </div>
+            <span class="tag emerald" style="margin:0;">Verified Enterprise Feedback</span>
+          </div>
+
+          <form id="client-review-form" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;">
+            <div class="form-group" style="margin:0;">
+              <label for="review-author-name" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Your Full Name</label>
+              <input id="review-author-name" type="text" required placeholder="e.g. Sravan Varma" class="auth-input" style="width:100%;">
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="review-company-role" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Company & Role</label>
+              <input id="review-company-role" type="text" required placeholder="e.g. Head of Product, CloudScale" class="auth-input" style="width:100%;">
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label for="review-service-category" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Service Engagement</label>
+              <select id="review-service-category" class="auth-input" style="width:100%;background:var(--card-bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 14px;">
+                <option value="Custom Web & Software Engineering">Custom Web & Software Engineering</option>
+                <option value="Cloud Infrastructure & DevOps">Cloud Infrastructure & DevOps</option>
+                <option value="API & Automation Architecture">API & Automation Architecture</option>
+                <option value="Full Retainer Dedicated Pod">Full Retainer Dedicated Pod</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin:0;">
+              <label style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Rating (1 to 5 Stars)</label>
+              <div id="star-rating-selector" style="display:flex;align-items:center;gap:6px;padding:8px 0;">
+                <button type="button" class="star-rating-btn" data-star="1" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
+                <button type="button" class="star-rating-btn" data-star="2" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
+                <button type="button" class="star-rating-btn" data-star="3" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
+                <button type="button" class="star-rating-btn" data-star="4" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
+                <button type="button" class="star-rating-btn" data-star="5" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
+                <span id="star-rating-label" style="font-size:13px;color:var(--muted);margin-left:8px;">5 Stars (Outstanding)</span>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin:0;grid-column:1 / -1;">
+              <label for="review-feedback-msg" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Feedback & Engagement Review</label>
+              <textarea id="review-feedback-msg" rows="3" required placeholder="Describe project delivery, architectural quality, communication, and overall ROI..." class="auth-input" style="width:100%;resize:vertical;"></textarea>
+            </div>
+
+            <div style="grid-column:1 / -1;display:flex;justify-content:flex-end;gap:12px;align-items:center;margin-top:8px;">
+              <span id="review-form-status" style="font-size:13px;color:var(--muted);"></span>
+              <button type="submit" class="btn btn-primary" id="btn-submit-review">
+                <span>Publish Verified Review</span>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -309,38 +366,71 @@
       </div>
     </section>
 
-    <!-- Workspace Gateways -->
-    <section class="section alt">
+    <!-- B2B Technology Consulting & Solutions -->
+    <section class="section alt" id="services-overview">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Stakeholder Portals</span>
-            <h2>Unified Workspaces for Every Role</h2>
+            <span class="eyebrow">B2B Solutions & Delivery</span>
+            <h2>Core Engineering Practices & Retainers</h2>
           </div>
-          <p>Real-time collaboration, sprint milestones, automated grading, timesheets, and support tickets.</p>
+          <p>Production-grade technology consulting, dedicated development pods, and scalable cloud engineering for global enterprises.</p>
         </div>
 
         <div class="grid three">
           <article class="card">
-            <span class="tag">Enterprise Client</span>
-            <h3>Delivery Workspace</h3>
-            <p>Milestone progress tracking, sprint deliverables, staging links, invoice management, and direct team chat.</p>
-            <a href="login-client.html" class="btn btn-ghost">Client Sign In</a>
+            <span class="tag">Web & Platforms</span>
+            <h3>Custom Web & Software Engineering</h3>
+            <p>High-throughput full-stack systems, modern reactive architectures, resilient TypeScript/React/Node backends, and 100% intellectual property assignment.</p>
+            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px">
+              <span class="pill">TypeScript</span>
+              <span class="pill">Next.js</span>
+              <span class="pill">Microfrontends</span>
+            </div>
+            <div style="margin-top:20px;">
+              <a href="services-custom-software.html" class="btn btn-ghost">Explore Software Engineering →</a>
+            </div>
           </article>
 
           <article class="card">
-            <span class="tag amber">Candidate / Engineer</span>
-            <h3>Learning & Upskilling Hub</h3>
-            <p>Real-world project curriculum, code reviews, automated assessments, capstones, and placement support.</p>
-            <a href="login-candidate.html" class="btn btn-ghost">Candidate Sign In</a>
+            <span class="tag indigo">Cloud & SRE</span>
+            <h3>Cloud Infrastructure & DevOps</h3>
+            <p>Kubernetes multi-cloud GKE/EKS clusters, automated Terraform/CI/CD pipelines, SLA-backed observability, and zero-downtime Canary deployments.</p>
+            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px">
+              <span class="pill">Kubernetes</span>
+              <span class="pill">Terraform</span>
+              <span class="pill">mTLS & Vault</span>
+            </div>
+            <div style="margin-top:20px;">
+              <a href="services-cloud-architecture.html" class="btn btn-ghost">Explore Cloud & DevOps →</a>
+            </div>
           </article>
 
           <article class="card">
-            <span class="tag indigo">Staff & Employee</span>
-            <h3>Operations Workspace</h3>
-            <p>Sprint task boards, billable hours tracking, timesheets, leave management, and engineering wiki.</p>
-            <a href="login-employee.html" class="btn btn-ghost">Employee Sign In</a>
+            <span class="tag emerald">Integration & AI</span>
+            <h3>API & Automation Architecture</h3>
+            <p>gRPC/REST API gateways, Kafka event streaming meshes, asynchronous worker queues, and secure LLM/RAG workflows with strict enterprise governance.</p>
+            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px">
+              <span class="pill">Kafka</span>
+              <span class="pill">gRPC / REST</span>
+              <span class="pill">pgvector</span>
+            </div>
+            <div style="margin-top:20px;">
+              <a href="services-api-automation.html" class="btn btn-ghost">Explore API Automation →</a>
+            </div>
           </article>
+        </div>
+
+        <!-- Consultation Banner -->
+        <div class="interactive-panel" style="margin-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;background:linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(34,211,238,0.05) 100%);border:1px solid rgba(99,102,241,0.25);border-radius:16px;padding:24px 28px;">
+          <div>
+            <h4 style="font-size:18px;color:var(--text);margin-bottom:4px">Ready to accelerate your technical roadmap?</h4>
+            <p style="font-size:13px;color:var(--muted);margin:0">Partner with our registered MSME engineering consulting practice for rapid sprint velocity.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="contact.html" class="btn btn-primary">Schedule Consultation</a>
+            <button type="button" class="btn btn-ghost" data-auth-trigger="signin">Client Portal Sign In</button>
+          </div>
         </div>
       </div>
     </section>

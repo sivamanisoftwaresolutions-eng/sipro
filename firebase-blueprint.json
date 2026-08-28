@@ -9,8 +9,26 @@
         "role": { "type": "string", "description": "Role: client | candidate | employee | admin" },
         "company": { "type": "string", "description": "Company name for clients" },
         "phone": { "type": "string", "description": "Phone number" },
+        "emailVerified": { "type": "boolean", "description": "Whether email is OTP verified" },
+        "verifiedAt": { "type": "string", "description": "Verification ISO timestamp" },
         "createdAt": { "type": "string", "description": "Creation ISO timestamp" },
         "updatedAt": { "type": "string", "description": "Update ISO timestamp" }
+      },
+      "rules": {
+        "read": "true",
+        "write": "true"
+      }
+    },
+    "OtpVerification": {
+      "collection": "otp_verifications",
+      "description": "One-time password verification tokens for Gmail/email authentication",
+      "fields": {
+        "email": { "type": "string", "description": "Target email" },
+        "otp": { "type": "string", "description": "6-digit OTP code" },
+        "purpose": { "type": "string", "description": "Purpose: login | signup | verify" },
+        "attempts": { "type": "number", "description": "Verification attempt counter" },
+        "expiresAt": { "type": "string", "description": "Expiration ISO timestamp" },
+        "createdAt": { "type": "string", "description": "Creation ISO timestamp" }
       },
       "rules": {
         "read": "true",

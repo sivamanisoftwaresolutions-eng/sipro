@@ -132,8 +132,10 @@ function renderHeader() {
     `;
   } else {
     desktopAuthHtml = `
-      <button type="button" class="btn btn-ghost btn-sm" data-auth-trigger="signin">Log In</button>
-      <button type="button" class="btn btn-primary btn-sm" data-auth-trigger="signup">Sign Up</button>
+      <div class="header-auth-group">
+        <button type="button" class="btn btn-ghost btn-sm" data-auth-trigger="signin">Sign In</button>
+        <button type="button" class="btn btn-primary btn-sm" data-auth-trigger="signup">Create Account</button>
+      </div>
     `;
   }
 
@@ -158,8 +160,10 @@ function renderHeader() {
     `;
   } else {
     mobileAuthHtml = `
-      <button type="button" class="btn btn-ghost btn-block" data-auth-trigger="signin">Log In</button>
-      <button type="button" class="btn btn-primary btn-block" data-auth-trigger="signup">Sign Up / Get Started</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;">
+        <button type="button" class="btn btn-ghost btn-block" data-auth-trigger="signin">Sign In</button>
+        <button type="button" class="btn btn-primary btn-block" data-auth-trigger="signup">Create Account</button>
+      </div>
     `;
   }
 
@@ -299,7 +303,7 @@ function renderFooter() {
 }
 
 // ==========================================================================
-// Authentication Modal & UI Engine
+// Authentication Modal & UI Engine (Password + Gmail/Email OTP)
 // ==========================================================================
 function renderAuthModal() {
   if (document.getElementById('auth-modal-root')) return;
@@ -309,159 +313,206 @@ function renderAuthModal() {
   modalRoot.className = 'auth-modal-backdrop';
   modalRoot.innerHTML = `
     <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
-      <button class="auth-modal-close" aria-label="Close dialog">×</button>
+      <button class="auth-modal-close" aria-label="Close dialog" title="Close (Esc)">×</button>
       
-      <div class="auth-card-header">
-        <div class="auth-card-brand">
-          <div class="brand-badge" style="width:30px;height:30px;font-size:13px">SP</div>
-          <strong style="font-size:18px">SiPro<span class="brand-tld">.tech</span></strong>
-        </div>
-        <h2 class="auth-card-title" id="auth-modal-title">Welcome to SiPro</h2>
-        <p class="auth-card-subtitle" id="auth-modal-desc">Access enterprise delivery, talent portals & systems</p>
-      </div>
-
-      <div class="auth-tabs">
-        <button type="button" class="auth-tab active" data-tab="signin">Sign In</button>
-        <button type="button" class="auth-tab" data-tab="signup">Create Account</button>
-      </div>
-
-      <!-- Social Login Buttons -->
-      <div class="oauth-buttons">
-        <button type="button" class="oauth-btn" data-oauth="google">
-          ${ICONS.google}
-          <span>Google</span>
-        </button>
-        <button type="button" class="oauth-btn" data-oauth="github">
-          ${ICONS.github}
-          <span>GitHub</span>
-        </button>
-      </div>
-
-      <div class="auth-divider">
-        <span>or with work email</span>
-      </div>
-
-      <!-- Sign In Form -->
-      <form class="auth-form" id="modal-signin-form">
-        <div class="form-group">
-          <label for="modal-signin-email">Work Email</label>
-          <div class="input-wrapper">
-            <span class="input-icon">${ICONS.mail}</span>
-            <input id="modal-signin-email" class="auth-input" type="email" required placeholder="you@company.com" autocomplete="email">
+      <div class="auth-card-body">
+        <div class="auth-card-header" id="modal-card-header">
+          <div class="auth-card-brand">
+            <div class="brand-badge" style="width:30px;height:30px;font-size:13px">SP</div>
+            <strong style="font-size:18px">SiPro<span class="brand-tld">.tech</span></strong>
           </div>
-          <span class="field-error" id="modal-signin-email-error">Please enter a valid work email address.</span>
+          <h2 class="auth-card-title" id="auth-modal-title">Welcome to SiPro</h2>
+          <p class="auth-card-subtitle" id="auth-modal-desc">Access enterprise delivery, talent portals & systems</p>
         </div>
 
-        <div class="form-group">
-          <label for="modal-signin-password">
-            <span>Password</span>
-            <a href="javascript:void(0)" class="forgot-pwd-trigger">Forgot password?</a>
-          </label>
-          <div class="input-wrapper">
-            <span class="input-icon">${ICONS.lock}</span>
-            <input id="modal-signin-password" class="auth-input" type="password" required placeholder="Enter your password" autocomplete="current-password">
-            <button type="button" class="password-toggle-btn" aria-label="Show password">${ICONS.eye}</button>
+        <!-- 2-Tab Navigation -->
+        <div class="auth-tabs" id="modal-auth-tabs">
+          <button type="button" class="auth-tab active" data-tab="signin">Sign In</button>
+          <button type="button" class="auth-tab" data-tab="signup">Create Account</button>
+        </div>
+
+        <!-- Social Login Buttons -->
+        <div class="oauth-buttons" id="modal-oauth-group">
+          <button type="button" class="oauth-btn" data-oauth="google">
+            ${ICONS.google}
+            <span>Google</span>
+          </button>
+          <button type="button" class="oauth-btn" data-oauth="github">
+            ${ICONS.github}
+            <span>GitHub</span>
+          </button>
+        </div>
+
+        <div class="auth-divider" id="modal-auth-divider">
+          <span id="modal-auth-divider-label">or sign in with email</span>
+        </div>
+
+        <!-- Sign In Form -->
+        <form class="auth-form" id="modal-signin-form">
+          <div class="form-group">
+            <label for="modal-signin-email">Work / Personal Email</label>
+            <div class="input-wrapper">
+              <span class="input-icon">${ICONS.mail}</span>
+              <input id="modal-signin-email" class="auth-input" type="email" required placeholder="you@company.com" autocomplete="email">
+            </div>
+            <span class="field-error" id="modal-signin-email-error">Please enter a valid work email address.</span>
           </div>
-          <span class="field-error" id="modal-signin-password-error">Password must be at least 6 characters.</span>
-        </div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="form-group">
+            <label for="modal-signin-password">
+              <span>Password</span>
+              <a href="javascript:void(0)" class="forgot-pwd-trigger" id="modal-forgot-pwd-link">Forgot password / Sign in with OTP</a>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">${ICONS.lock}</span>
+              <input id="modal-signin-password" class="auth-input" type="password" required placeholder="Enter your password" autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" aria-label="Show password">${ICONS.eye}</button>
+            </div>
+            <span class="field-error" id="modal-signin-password-error">Password must be at least 6 characters.</span>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <label class="checkbox-label" style="margin:0;">
+              <input type="checkbox" id="modal-signin-remember" checked style="position:absolute;opacity:0">
+              <span class="custom-checkbox">${ICONS.check}</span>
+              <span>Remember me</span>
+            </label>
+            <button type="button" class="otp-switch-link" id="modal-btn-trigger-otp" style="font-size:12px;background:none;border:none;color:var(--cyan);cursor:pointer;padding:0;">⚡ Sign in with OTP Code</button>
+          </div>
+
+          <button type="submit" class="btn btn-primary auth-submit-btn">
+            <span class="btn-text">Sign In to SiPro</span>
+            <span class="btn-spinner"></span>
+          </button>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form class="auth-form" id="modal-signup-form" style="display:none">
+          <div class="form-group">
+            <label for="modal-signup-name">Full Name</label>
+            <div class="input-wrapper">
+              <span class="input-icon">${ICONS.user}</span>
+              <input id="modal-signup-name" class="auth-input" type="text" required placeholder="e.g. Arjun Sharma" autocomplete="name">
+            </div>
+            <span class="field-error" id="modal-signup-name-error">Please enter your full name.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-signup-email">Work / Personal Email</label>
+            <div class="input-wrapper">
+              <span class="input-icon">${ICONS.mail}</span>
+              <input id="modal-signup-email" class="auth-input" type="email" required placeholder="you@company.com" autocomplete="email">
+            </div>
+            <span class="field-error" id="modal-signup-email-error">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group">
+            <label>Select Workspace Role</label>
+            <div class="role-pills">
+              <label>
+                <input type="radio" name="modal-role" value="client" class="role-pill-radio" checked>
+                <span class="role-pill-label">Enterprise Client</span>
+              </label>
+              <label>
+                <input type="radio" name="modal-role" value="candidate" class="role-pill-radio">
+                <span class="role-pill-label">Candidate / Engineer</span>
+              </label>
+              <label>
+                <input type="radio" name="modal-role" value="employee" class="role-pill-radio">
+                <span class="role-pill-label">Team Member</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-signup-password">Create Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">${ICONS.lock}</span>
+              <input id="modal-signup-password" class="auth-input" type="password" required placeholder="At least 8 characters" autocomplete="new-password">
+              <button type="button" class="password-toggle-btn" aria-label="Show password">${ICONS.eye}</button>
+            </div>
+            <div class="strength-meter">
+              <div class="strength-bars">
+                <span class="strength-bar"></span>
+                <span class="strength-bar"></span>
+                <span class="strength-bar"></span>
+                <span class="strength-bar"></span>
+              </div>
+              <div class="strength-text">
+                <span>Password strength</span>
+                <strong id="modal-strength-label">Empty</strong>
+              </div>
+            </div>
+            <span class="field-error" id="modal-signup-password-error">Password must be at least 8 characters.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-signup-confirm">Confirm Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">${ICONS.lock}</span>
+              <input id="modal-signup-confirm" class="auth-input" type="password" required placeholder="Re-enter password" autocomplete="new-password">
+            </div>
+            <span class="field-error" id="modal-signup-confirm-error">Passwords do not match.</span>
+          </div>
+
           <label class="checkbox-label">
-            <input type="checkbox" id="modal-signin-remember" checked style="position:absolute;opacity:0">
+            <input type="checkbox" id="modal-signup-terms" required checked style="position:absolute;opacity:0">
             <span class="custom-checkbox">${ICONS.check}</span>
-            <span>Remember me</span>
+            <span>I agree to the <a href="about.html" target="_blank">Terms of Service</a> & <a href="about.html" target="_blank">Privacy Policy</a></span>
           </label>
-        </div>
 
-        <button type="submit" class="btn btn-primary auth-submit-btn">
-          <span class="btn-text">Sign In to SiPro</span>
-          <span class="btn-spinner"></span>
-        </button>
-      </form>
+          <button type="submit" class="btn btn-primary auth-submit-btn">
+            <span class="btn-text">Create Account & Verify</span>
+            <span class="btn-spinner"></span>
+          </button>
+        </form>
 
-      <!-- Sign Up Form -->
-      <form class="auth-form" id="modal-signup-form" style="display:none">
-        <div class="form-group">
-          <label for="modal-signup-name">Full Name</label>
-          <div class="input-wrapper">
-            <span class="input-icon">${ICONS.user}</span>
-            <input id="modal-signup-name" class="auth-input" type="text" required placeholder="e.g. Arjun Sharma" autocomplete="name">
-          </div>
-          <span class="field-error" id="modal-signup-name-error">Please enter your full name.</span>
-        </div>
-
-        <div class="form-group">
-          <label for="modal-signup-email">Work Email</label>
-          <div class="input-wrapper">
-            <span class="input-icon">${ICONS.mail}</span>
-            <input id="modal-signup-email" class="auth-input" type="email" required placeholder="you@company.com" autocomplete="email">
-          </div>
-          <span class="field-error" id="modal-signup-email-error">Please enter a valid email address.</span>
-        </div>
-
-        <div class="form-group">
-          <label>Select Workspace Role</label>
-          <div class="role-pills">
-            <label>
-              <input type="radio" name="modal-role" value="client" class="role-pill-radio" checked>
-              <span class="role-pill-label">Enterprise Client</span>
-            </label>
-            <label>
-              <input type="radio" name="modal-role" value="candidate" class="role-pill-radio">
-              <span class="role-pill-label">Candidate / Engineer</span>
-            </label>
-            <label>
-              <input type="radio" name="modal-role" value="employee" class="role-pill-radio">
-              <span class="role-pill-label">Team Member</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="modal-signup-password">Create Password</label>
-          <div class="input-wrapper">
-            <span class="input-icon">${ICONS.lock}</span>
-            <input id="modal-signup-password" class="auth-input" type="password" required placeholder="At least 8 characters" autocomplete="new-password">
-            <button type="button" class="password-toggle-btn" aria-label="Show password">${ICONS.eye}</button>
-          </div>
-          <div class="strength-meter">
-            <div class="strength-bars">
-              <span class="strength-bar"></span>
-              <span class="strength-bar"></span>
-              <span class="strength-bar"></span>
-              <span class="strength-bar"></span>
+        <!-- Seamless Email OTP Verification View -->
+        <div class="otp-auth-section" id="modal-otp-section" style="display:none">
+          <form class="auth-form" id="modal-otp-verify-form" style="display:flex;flex-direction:column;gap:16px;">
+            <div class="otp-header-badge" style="display:flex;align-items:center;gap:8px;background:rgba(99,102,241,0.12);padding:8px 14px;border-radius:10px;border:1px solid rgba(99,102,241,0.25);">
+              <span>🔒 Code Sent to: <strong class="otp-target-email" id="modal-otp-target-display" style="color:var(--cyan)"></strong></span>
             </div>
-            <div class="strength-text">
-              <span>Password strength</span>
-              <strong id="modal-strength-label">Too weak</strong>
+
+            <p style="font-size:13px;color:var(--muted);margin:0;line-height:1.5;">
+              Please enter the 6-digit verification code sent to your email to verify and complete authentication.
+            </p>
+
+            <div class="otp-demo-hint" id="modal-otp-hint-box" style="display:none;background:rgba(16,185,129,0.1);border:1px dashed rgba(16,185,129,0.4);border-radius:8px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:var(--emerald)">Dispatched Code: <code id="modal-otp-hint-code" style="font-weight:700;font-size:14px;letter-spacing:2px;color:var(--emerald)">123456</code></span>
+              <button type="button" class="copy-pill" id="modal-btn-autofill-otp" style="font-size:11px;padding:3px 8px;background:rgba(16,185,129,0.2);color:var(--emerald);border:none;border-radius:4px;cursor:pointer;font-weight:600;">Auto-Fill</button>
             </div>
-          </div>
-          <span class="field-error" id="modal-signup-password-error">Password must be at least 8 characters.</span>
+
+            <div class="otp-input-grid" id="modal-otp-digit-grid">
+              <input type="text" maxlength="1" inputmode="numeric" class="otp-digit-box" data-index="0" autofocus>
+              <input type="text" maxlength="1" inputmode="numeric" class="otp-digit-box" data-index="1">
+              <input type="text" maxlength="1" inputmode="numeric" class="otp-digit-box" data-index="2">
+              <input type="text" maxlength="1" inputmode="numeric" class="otp-digit-box" data-index="3">
+              <input type="text" maxlength="1" inputmode="numeric" class="otp-digit-box" data-index="4">
+              <input type="text" maxlength="1" inputmode="numeric" class="otp-digit-box" data-index="5">
+            </div>
+
+            <span class="field-error" id="modal-otp-verify-error" style="text-align:center;">Invalid or expired 6-digit code. Please retry.</span>
+
+            <div class="otp-timer-row" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+              <span id="modal-otp-timer-text" style="color:var(--muted)">Resend available in <strong id="modal-otp-countdown" style="color:var(--cyan)">60s</strong></span>
+              <button type="button" class="otp-resend-btn" id="modal-btn-resend-otp" disabled style="background:none;border:none;color:var(--cyan);cursor:pointer;font-weight:600;font-size:12px;">Resend Code</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-submit-btn" id="modal-btn-verify-otp">
+              <span class="btn-text">Verify & Enter Workspace</span>
+              <span class="btn-spinner"></span>
+            </button>
+
+            <div class="otp-switch-method" style="text-align:center;margin-top:4px;">
+              <button type="button" class="otp-switch-link" id="modal-btn-back-from-otp" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;">← Back / Edit Information</button>
+            </div>
+          </form>
         </div>
 
-        <div class="form-group">
-          <label for="modal-signup-confirm">Confirm Password</label>
-          <div class="input-wrapper">
-            <span class="input-icon">${ICONS.lock}</span>
-            <input id="modal-signup-confirm" class="auth-input" type="password" required placeholder="Re-enter password" autocomplete="new-password">
-          </div>
-          <span class="field-error" id="modal-signup-confirm-error">Passwords do not match.</span>
+        <div class="auth-card-footer" id="modal-auth-toggle-note">
+          Don't have an account yet? <a href="javascript:void(0)" onclick="switchAuthTab('signup')">Sign up for free</a>
         </div>
-
-        <label class="checkbox-label">
-          <input type="checkbox" id="modal-signup-terms" required checked style="position:absolute;opacity:0">
-          <span class="custom-checkbox">${ICONS.check}</span>
-          <span>I agree to the <a href="about.html" target="_blank">Terms of Service</a> & <a href="about.html" target="_blank">Privacy Policy</a></span>
-        </label>
-
-        <button type="submit" class="btn btn-primary auth-submit-btn">
-          <span class="btn-text">Create Account</span>
-          <span class="btn-spinner"></span>
-        </button>
-      </form>
-
-      <div class="auth-card-footer" id="modal-auth-toggle-note">
-        Don't have an account yet? <a href="javascript:void(0)" onclick="switchAuthTab('signup')">Sign up for free</a>
       </div>
     </div>
   `;
@@ -510,6 +561,201 @@ function renderAuthModal() {
   confirmInput.addEventListener('input', checkMatch);
   pwdInput.addEventListener('input', checkMatch);
 
+  // Setup OTP Digit Inputs logic
+  setupOtpInputControls(
+    modalRoot.querySelector('#modal-otp-digit-grid'),
+    () => modalRoot.querySelector('#modal-otp-verify-form').dispatchEvent(new Event('submit'))
+  );
+
+  // State for OTP in Modal
+  let activeModalOtpState = {
+    email: '',
+    name: '',
+    role: 'client',
+    password: '',
+    mode: 'register',
+    fromTab: 'signup',
+    countdownTimer: null,
+    secondsLeft: 60,
+    latestCode: ''
+  };
+
+  // Helper to transition smoothly into the OTP verification step
+  async function transitionToModalOtp({ email, role, name = '', password = '', mode = 'register', fromTab = 'signup' }) {
+    activeModalOtpState.email = email;
+    activeModalOtpState.role = role || 'client';
+    activeModalOtpState.name = name || email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    activeModalOtpState.password = password;
+    activeModalOtpState.mode = mode;
+    activeModalOtpState.fromTab = fromTab;
+
+    // UI Transition
+    const title = modalRoot.querySelector('#auth-modal-title');
+    const desc = modalRoot.querySelector('#auth-modal-desc');
+    const authTabs = modalRoot.querySelector('#modal-auth-tabs');
+    const oauthGroup = modalRoot.querySelector('#modal-oauth-group');
+    const authDivider = modalRoot.querySelector('#modal-auth-divider');
+    const signinForm = modalRoot.querySelector('#modal-signin-form');
+    const signupForm = modalRoot.querySelector('#modal-signup-form');
+    const otpSection = modalRoot.querySelector('#modal-otp-section');
+    const footerToggle = modalRoot.querySelector('#modal-auth-toggle-note');
+    const targetDisplay = modalRoot.querySelector('#modal-otp-target-display');
+    const verifyError = modalRoot.querySelector('#modal-otp-verify-error');
+
+    title.textContent = 'Verify Your Email';
+    desc.textContent = `Enter the 6-digit verification code sent to ${email}`;
+    if (targetDisplay) targetDisplay.textContent = email;
+    if (verifyError) verifyError.classList.remove('visible');
+
+    if (authTabs) authTabs.style.display = 'none';
+    if (oauthGroup) oauthGroup.style.display = 'none';
+    if (authDivider) authDivider.style.display = 'none';
+    if (signinForm) signinForm.style.display = 'none';
+    if (signupForm) signupForm.style.display = 'none';
+    if (footerToggle) footerToggle.style.display = 'none';
+    if (otpSection) otpSection.style.display = 'block';
+
+    // Clear digit inputs & focus 1st box
+    const digitBoxes = modalRoot.querySelectorAll('#modal-otp-digit-grid .otp-digit-box');
+    digitBoxes.forEach(b => { b.value = ''; b.classList.remove('filled'); });
+    setTimeout(() => digitBoxes[0]?.focus(), 150);
+
+    // Dispatch OTP API call
+    try {
+      const res = await fetch('/api/v1/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, role: activeModalOtpState.role, purpose: 'verification' })
+      });
+      const data = await res.json();
+      if (data.success) {
+        activeModalOtpState.latestCode = data.otp || '';
+        const hintBox = modalRoot.querySelector('#modal-otp-hint-box');
+        const hintCode = modalRoot.querySelector('#modal-otp-hint-code');
+        if (data.otp && hintCode && hintBox) {
+          hintCode.textContent = data.otp;
+          hintBox.style.display = 'flex';
+        }
+        startOtpCountdown(modalRoot, activeModalOtpState);
+        showToast(`Verification code sent to ${email}!`, 'success');
+      } else {
+        showToast(data.error || 'Failed to dispatch verification code.', 'error');
+      }
+    } catch {
+      showToast('Network error while dispatching code.', 'error');
+    }
+  }
+
+  // Back button from OTP step
+  modalRoot.querySelector('#modal-btn-back-from-otp')?.addEventListener('click', () => {
+    if (activeModalOtpState.countdownTimer) clearInterval(activeModalOtpState.countdownTimer);
+    switchAuthTab(activeModalOtpState.fromTab || 'signup');
+  });
+
+  // Auto-fill button click
+  modalRoot.querySelector('#modal-btn-autofill-otp')?.addEventListener('click', () => {
+    if (activeModalOtpState.latestCode) {
+      fillOtpDigits(modalRoot.querySelector('#modal-otp-digit-grid'), activeModalOtpState.latestCode);
+    }
+  });
+
+  // Resend OTP button
+  modalRoot.querySelector('#modal-btn-resend-otp')?.addEventListener('click', async () => {
+    const resendBtn = modalRoot.querySelector('#modal-btn-resend-otp');
+    resendBtn.disabled = true;
+    resendBtn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/v1/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: activeModalOtpState.email, role: activeModalOtpState.role, purpose: 'verification' })
+      });
+      const data = await res.json();
+      if (data.success) {
+        activeModalOtpState.latestCode = data.otp || '';
+        const hintCode = modalRoot.querySelector('#modal-otp-hint-code');
+        if (data.otp && hintCode) hintCode.textContent = data.otp;
+        showToast('New 6-digit verification code dispatched!', 'success');
+        startOtpCountdown(modalRoot, activeModalOtpState);
+      } else {
+        showToast(data.error || 'Could not resend code.', 'error');
+      }
+    } catch {
+      showToast('Failed to resend code.', 'error');
+    }
+  });
+
+  // Verify OTP form submit
+  const verifyOtpForm = modalRoot.querySelector('#modal-otp-verify-form');
+  verifyOtpForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const digitBoxes = modalRoot.querySelectorAll('#modal-otp-digit-grid .otp-digit-box');
+    const otpCode = Array.from(digitBoxes).map(b => b.value).join('');
+    const verifyError = modalRoot.querySelector('#modal-otp-verify-error');
+
+    if (otpCode.length !== 6) {
+      verifyError.textContent = 'Please enter all 6 digits.';
+      verifyError.classList.add('visible');
+      return;
+    }
+    verifyError.classList.remove('visible');
+
+    const submitBtn = modalRoot.querySelector('#modal-btn-verify-otp');
+    submitBtn.classList.add('loading');
+
+    try {
+      const res = await fetch('/api/v1/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: activeModalOtpState.email,
+          otp: otpCode,
+          role: activeModalOtpState.role,
+          displayName: activeModalOtpState.name
+        })
+      });
+      const data = await res.json();
+      submitBtn.classList.remove('loading');
+
+      if (data.success) {
+        if (activeModalOtpState.countdownTimer) clearInterval(activeModalOtpState.countdownTimer);
+
+        const user = data.user || {
+          email: activeModalOtpState.email,
+          name: activeModalOtpState.name,
+          role: activeModalOtpState.role,
+          emailVerified: true,
+          verifiedAt: new Date().toISOString(),
+          loginAt: new Date().toISOString()
+        };
+
+        AuthState.setUser(user);
+        closeAuthModal();
+        showToast(`Email verified successfully! Welcome, ${user.name}!`, 'success');
+        triggerNamasteCelebration(user);
+
+        const target = user.role === 'client' ? 'client-dashboard.html' :
+                       user.role === 'candidate' ? 'candidate-dashboard.html' : 'employee-dashboard.html';
+        setTimeout(() => {
+          if (!location.pathname.includes('dashboard')) {
+            location.href = target;
+          }
+        }, 1500);
+      } else {
+        verifyError.textContent = data.error || 'Verification failed. Please check the code.';
+        verifyError.classList.add('visible');
+        const card = modalRoot.querySelector('.auth-card');
+        card.classList.add('shake');
+        setTimeout(() => card.classList.remove('shake'), 500);
+        showToast(data.error || 'Invalid verification code.', 'error');
+      }
+    } catch (err) {
+      submitBtn.classList.remove('loading');
+      showToast('Network error during verification.', 'error');
+    }
+  });
+
   // Form submission: Sign In
   const signinForm = modalRoot.querySelector('#modal-signin-form');
   signinForm.addEventListener('submit', (e) => {
@@ -540,7 +786,7 @@ function renderAuthModal() {
         card.classList.add('shake');
         setTimeout(() => card.classList.remove('shake'), 500);
       }
-      showToast('Incorrect password format or missing credentials. Please retry.', 'error');
+      showToast('Please check email format & enter your password.', 'error');
       return;
     }
 
@@ -549,13 +795,12 @@ function renderAuthModal() {
 
     setTimeout(() => {
       submitBtn.classList.remove('loading');
-      // Determine role from email or default to client
       let role = 'client';
       if (email.includes('candidate') || email.includes('student') || email.includes('learn')) role = 'candidate';
       if (email.includes('employee') || email.includes('sipro') || email.includes('staff')) role = 'employee';
 
       const userName = email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-      const user = { email, name: userName || 'Arjun Sharma', role, loginAt: new Date().toISOString() };
+      const user = { email, name: userName || 'Arjun Sharma', role, emailVerified: true, loginAt: new Date().toISOString() };
 
       AuthState.setUser(user);
       
@@ -563,7 +808,7 @@ function renderAuthModal() {
       fetch('/api/v1/auth/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, displayName: user.name, role: user.role })
+        body: JSON.stringify({ email: user.email, displayName: user.name, role: user.role, emailVerified: true })
       }).catch(e => console.warn('Auth sync:', e));
 
       closeAuthModal();
@@ -580,7 +825,19 @@ function renderAuthModal() {
     }, 700);
   });
 
-  // Form submission: Sign Up
+  // Sign In with OTP / Forgot Password triggers
+  const triggerOtpFromSignin = () => {
+    const email = modalRoot.querySelector('#modal-signin-email').value.trim() || 'client@sipro.tech';
+    let role = 'client';
+    if (email.includes('candidate') || email.includes('student')) role = 'candidate';
+    if (email.includes('employee') || email.includes('staff')) role = 'employee';
+    transitionToModalOtp({ email, role, mode: 'signin', fromTab: 'signin' });
+  };
+
+  modalRoot.querySelector('#modal-btn-trigger-otp')?.addEventListener('click', triggerOtpFromSignin);
+  modalRoot.querySelector('#modal-forgot-pwd-link')?.addEventListener('click', triggerOtpFromSignin);
+
+  // Form submission: Sign Up -> Seamless OTP Verification Transition
   const signupForm = modalRoot.querySelector('#modal-signup-form');
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -595,18 +852,29 @@ function renderAuthModal() {
     if (!name) {
       modalRoot.querySelector('#modal-signup-name-error').classList.add('visible');
       valid = false;
+    } else {
+      modalRoot.querySelector('#modal-signup-name-error').classList.remove('visible');
     }
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       modalRoot.querySelector('#modal-signup-email-error').classList.add('visible');
       valid = false;
+    } else {
+      modalRoot.querySelector('#modal-signup-email-error').classList.remove('visible');
     }
+
     if (password.length < 8) {
       modalRoot.querySelector('#modal-signup-password-error').classList.add('visible');
       valid = false;
+    } else {
+      modalRoot.querySelector('#modal-signup-password-error').classList.remove('visible');
     }
+
     if (password !== confirm) {
       modalRoot.querySelector('#modal-signup-confirm-error').classList.add('visible');
       valid = false;
+    } else {
+      modalRoot.querySelector('#modal-signup-confirm-error').classList.remove('visible');
     }
 
     if (!valid) {
@@ -621,26 +889,8 @@ function renderAuthModal() {
 
     setTimeout(() => {
       submitBtn.classList.remove('loading');
-      const user = { email, name, role, loginAt: new Date().toISOString() };
-      AuthState.setUser(user);
-
-      // Async DB Sync
-      fetch('/api/v1/auth/user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, displayName: user.name, role: user.role })
-      }).catch(e => console.warn('Auth sync:', e));
-
-      closeAuthModal();
-      showToast(`Account created & saved to database!`, 'success');
-      triggerNamasteCelebration(user);
-
-      const target = role === 'client' ? 'client-dashboard.html' :
-                     role === 'candidate' ? 'candidate-dashboard.html' : 'employee-dashboard.html';
-      setTimeout(() => {
-        location.href = target;
-      }, 1600);
-    }, 800);
+      transitionToModalOtp({ email, role, name, password, mode: 'register', fromTab: 'signup' });
+    }, 400);
   });
 
   // Social OAuth Handlers
@@ -655,25 +905,17 @@ function renderAuthModal() {
           name: 'Arjun Sharma',
           role: 'client',
           provider,
+          emailVerified: true,
+          verifiedAt: new Date().toISOString(),
           loginAt: new Date().toISOString()
         };
         AuthState.setUser(user);
         closeAuthModal();
-        showToast(`Authenticated with ${provider}!`, 'success');
+        showToast(`Authenticated and verified with ${provider}!`, 'success');
         if (!location.pathname.includes('dashboard')) {
           location.href = 'client-dashboard.html';
         }
       }, 600);
-    });
-  });
-
-  // Forgot password flow
-  modalRoot.querySelectorAll('.forgot-pwd-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const email = prompt('Enter your work email address to receive password reset instructions:', 'arjun@northstar.io');
-      if (email) {
-        showToast(`Password reset link sent to ${email}`, 'success');
-      }
     });
   });
 }
@@ -685,25 +927,61 @@ function openAuthModal(tab = 'signin') {
 
   switchAuthTab(tab);
   root.classList.add('active');
+  document.body.classList.add('overflow-hidden');
   document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+
+  // Reset internal scroll position to top when opened
+  const cardBody = root.querySelector('.auth-card-body');
+  if (cardBody) cardBody.scrollTop = 0;
+
+  // Auto-focus first input field in active tab
+  setTimeout(() => {
+    const activeForm = root.querySelector('.auth-form:not([style*="display: none"]):not([style*="display:none"])');
+    const firstInput = activeForm?.querySelector('input:not([type="hidden"]):not([type="radio"]):not([type="checkbox"])');
+    if (firstInput) firstInput.focus();
+  }, 100);
 }
 
 function closeAuthModal() {
   const root = document.getElementById('auth-modal-root');
   if (!root) return;
   root.classList.remove('active');
+  document.body.classList.remove('overflow-hidden');
   document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
 }
+
+// Global escape key listener to close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' || e.key === 'Esc') {
+    const root = document.getElementById('auth-modal-root');
+    if (root && root.classList.contains('active')) {
+      closeAuthModal();
+    }
+  }
+});
 
 function switchAuthTab(tabName) {
   const root = document.getElementById('auth-modal-root');
   if (!root) return;
 
+  const authTabs = root.querySelector('#modal-auth-tabs');
   const signinForm = root.querySelector('#modal-signin-form');
   const signupForm = root.querySelector('#modal-signup-form');
+  const otpSection = root.querySelector('#modal-otp-section');
   const title = root.querySelector('#auth-modal-title');
   const desc = root.querySelector('#auth-modal-desc');
   const footerToggle = root.querySelector('#modal-auth-toggle-note');
+  const oauthGroup = root.querySelector('#modal-oauth-group');
+  const authDivider = root.querySelector('#modal-auth-divider');
+  const dividerLabel = root.querySelector('#modal-auth-divider-label');
+
+  if (authTabs) authTabs.style.display = 'flex';
+  if (otpSection) otpSection.style.display = 'none';
+  if (oauthGroup) oauthGroup.style.display = 'grid';
+  if (authDivider) authDivider.style.display = 'flex';
+  if (footerToggle) footerToggle.style.display = 'block';
 
   root.querySelectorAll('.auth-tab').forEach(t => {
     t.classList.toggle('active', t.dataset.tab === tabName);
@@ -713,14 +991,101 @@ function switchAuthTab(tabName) {
     signinForm.style.display = 'none';
     signupForm.style.display = 'flex';
     title.textContent = 'Create an Account';
-    desc.textContent = 'Start with SiPro enterprise delivery or upskilling';
+    desc.textContent = 'Enterprise engineering, cloud delivery & talent acceleration';
+    if (dividerLabel) dividerLabel.textContent = 'or register with email';
     footerToggle.innerHTML = `Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('signin')">Sign in here</a>`;
   } else {
     signinForm.style.display = 'flex';
     signupForm.style.display = 'none';
     title.textContent = 'Welcome Back';
-    desc.textContent = 'Access enterprise delivery, talent portals & systems';
+    desc.textContent = 'Sign in to access your enterprise delivery pod & systems';
+    if (dividerLabel) dividerLabel.textContent = 'or sign in with email';
     footerToggle.innerHTML = `Don't have an account yet? <a href="javascript:void(0)" onclick="switchAuthTab('signup')">Sign up for free</a>`;
+  }
+}
+
+// Countdown timer helper for OTP
+function startOtpCountdown(root, state) {
+  if (state.countdownTimer) clearInterval(state.countdownTimer);
+  state.secondsLeft = 60;
+
+  const countdownEl = root.querySelector('#modal-otp-countdown') || root.querySelector('#standalone-otp-countdown');
+  const resendBtn = root.querySelector('#modal-btn-resend-otp') || root.querySelector('#standalone-btn-resend-otp');
+  const timerText = root.querySelector('#modal-otp-timer-text') || root.querySelector('#standalone-otp-timer-text');
+
+  if (resendBtn) resendBtn.disabled = true;
+  if (countdownEl) countdownEl.textContent = `${state.secondsLeft}s`;
+
+  state.countdownTimer = setInterval(() => {
+    state.secondsLeft--;
+    if (countdownEl) countdownEl.textContent = `${state.secondsLeft}s`;
+
+    if (state.secondsLeft <= 0) {
+      clearInterval(state.countdownTimer);
+      if (resendBtn) {
+        resendBtn.disabled = false;
+        resendBtn.textContent = 'Resend Code';
+      }
+      if (timerText) timerText.innerHTML = `Didn't get the code?`;
+    }
+  }, 1000);
+}
+
+// 6-digit OTP input auto-advance and keyboard navigation helper
+function setupOtpInputControls(gridElement, onComplete) {
+  if (!gridElement) return;
+
+  const boxes = gridElement.querySelectorAll('.otp-digit-box');
+  boxes.forEach((box, idx) => {
+    box.addEventListener('input', (e) => {
+      const val = box.value.replace(/\D/g, '');
+      box.value = val ? val[val.length - 1] : '';
+      box.classList.toggle('filled', Boolean(box.value));
+
+      if (box.value && idx < boxes.length - 1) {
+        boxes[idx + 1].focus();
+      }
+
+      const allFilled = Array.from(boxes).every(b => b.value.length === 1);
+      if (allFilled && typeof onComplete === 'function') {
+        onComplete();
+      }
+    });
+
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !box.value && idx > 0) {
+        boxes[idx - 1].focus();
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        boxes[idx - 1].focus();
+      } else if (e.key === 'ArrowRight' && idx < boxes.length - 1) {
+        boxes[idx + 1].focus();
+      }
+    });
+
+    box.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasteData = (e.clipboardData || window.clipboardData).getData('text').trim();
+      const digits = pasteData.replace(/\D/g, '').slice(0, 6);
+      fillOtpDigits(gridElement, digits);
+      if (digits.length === 6 && typeof onComplete === 'function') {
+        onComplete();
+      }
+    });
+  });
+}
+
+function fillOtpDigits(gridElement, digits) {
+  if (!gridElement || !digits) return;
+  const boxes = gridElement.querySelectorAll('.otp-digit-box');
+  for (let i = 0; i < boxes.length; i++) {
+    boxes[i].value = digits[i] || '';
+    boxes[i].classList.toggle('filled', Boolean(digits[i]));
+  }
+  const nextEmpty = Array.from(boxes).findIndex(b => !b.value);
+  if (nextEmpty !== -1) {
+    boxes[nextEmpty].focus();
+  } else {
+    boxes[boxes.length - 1].focus();
   }
 }
 
@@ -786,7 +1151,7 @@ function bindAuthTriggers() {
   });
 }
 
-// Setup standalone auth pages (login.html, signup.html)
+// Setup standalone auth pages (login.html, signup.html) with OTP support
 function initStandaloneAuthPage() {
   const container = document.querySelector('[data-standalone-auth]');
   if (!container) return;
@@ -794,15 +1159,28 @@ function initStandaloneAuthPage() {
   const defaultTab = container.dataset.standaloneAuth || 'signin';
   const signinForm = container.querySelector('#standalone-signin-form');
   const signupForm = container.querySelector('#standalone-signup-form');
+  const otpSection = container.querySelector('#standalone-otp-section');
+  const sendOtpForm = container.querySelector('#standalone-otp-send-form');
+  const verifyOtpForm = container.querySelector('#standalone-otp-verify-form');
 
   const switchTab = (tab) => {
     container.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
     if (tab === 'signup') {
       if (signinForm) signinForm.style.display = 'none';
       if (signupForm) signupForm.style.display = 'flex';
+      if (otpSection) otpSection.style.display = 'none';
+    } else if (tab === 'otp') {
+      if (signinForm) signinForm.style.display = 'none';
+      if (signupForm) signupForm.style.display = 'none';
+      if (otpSection) {
+        otpSection.style.display = 'flex';
+        if (sendOtpForm) sendOtpForm.style.display = 'flex';
+        if (verifyOtpForm) verifyOtpForm.style.display = 'none';
+      }
     } else {
       if (signinForm) signinForm.style.display = 'flex';
       if (signupForm) signupForm.style.display = 'none';
+      if (otpSection) otpSection.style.display = 'none';
     }
   };
 
@@ -816,6 +1194,169 @@ function initStandaloneAuthPage() {
     container.querySelector('.strength-bars'),
     container.querySelector('#standalone-strength-label')
   );
+
+  // Standalone OTP State & Setup
+  const otpGrid = container.querySelector('#standalone-otp-digit-grid');
+  if (otpGrid) {
+    setupOtpInputControls(otpGrid, () => {
+      verifyOtpForm?.dispatchEvent(new Event('submit'));
+    });
+  }
+
+  let standaloneOtpState = {
+    email: '',
+    role: document.body.dataset.role || 'client',
+    countdownTimer: null,
+    secondsLeft: 60,
+    latestCode: ''
+  };
+
+  sendOtpForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = container.querySelector('#standalone-otp-email')?.value.trim();
+    const roleRadio = container.querySelector('input[name="standalone-otp-role"]:checked');
+    const role = roleRadio ? roleRadio.value : (document.body.dataset.role || 'client');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    const submitBtn = container.querySelector('#standalone-btn-send-otp');
+    submitBtn.classList.add('loading');
+
+    try {
+      const res = await fetch('/api/v1/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, role, purpose: 'verification' })
+      });
+      const data = await res.json();
+      submitBtn.classList.remove('loading');
+
+      if (data.success) {
+        standaloneOtpState.email = email;
+        standaloneOtpState.role = role;
+        standaloneOtpState.latestCode = data.otp || '';
+
+        const targetDisplay = container.querySelector('#standalone-otp-target-display');
+        if (targetDisplay) targetDisplay.textContent = email;
+
+        sendOtpForm.style.display = 'none';
+        if (verifyOtpForm) verifyOtpForm.style.display = 'flex';
+
+        const hintBox = container.querySelector('#standalone-otp-hint-box');
+        const hintCode = container.querySelector('#standalone-otp-hint-code');
+        if (data.otp && hintCode) {
+          hintCode.textContent = data.otp;
+          if (hintBox) hintBox.style.display = 'flex';
+        }
+
+        startOtpCountdown(container, standaloneOtpState);
+        const digitBoxes = container.querySelectorAll('#standalone-otp-digit-grid .otp-digit-box');
+        digitBoxes.forEach(b => { b.value = ''; b.classList.remove('filled'); });
+        digitBoxes[0]?.focus();
+
+        showToast(`Verification code sent to ${email}!`, 'success');
+      } else {
+        showToast(data.error || 'Failed to dispatch OTP.', 'error');
+      }
+    } catch {
+      submitBtn.classList.remove('loading');
+      showToast('Network error while dispatching OTP.', 'error');
+    }
+  });
+
+  container.querySelector('#standalone-btn-autofill-otp')?.addEventListener('click', () => {
+    if (standaloneOtpState.latestCode && otpGrid) {
+      fillOtpDigits(otpGrid, standaloneOtpState.latestCode);
+    }
+  });
+
+  container.querySelector('#standalone-btn-resend-otp')?.addEventListener('click', async () => {
+    const resendBtn = container.querySelector('#standalone-btn-resend-otp');
+    resendBtn.disabled = true;
+    resendBtn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/v1/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: standaloneOtpState.email, role: standaloneOtpState.role, purpose: 'verification' })
+      });
+      const data = await res.json();
+      if (data.success) {
+        standaloneOtpState.latestCode = data.otp || '';
+        const hintCode = container.querySelector('#standalone-otp-hint-code');
+        if (data.otp && hintCode) hintCode.textContent = data.otp;
+        showToast('New 6-digit verification code sent!', 'success');
+        startOtpCountdown(container, standaloneOtpState);
+      }
+    } catch {
+      showToast('Failed to resend OTP.', 'error');
+    }
+  });
+
+  container.querySelector('#standalone-btn-change-otp-email')?.addEventListener('click', () => {
+    if (standaloneOtpState.countdownTimer) clearInterval(standaloneOtpState.countdownTimer);
+    if (verifyOtpForm) verifyOtpForm.style.display = 'none';
+    if (sendOtpForm) sendOtpForm.style.display = 'flex';
+  });
+
+  verifyOtpForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const digitBoxes = container.querySelectorAll('#standalone-otp-digit-grid .otp-digit-box');
+    const otpCode = Array.from(digitBoxes).map(b => b.value).join('');
+
+    if (otpCode.length !== 6) {
+      showToast('Please enter all 6 digits of the code.', 'error');
+      return;
+    }
+
+    const submitBtn = container.querySelector('#standalone-btn-verify-otp');
+    submitBtn.classList.add('loading');
+
+    try {
+      const res = await fetch('/api/v1/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: standaloneOtpState.email,
+          otp: otpCode,
+          role: standaloneOtpState.role,
+          displayName: standaloneOtpState.email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+        })
+      });
+      const data = await res.json();
+      submitBtn.classList.remove('loading');
+
+      if (data.success) {
+        if (standaloneOtpState.countdownTimer) clearInterval(standaloneOtpState.countdownTimer);
+
+        const user = data.user || {
+          email: standaloneOtpState.email,
+          name: standaloneOtpState.email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+          role: standaloneOtpState.role,
+          emailVerified: true,
+          verifiedAt: new Date().toISOString(),
+          loginAt: new Date().toISOString()
+        };
+
+        AuthState.setUser(user);
+        showToast(`Email verified! Welcome, ${user.name}!`, 'success');
+        triggerNamasteCelebration(user);
+
+        const target = user.role === 'client' ? 'client-dashboard.html' :
+                       user.role === 'candidate' ? 'candidate-dashboard.html' : 'employee-dashboard.html';
+        setTimeout(() => { location.href = target; }, 1400);
+      } else {
+        showToast(data.error || 'Invalid OTP code.', 'error');
+      }
+    } catch {
+      submitBtn.classList.remove('loading');
+      showToast('Network error during OTP verification.', 'error');
+    }
+  });
 
   // Sign in submit
   signinForm?.addEventListener('submit', (e) => {
@@ -832,7 +1373,7 @@ function initStandaloneAuthPage() {
       if (email.includes('employee') || email.includes('staff')) role = 'employee';
 
       const userName = email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-      const user = { email, name: userName || 'Arjun Sharma', role, loginAt: new Date().toISOString() };
+      const user = { email, name: userName || 'Arjun Sharma', role, emailVerified: true, loginAt: new Date().toISOString() };
       AuthState.setUser(user);
       showToast(`Welcome back, ${user.name}!`, 'success');
 
@@ -854,9 +1395,9 @@ function initStandaloneAuthPage() {
     btn.classList.add('loading');
     setTimeout(() => {
       btn.classList.remove('loading');
-      const user = { email, name, role, loginAt: new Date().toISOString() };
+      const user = { email, name, role, emailVerified: true, loginAt: new Date().toISOString() };
       AuthState.setUser(user);
-      showToast(`Account created! Welcome to SiPro Tech.`, 'success');
+      showToast(`Account created & verified with SiPro Tech!`, 'success');
 
       const target = role === 'client' ? 'client-dashboard.html' :
                      role === 'candidate' ? 'candidate-dashboard.html' : 'employee-dashboard.html';
@@ -876,6 +1417,7 @@ function initStandaloneAuthPage() {
           name: 'Arjun Sharma',
           role: document.body.dataset.role || 'client',
           provider,
+          emailVerified: true,
           loginAt: new Date().toISOString()
         };
         AuthState.setUser(user);
@@ -1039,6 +1581,198 @@ function downloadReceipt(invoiceId, title, amount) {
   `);
 }
 
+// Client Feedback & Review System Engine
+function initClientReviewSystem() {
+  const reviewsGrid = document.getElementById('client-reviews-list');
+  const reviewForm = document.getElementById('client-review-form');
+  if (!reviewsGrid && !reviewForm) return;
+
+  let currentSelectedRating = 5;
+  const ratingLabels = {
+    1: '1 Star (Needs Improvement)',
+    2: '2 Stars (Fair Delivery)',
+    3: '3 Stars (Good Quality)',
+    4: '4 Stars (Very Good)',
+    5: '5 Stars (Outstanding ROI & Architecture)'
+  };
+
+  // Setup Star selector if available
+  const starContainer = document.getElementById('star-rating-selector');
+  const starLabel = document.getElementById('star-rating-label');
+  if (starContainer) {
+    const starBtns = starContainer.querySelectorAll('.star-rating-btn');
+    
+    const updateStarUI = (val) => {
+      starBtns.forEach(btn => {
+        const starIndex = parseInt(btn.dataset.star, 10);
+        if (starIndex <= val) {
+          btn.style.color = '#f59e0b';
+          btn.style.opacity = '1';
+        } else {
+          btn.style.color = 'var(--muted)';
+          btn.style.opacity = '0.4';
+        }
+      });
+      if (starLabel) starLabel.textContent = ratingLabels[val] || `${val} Stars`;
+    };
+
+    starBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSelectedRating = parseInt(btn.dataset.star, 10);
+        updateStarUI(currentSelectedRating);
+      });
+      btn.addEventListener('mouseenter', () => {
+        const hoverVal = parseInt(btn.dataset.star, 10);
+        updateStarUI(hoverVal);
+      });
+    });
+
+    starContainer.addEventListener('mouseleave', () => {
+      updateStarUI(currentSelectedRating);
+    });
+
+    updateStarUI(5);
+  }
+
+  // Fetch verified reviews from backend API
+  const loadReviews = async () => {
+    try {
+      const res = await fetch('/api/v1/reviews');
+      const data = await res.json();
+      if (data.success && Array.isArray(data.reviews) && data.reviews.length > 0 && reviewsGrid) {
+        reviewsGrid.innerHTML = data.reviews.map(r => {
+          const starsStr = '★'.repeat(Math.min(5, Math.max(1, r.rating || 5)));
+          const initials = (r.name || 'Client').split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+          const servicePill = r.service ? `<span class="pill" style="font-size:10px;margin-bottom:8px;display:inline-block">${r.service}</span>` : '';
+          return `
+            <div class="testimonial-card">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <div class="testimonial-stars" style="color:#f59e0b;font-size:16px">${starsStr}</div>
+                ${servicePill}
+              </div>
+              <p class="testimonial-quote">"${escapeHtml(r.feedback || '')}"</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background:linear-gradient(135deg, #6366f1, #22d3ee)">${initials}</div>
+                <div>
+                  <div class="testimonial-name">${escapeHtml(r.name || 'Anonymous Client')}</div>
+                  <div class="testimonial-role">${escapeHtml(r.company || 'Enterprise Partner')}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    } catch (e) {
+      console.warn('Could not load dynamic reviews:', e);
+    }
+  };
+
+  loadReviews();
+
+  // Review submission handler
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('review-author-name');
+      const companyInput = document.getElementById('review-company-role');
+      const serviceInput = document.getElementById('review-service-category');
+      const feedbackInput = document.getElementById('review-feedback-msg');
+      const statusText = document.getElementById('review-form-status');
+      const submitBtn = document.getElementById('btn-submit-review');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const company = companyInput ? companyInput.value.trim() : '';
+      const service = serviceInput ? serviceInput.value : 'Custom Web & Software Engineering';
+      const feedback = feedbackInput ? feedbackInput.value.trim() : '';
+      const rating = currentSelectedRating;
+
+      if (!name || !company || !feedback) {
+        showToast('Please complete all review fields.', 'error');
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.querySelector('span').textContent = 'Submitting Review...';
+      }
+
+      try {
+        const res = await fetch('/api/v1/reviews', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, company, service, feedback, rating })
+        });
+        const data = await res.json();
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = 'Publish Verified Review';
+        }
+
+        if (data.success) {
+          showToast('Thank you! Your verified client review has been published.', 'success');
+          if (statusText) {
+            statusText.textContent = '✔ Review successfully published and synchronized.';
+            statusText.style.color = 'var(--emerald)';
+          }
+
+          // Prepend card to grid
+          if (reviewsGrid) {
+            const starsStr = '★'.repeat(rating);
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+            const newCard = document.createElement('div');
+            newCard.className = 'testimonial-card';
+            newCard.style.animation = 'fadeIn 0.4s ease-out';
+            newCard.innerHTML = `
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <div class="testimonial-stars" style="color:#f59e0b;font-size:16px">${starsStr}</div>
+                <span class="pill" style="font-size:10px;margin-bottom:8px;display:inline-block">${service}</span>
+              </div>
+              <p class="testimonial-quote">"${escapeHtml(feedback)}"</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background:linear-gradient(135deg, #6366f1, #22d3ee)">${initials}</div>
+                <div>
+                  <div class="testimonial-name">${escapeHtml(name)}</div>
+                  <div class="testimonial-role">${escapeHtml(company)}</div>
+                </div>
+              </div>
+            `;
+            reviewsGrid.insertBefore(newCard, reviewsGrid.firstChild);
+          }
+
+          // Reset form fields
+          reviewForm.reset();
+          currentSelectedRating = 5;
+          if (starContainer) {
+            starContainer.querySelectorAll('.star-rating-btn').forEach(btn => {
+              btn.style.color = '#f59e0b';
+              btn.style.opacity = '1';
+            });
+            if (starLabel) starLabel.textContent = ratingLabels[5];
+          }
+        } else {
+          showToast(data.error || 'Failed to submit review.', 'error');
+        }
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = 'Publish Verified Review';
+        }
+        showToast('Network error while publishing review.', 'error');
+      }
+    });
+  }
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // DOM Ready initialization
 document.addEventListener('DOMContentLoaded', () => {
   // Theme check
@@ -1059,6 +1793,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDPDPConsent();
 
   // Page-specific modules
+  initClientReviewSystem();
   initStandaloneAuthPage();
   initContactForm();
   initPricingTabs();
