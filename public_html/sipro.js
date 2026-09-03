@@ -12,10 +12,7 @@ const formatINR = new Intl.NumberFormat('en-IN', {
 
 const NAV_LINKS = [
   ['Home', 'index.html'],
-  ['Services', 'services.html'],
-  ['Pricing', 'pricing.html'],
   ['Careers', 'careers.html'],
-  ['About', 'about.html'],
   ['Contact', 'contact.html']
 ];
 
@@ -30,7 +27,215 @@ const ICONS = {
   github: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
   check: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
   sun: `<svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
-  moon: `<svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`
+  moon: `<svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
+  chevronDown: `<svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`,
+  arrowRight: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+  close: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`,
+  cloud: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
+  cpu: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>`,
+  zap: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  shield: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  book: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v20"/></svg>`,
+  star: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  globe: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+  briefcase: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+  building: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>`,
+  layers: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+  code: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+  scale: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>`,
+  home: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+  sparkles: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
+  search: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`,
+  phone: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
+};
+
+// Enterprise Accenture/Wipro Mega-Menu Configuration
+const MEGA_MENUS = {
+  whatWeDo: {
+    id: 'mega-what-we-do',
+    label: 'What We Do',
+    columns: [
+      {
+        title: 'Core Capabilities',
+        items: [
+          {
+            title: 'Cloud Architecture & Kubernetes',
+            desc: 'Multi-cloud AWS/GCP, K8s orchestration & IaC Terraform',
+            href: 'services-cloud-architecture.html',
+            icon: 'cloud',
+            badge: 'Enterprise'
+          },
+          {
+            title: 'Custom Software & Microservices',
+            desc: 'High-concurrency platforms & distributed Go/Node services',
+            href: 'services-custom-software.html',
+            icon: 'cpu'
+          },
+          {
+            title: 'Intelligent APIs & Automation',
+            desc: 'Workflow automation, AI agent orchestration & ETL pipelines',
+            href: 'services-api-automation.html',
+            icon: 'zap'
+          }
+        ]
+      },
+      {
+        title: 'Delivery & Workspaces',
+        items: [
+          {
+            title: 'Dedicated Engineering Pods',
+            desc: '5-day deployment squads & transparent INR retainers',
+            href: 'pricing.html',
+            icon: 'layers',
+            badge: 'Pods'
+          },
+          {
+            title: 'All Solutions Catalog',
+            desc: 'Comprehensive index of digital engineering offerings',
+            href: 'services.html',
+            icon: 'code'
+          },
+          {
+            title: 'Client Deliverables & Workspace',
+            desc: 'Sprint milestones, live telemetry & GST invoices',
+            href: 'portals.html',
+            icon: 'building'
+          }
+        ]
+      }
+    ],
+    spotlight: {
+      tag: 'FEATURED CAPABILITY',
+      title: 'Zero-Downtime Cloud Pods',
+      desc: 'Deploy dedicated senior squads delivering 99.95% SLA availability with sub-5ms edge latency for fintech & SaaS.',
+      linkText: 'Explore Cloud Architecture',
+      href: 'services-cloud-architecture.html',
+      badge: '99.95% SLA'
+    }
+  },
+  whatWeThink: {
+    id: 'mega-what-we-think',
+    label: 'What We Think',
+    columns: [
+      {
+        title: 'Compliance & Governance',
+        items: [
+          {
+            title: 'DPDP Act 2023 Privacy Portal',
+            desc: 'India Digital Personal Data Protection fiduciary framework',
+            href: 'privacy-portal.html',
+            icon: 'shield',
+            badge: 'DPDP 2023'
+          },
+          {
+            title: 'Grievance Redressal & DPO',
+            desc: 'Statutory Data Protection & Grievance Redressal mechanisms',
+            href: 'grievance-redressal.html',
+            icon: 'scale'
+          },
+          {
+            title: 'Privacy Policy & Data Security',
+            desc: 'ISO 27001-aligned controls & data encryption protocols',
+            href: 'privacy-policy.html',
+            icon: 'lock'
+          }
+        ]
+      },
+      {
+        title: 'Engineering & Insights',
+        items: [
+          {
+            title: 'Engineering Wiki & Playbooks',
+            desc: 'Architecture standards, CI/CD guides & system wiki',
+            href: 'employee-wiki.html',
+            icon: 'book'
+          },
+          {
+            title: 'Talent Academy Curriculum',
+            desc: 'Full-stack engineering syllabus & acceleration tracks',
+            href: 'candidate-curriculum.html',
+            icon: 'code'
+          },
+          {
+            title: 'Verified Client Reviews',
+            desc: 'Enterprise testimonials, verified ratings & feedback',
+            href: 'index.html#reviews',
+            icon: 'star',
+            badge: '4.9/5'
+          }
+        ]
+      }
+    ],
+    spotlight: {
+      tag: 'REGULATORY INSIGHT',
+      title: 'DPDP Act 2023 Roadmap',
+      desc: 'A comprehensive engineering guide for enterprise data fiduciaries on consent lifecycle, erasure & security audits.',
+      linkText: 'Access Privacy Portal',
+      href: 'privacy-portal.html',
+      badge: 'Statutory'
+    }
+  },
+  whoWeAre: {
+    id: 'mega-who-we-are',
+    label: 'Who We Are',
+    columns: [
+      {
+        title: 'Organization & Delivery',
+        items: [
+          {
+            title: 'About SiPro Technologies',
+            desc: 'Our heritage, engineering ethos & leadership principles',
+            href: 'about.html',
+            icon: 'building'
+          },
+          {
+            title: 'Global Delivery Network',
+            desc: 'Operating from Telangana to global enterprise partners',
+            href: 'locations-global.html',
+            icon: 'globe'
+          },
+          {
+            title: 'Hyderabad & Regional Hubs',
+            desc: 'Innovation engineering hubs in South India',
+            href: 'locations-hyderabad.html',
+            icon: 'building'
+          }
+        ]
+      },
+      {
+        title: 'Careers & Engagement',
+        items: [
+          {
+            title: 'Careers & Open Positions',
+            desc: 'Join high-impact squads with competitive compensation',
+            href: 'careers.html',
+            icon: 'briefcase',
+            badge: 'Hiring'
+          },
+          {
+            title: 'Candidate Assessments',
+            desc: 'Technical coding challenges & evaluation portal',
+            href: 'candidate-assessments.html',
+            icon: 'code'
+          },
+          {
+            title: 'Enterprise Consultation & RFP',
+            desc: 'Schedule technical discovery with solutions architects',
+            href: 'contact.html',
+            icon: 'mail'
+          }
+        ]
+      }
+    ],
+    spotlight: {
+      tag: 'WE ARE HIRING',
+      title: 'Build at Enterprise Scale',
+      desc: 'Join our senior engineering squads solving mission-critical cloud, distributed systems, and automation challenges.',
+      linkText: 'View Open Roles',
+      href: 'careers.html',
+      badge: '12 Roles'
+    }
+  }
 };
 
 // State Management for Session
@@ -50,6 +255,9 @@ const AuthState = {
       localStorage.removeItem('sipro_auth_session');
     }
     renderHeader();
+    if (typeof initPricingAuthGate === 'function') {
+      initPricingAuthGate();
+    }
   },
   logout() {
     this.setUser(null);
@@ -99,19 +307,151 @@ function renderHeader() {
   const page = document.body.dataset.page || (location.pathname.split('/').pop() || 'index.html');
   const user = AuthState.getUser();
 
-  // Generate desktop nav links
-  const desktopLinks = NAV_LINKS.map(([label, href]) => {
+  // Helper to render Mega-Menu Desktop Dropdown Item
+  const renderDesktopMegaMenu = (menuKey, menu) => {
+    const isAnyActive = menu.columns.some(col => col.items.some(item => page === item.href));
+    return `
+      <div class="nav-item-dropdown ${isAnyActive ? 'active' : ''}" data-mega="${menuKey}">
+        <button type="button" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false" id="trigger-${menu.id}">
+          <span>${menu.label}</span>
+          ${ICONS.chevronDown}
+        </button>
+        <div class="mega-menu-panel" role="region" aria-labelledby="trigger-${menu.id}">
+          <div class="mega-menu-grid">
+            ${menu.columns.map(col => `
+              <div class="mega-column">
+                <div class="mega-column-title">${col.title}</div>
+                ${col.items.map(item => {
+                  const itemActive = page === item.href;
+                  return `
+                    <a href="${item.href}" class="mega-item-link ${itemActive ? 'active' : ''}">
+                      <div class="mega-item-icon">
+                        ${ICONS[item.icon] || ICONS.code}
+                      </div>
+                      <div class="mega-item-text">
+                        <div class="mega-item-title">
+                          <span>${item.title}</span>
+                          ${item.badge ? `<span class="mega-item-badge">${item.badge}</span>` : ''}
+                        </div>
+                        <div class="mega-item-desc">${item.desc}</div>
+                      </div>
+                    </a>
+                  `;
+                }).join('')}
+              </div>
+            `).join('')}
+
+            <!-- Spotlight Card -->
+            <div class="mega-spotlight-card">
+              <div>
+                <div class="mega-spotlight-tag">
+                  <span>✦</span> ${menu.spotlight.tag}
+                </div>
+                <div class="mega-spotlight-title">${menu.spotlight.title}</div>
+                <div class="mega-spotlight-desc">${menu.spotlight.desc}</div>
+              </div>
+              <div>
+                <a href="${menu.spotlight.href}" class="mega-spotlight-cta">
+                  <span>${menu.spotlight.linkText}</span>
+                  ${ICONS.arrowRight}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  // Helper to render Mobile Accordion Section
+  const renderMobileAccordion = (menuKey, menu) => {
+    const isAnyActive = menu.columns.some(col => col.items.some(item => page === item.href));
+    const totalItems = menu.columns.reduce((acc, col) => acc + col.items.length, 0);
+    const menuIcons = {
+      whatWeDo: ICONS.cpu,
+      whatWeThink: ICONS.shield,
+      whoWeAre: ICONS.building
+    };
+    const accentColors = {
+      whatWeDo: 'accent-cyan',
+      whatWeThink: 'accent-violet',
+      whoWeAre: 'accent-amber'
+    };
+    const subtitleMap = {
+      whatWeDo: 'Cloud, Microservices, AI & Pods',
+      whatWeThink: 'DPDP Governance, Security & Wiki',
+      whoWeAre: 'Leadership, Hubs & 12 Open Roles'
+    };
+    const badgeColors = {
+      whatWeDo: 'cyan',
+      whatWeThink: 'emerald',
+      whoWeAre: 'amber'
+    };
+
+    return `
+      <div class="mobile-accordion ${isAnyActive ? 'open' : ''}" data-accordion="${menuKey}">
+        <button type="button" class="mobile-accordion-trigger" aria-expanded="${isAnyActive ? 'true' : 'false'}">
+          <div class="mobile-nav-item-left">
+            <div class="mobile-nav-icon-badge ${accentColors[menuKey] || ''}">
+              ${menuIcons[menuKey] || ICONS.code}
+            </div>
+            <div class="mobile-nav-item-meta">
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="mobile-nav-item-title">${menu.label}</span>
+                <span class="mobile-badge-pill ${badgeColors[menuKey] || 'cyan'}">${totalItems} Items</span>
+              </div>
+              <span class="mobile-nav-item-sub">${subtitleMap[menuKey] || `${totalItems} Capabilities &amp; Portals`}</span>
+            </div>
+          </div>
+          <div class="mobile-nav-item-right">
+            <span class="mobile-accordion-chevron">${ICONS.chevronDown}</span>
+          </div>
+        </button>
+        <div class="mobile-accordion-content">
+          ${menu.columns.map(col => `
+            <div class="mobile-accordion-section-header">
+              <span>${col.title}</span>
+            </div>
+            ${col.items.map(item => {
+              const itemActive = page === item.href;
+              return `
+                <a href="${item.href}" class="mobile-sub-link ${itemActive ? 'active' : ''}">
+                  <div class="mobile-sub-icon">${ICONS[item.icon] || ICONS.code}</div>
+                  <div class="mobile-sub-text">
+                    <div class="mobile-sub-title">
+                      <span>${item.title}</span>
+                      ${item.badge ? `<span class="mobile-sub-badge">${item.badge}</span>` : ''}
+                    </div>
+                    ${item.desc ? `<div class="mobile-sub-desc">${item.desc}</div>` : ''}
+                  </div>
+                </a>
+              `;
+            }).join('')}
+          `).join('')}
+
+          ${menu.spotlight ? `
+            <div class="mobile-accordion-spotlight">
+              <div class="mobile-spotlight-top">
+                <span class="mobile-spotlight-pill">✦ ${menu.spotlight.tag}</span>
+                ${menu.spotlight.badge ? `<span class="mobile-sub-badge">${menu.spotlight.badge}</span>` : ''}
+              </div>
+              <div class="mobile-spotlight-title">${menu.spotlight.title}</div>
+              <div class="mobile-spotlight-desc">${menu.spotlight.desc}</div>
+              <a href="${menu.spotlight.href}" class="mobile-spotlight-btn">
+                <span>${menu.spotlight.linkText}</span>
+                ${ICONS.arrowRight}
+              </a>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  };
+
+  // Generate desktop direct links
+  const directDesktopLinks = NAV_LINKS.map(([label, href]) => {
     const isActive = page === href || (href === 'index.html' && page === '');
     return `<a class="nav-link ${isActive ? 'active' : ''}" href="${href}">${label}</a>`;
-  }).join('');
-
-  // Generate mobile nav links
-  const mobileLinks = NAV_LINKS.map(([label, href]) => {
-    const isActive = page === href || (href === 'index.html' && page === '');
-    return `<a class="mobile-nav-link ${isActive ? 'active' : ''}" href="${href}">
-      <span>${label}</span>
-      <span style="opacity:0.4">→</span>
-    </a>`;
   }).join('');
 
   // Auth block for desktop
@@ -132,10 +472,10 @@ function renderHeader() {
     `;
   } else {
     desktopAuthHtml = `
-      <div class="header-auth-group">
-        <button type="button" class="btn btn-ghost btn-sm" data-auth-trigger="signin">Sign In</button>
-        <button type="button" class="btn btn-primary btn-sm" data-auth-trigger="signup">Create Account</button>
-      </div>
+      <button type="button" class="btn btn-primary btn-sm header-login-btn" data-auth-trigger="login" title="Login or Create Account">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        <span>Login</span>
+      </button>
     `;
   }
 
@@ -160,9 +500,11 @@ function renderHeader() {
     `;
   } else {
     mobileAuthHtml = `
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;">
-        <button type="button" class="btn btn-ghost btn-block" data-auth-trigger="signin">Sign In</button>
-        <button type="button" class="btn btn-primary btn-block" data-auth-trigger="signup">Create Account</button>
+      <div class="mobile-auth-btn-row" style="grid-template-columns: 1fr;">
+        <button type="button" class="btn btn-primary btn-block" data-auth-trigger="login" style="display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Login</span>
+        </button>
       </div>
     `;
   }
@@ -173,14 +515,31 @@ function renderHeader() {
         <div class="header-nav">
           <a class="brand" href="index.html">
             <div class="brand-badge">SP</div>
-            <span class="brand-name">SiPro<span class="brand-tld">.tech</span></span>
+            <span class="brand-name">SiPro<span class="brand-tech">Tech</span></span>
           </a>
 
-          <nav class="nav-links-desktop" aria-label="Main Navigation">
-            ${desktopLinks}
+          <!-- Enterprise Mega-Menu Desktop Navigation (Accenture/Wipro Style) -->
+          <nav class="nav-links-desktop" aria-label="Enterprise Navigation">
+            <a class="nav-link ${page === 'index.html' || page === '' ? 'active' : ''}" href="index.html">Home</a>
+            ${renderDesktopMegaMenu('whatWeDo', MEGA_MENUS.whatWeDo)}
+            ${renderDesktopMegaMenu('whatWeThink', MEGA_MENUS.whatWeThink)}
+            ${renderDesktopMegaMenu('whoWeAre', MEGA_MENUS.whoWeAre)}
+            <a class="nav-link ${page === 'careers.html' ? 'active' : ''}" href="careers.html">Careers</a>
+            ${user ? `<a class="nav-link ${page === 'pricing.html' ? 'active' : ''}" href="pricing.html">Pricing</a>` : ''}
+            <a class="nav-link ${page === 'contact.html' ? 'active' : ''}" href="contact.html">Contact</a>
           </nav>
 
           <div class="header-actions">
+            <button class="header-search-btn" type="button" onclick="document.dispatchEvent(new KeyboardEvent('keydown', {key: 'k', ctrlKey: true, metaKey: true}))" aria-label="Open Command Search" title="Quick Search (Ctrl+K)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Search</span>
+              <kbd>⌘K</kbd>
+            </button>
+
+            <button class="a11y-toggle-btn" id="a11y-quick-btn" type="button" onclick="openAccessibilityModal()" aria-label="Accessibility settings" title="Accessibility & Display Settings">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+            </button>
+
             <button class="theme-toggle-btn" type="button" aria-label="Switch light or dark mode">
               ${ICONS.sun}
               ${ICONS.moon}
@@ -199,23 +558,170 @@ function renderHeader() {
         </div>
       </div>
 
-      <!-- Mobile Dropdown Drawer -->
-      <div class="mobile-drawer" id="mobile-drawer">
-        <nav class="mobile-nav-links">
-          ${mobileLinks}
-        </nav>
-        <div class="mobile-auth-block">
-          ${mobileAuthHtml}
+      <!-- Mobile Slide-Over Glassmorphic Drawer -->
+      <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
+        <div class="mobile-drawer-header">
+          <a class="brand" href="index.html">
+            <div class="brand-badge" style="width:32px;height:32px;font-size:14px">SP</div>
+            <span class="brand-name" style="font-size:17px">SiPro<span class="brand-tech">Tech</span></span>
+          </a>
+          <button class="mobile-drawer-close" type="button" aria-label="Close navigation drawer">
+            ${ICONS.close}
+          </button>
+        </div>
+
+        <div class="mobile-drawer-body">
+          <!-- Quick Command Search Trigger -->
+          <div class="mobile-search-pill" onclick="document.dispatchEvent(new KeyboardEvent('keydown', {key: 'k', ctrlKey: true, metaKey: true}))" role="button" tabindex="0" aria-label="Open Command Search">
+            <span class="mobile-search-icon">${ICONS.search}</span>
+            <span class="mobile-search-text">Search platforms, services &amp; docs...</span>
+            <kbd class="mobile-search-kbd">⌘K</kbd>
+          </div>
+
+          <!-- Main Navigation Group -->
+          <div class="mobile-group-label">OVERVIEW</div>
+          <a href="index.html" class="mobile-nav-link ${page === 'index.html' || page === '' ? 'active' : ''}">
+            <div class="mobile-nav-item-left">
+              <div class="mobile-nav-icon-badge accent-blue">${ICONS.home}</div>
+              <div class="mobile-nav-item-meta">
+                <span class="mobile-nav-item-title">Home</span>
+                <span class="mobile-nav-item-sub">Enterprise Overview &amp; Cloud Pods</span>
+              </div>
+            </div>
+            <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
+          </a>
+
+          <div class="mobile-group-label">SOLUTIONS &amp; ARCHITECTURE</div>
+          ${renderMobileAccordion('whatWeDo', MEGA_MENUS.whatWeDo)}
+          ${renderMobileAccordion('whatWeThink', MEGA_MENUS.whatWeThink)}
+          ${renderMobileAccordion('whoWeAre', MEGA_MENUS.whoWeAre)}
+
+          <div class="mobile-group-label">COMMERCIAL &amp; OPPORTUNITIES</div>
+          <a href="careers.html" class="mobile-nav-link ${page === 'careers.html' ? 'active' : ''}">
+            <div class="mobile-nav-item-left">
+              <div class="mobile-nav-icon-badge accent-amber">${ICONS.sparkles}</div>
+              <div class="mobile-nav-item-meta">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="mobile-nav-item-title">Careers &amp; Hiring</span>
+                  <span class="mobile-badge-pill amber">6 Openings</span>
+                </div>
+                <span class="mobile-nav-item-sub">Software Internships &amp; Engineering Roles</span>
+              </div>
+            </div>
+            <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
+          </a>
+
+          ${user ? `
+          <a href="pricing.html" class="mobile-nav-link ${page === 'pricing.html' ? 'active' : ''}">
+            <div class="mobile-nav-item-left">
+              <div class="mobile-nav-icon-badge accent-emerald">${ICONS.layers}</div>
+              <div class="mobile-nav-item-meta">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="mobile-nav-item-title">Pricing &amp; Retainers</span>
+                  <span class="mobile-badge-pill emerald">INR Pods</span>
+                </div>
+                <span class="mobile-nav-item-sub">Sprint Rates &amp; Engineering Calculator</span>
+              </div>
+            </div>
+            <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
+          </a>` : ''}
+
+          <a href="contact.html" class="mobile-nav-link ${page === 'contact.html' ? 'active' : ''}">
+            <div class="mobile-nav-item-left">
+              <div class="mobile-nav-icon-badge accent-cyan">${ICONS.phone}</div>
+              <div class="mobile-nav-item-meta">
+                <span class="mobile-nav-item-title">Contact &amp; RFP</span>
+                <span class="mobile-nav-item-sub">Schedule Consultation &amp; RFP Submissions</span>
+              </div>
+            </div>
+            <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
+          </a>
+
+          <a href="portals.html" class="mobile-nav-link ${page === 'portals.html' ? 'active' : ''}">
+            <div class="mobile-nav-item-left">
+              <div class="mobile-nav-icon-badge accent-violet">${ICONS.building}</div>
+              <div class="mobile-nav-item-meta">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="mobile-nav-item-title">Workspaces &amp; Portals</span>
+                  <span class="mobile-badge-pill cyan">Live</span>
+                </div>
+                <span class="mobile-nav-item-sub">Client Hub, Employee Board &amp; Assessments</span>
+              </div>
+            </div>
+            <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
+          </a>
+
+          <div class="mobile-auth-block">
+            <div class="mobile-group-label" style="margin-top:0">ACCOUNT ACCESS</div>
+            ${mobileAuthHtml}
+          </div>
+        </div>
+
+        <div class="mobile-drawer-footer">
+          <div class="mobile-footer-info">
+            <div class="mobile-msme-badge">
+              <span class="msme-dot"></span>
+              <span>Telangana, India · MSME UDYAM</span>
+            </div>
+          </div>
+          <div class="mobile-footer-actions">
+            <button class="theme-toggle-btn" type="button" aria-label="Toggle theme in mobile menu">
+              ${ICONS.sun}
+              ${ICONS.moon}
+            </button>
+          </div>
         </div>
       </div>
       <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
     </header>
   `;
 
+  // Desktop Mega-Menu Hover & Keyboard Interactions
+  const megaDropdowns = headerContainer.querySelectorAll('.nav-item-dropdown');
+  megaDropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isCurrentlyOpen = dropdown.classList.contains('open');
+      megaDropdowns.forEach(d => {
+        if (d !== dropdown) {
+          d.classList.remove('open');
+          d.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      dropdown.classList.toggle('open', !isCurrentlyOpen);
+      trigger.setAttribute('aria-expanded', String(!isCurrentlyOpen));
+    });
+  });
+
+  // Close desktop mega menus when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item-dropdown')) {
+      megaDropdowns.forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Close desktop mega menus and mobile drawer on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      megaDropdowns.forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+      closeDrawer();
+    }
+  });
+
   // Mobile drawer bindings
   const hamburger = headerContainer.querySelector('.hamburger-btn');
   const drawer = headerContainer.querySelector('.mobile-drawer');
   const backdrop = headerContainer.querySelector('.mobile-drawer-backdrop');
+  const closeBtn = headerContainer.querySelector('.mobile-drawer-close');
 
   const closeDrawer = () => {
     if (!drawer || !hamburger || !backdrop) return;
@@ -223,21 +729,56 @@ function renderHeader() {
     backdrop.classList.remove('active');
     hamburger.setAttribute('aria-expanded', 'false');
     hamburger.setAttribute('aria-label', 'Open navigation menu');
+    document.body.style.overflow = '';
+  };
+
+  const openDrawer = () => {
+    if (!drawer || !hamburger || !backdrop) return;
+    drawer.classList.add('open');
+    backdrop.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    hamburger.setAttribute('aria-label', 'Close navigation menu');
+    document.body.style.overflow = 'hidden';
   };
 
   if (hamburger && drawer && backdrop) {
     hamburger.addEventListener('click', () => {
-      const isOpen = drawer.classList.toggle('open');
-      backdrop.classList.toggle('active', isOpen);
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      const isOpen = drawer.classList.contains('open');
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
     });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeDrawer);
+    }
 
     backdrop.addEventListener('click', closeDrawer);
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    drawer.querySelectorAll('button:not(.mobile-accordion-trigger):not(.theme-toggle-btn)').forEach(b => b.addEventListener('click', closeDrawer));
   }
 
-  // Theme toggle button
+  // Auto close drawer when screen resizes to desktop width
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1080 && drawer?.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+
+  // Mobile Accordion toggles inside drawer
+  drawer?.querySelectorAll('.mobile-accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const parent = trigger.closest('.mobile-accordion');
+      if (!parent) return;
+      const isOpen = parent.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  // Theme toggle buttons (both desktop and mobile footer)
   headerContainer.querySelectorAll('.theme-toggle-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const isLight = document.documentElement.classList.toggle('light');
@@ -260,7 +801,7 @@ function renderFooter() {
           <div class="footer-brand">
             <a class="brand" href="index.html">
               <div class="brand-badge">SP</div>
-              <span class="brand-name">SiPro<span class="brand-tld">.tech</span></span>
+              <span class="brand-name">SiPro<span class="brand-tech">Tech</span></span>
             </a>
             <p>Cloud Architecture, Enterprise Web Systems, Microservices, and Intelligent Automation.</p>
             <p style="margin-top:12px;font-size:13px;color:var(--muted)">Hanamkonda, Telangana · Operating Globally</p>
@@ -280,7 +821,7 @@ function renderFooter() {
               <li><a href="login-client.html">Client Delivery Portal</a></li>
               <li><a href="login-candidate.html">Candidate Learning Hub</a></li>
               <li><a href="login-employee.html">Employee Operations</a></li>
-              <li><a href="pricing.html">Pricing & Retainers</a></li>
+              <li><a href="careers.html">Careers & Open Roles</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -963,6 +1504,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function switchAuthTab(tabName) {
+  if (tabName === 'login') tabName = 'signin';
   const root = document.getElementById('auth-modal-root');
   if (!root) return;
 
@@ -1642,20 +2184,22 @@ function initClientReviewSystem() {
       if (data.success && Array.isArray(data.reviews) && data.reviews.length > 0 && reviewsGrid) {
         reviewsGrid.innerHTML = data.reviews.map(r => {
           const starsStr = '★'.repeat(Math.min(5, Math.max(1, r.rating || 5)));
-          const initials = (r.name || 'Client').split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-          const servicePill = r.service ? `<span class="pill" style="font-size:10px;margin-bottom:8px;display:inline-block">${r.service}</span>` : '';
+          const authorName = r.author || r.name || 'Anonymous Client';
+          const reviewMsg = r.message || r.feedback || '';
+          const initials = authorName.split(' ').map(n => n[0]).filter(Boolean).join('').toUpperCase().slice(0, 2) || 'CL';
+          const servicePill = r.service ? `<span class="pill" style="font-size:10px;margin-bottom:8px;display:inline-block">${escapeHtml(r.service)}</span>` : '';
           return `
             <div class="testimonial-card">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
                 <div class="testimonial-stars" style="color:#f59e0b;font-size:16px">${starsStr}</div>
                 ${servicePill}
               </div>
-              <p class="testimonial-quote">"${escapeHtml(r.feedback || '')}"</p>
+              <p class="testimonial-quote">"${escapeHtml(reviewMsg)}"</p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar" style="background:linear-gradient(135deg, #6366f1, #22d3ee)">${initials}</div>
+                <div class="testimonial-avatar" style="background:linear-gradient(135deg, #6366f1, #22d3ee)">${escapeHtml(initials)}</div>
                 <div>
-                  <div class="testimonial-name">${escapeHtml(r.name || 'Anonymous Client')}</div>
-                  <div class="testimonial-role">${escapeHtml(r.company || 'Enterprise Partner')}</div>
+                  <div class="testimonial-name">${escapeHtml(authorName)}</div>
+                  <div class="testimonial-role">${escapeHtml(r.company || r.role || 'Enterprise Partner')}</div>
                 </div>
               </div>
             </div>
@@ -1773,6 +2317,342 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+/* ==========================================================================
+   Universal Info/Alert Modal Helper
+   ========================================================================== */
+function modal(title, htmlContent) {
+  let modalBackdrop = document.getElementById('sipro-info-modal');
+  if (!modalBackdrop) {
+    modalBackdrop = document.createElement('div');
+    modalBackdrop.id = 'sipro-info-modal';
+    modalBackdrop.className = 'auth-modal-backdrop';
+    document.body.appendChild(modalBackdrop);
+  }
+
+  modalBackdrop.innerHTML = `
+    <div class="auth-card" style="max-width:540px;text-align:left;">
+      <button class="auth-modal-close" onclick="document.getElementById('sipro-info-modal').classList.remove('active')">×</button>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div class="brand-badge" style="width:28px;height:28px;font-size:12px;">SP</div>
+        <h3 style="font-size:19px;margin:0;">${escapeHtml(title)}</h3>
+      </div>
+      <div style="font-size:14px;line-height:1.6;color:var(--text);margin-bottom:20px;">
+        ${htmlContent}
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('sipro-info-modal').classList.remove('active')">
+          Dismiss
+        </button>
+      </div>
+    </div>
+  `;
+
+  modalBackdrop.classList.add('active');
+}
+
+/* ==========================================================================
+   GST Tax Invoice & Receipt Generator (Printable Format)
+   ========================================================================== */
+function downloadReceipt(invoiceId, description, totalAmount) {
+  const gstBase = Math.round((totalAmount || 149000) / 1.18);
+  const gstTax = (totalAmount || 149000) - gstBase;
+  const today = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+
+  const receiptHtml = `
+    <div style="font-family:system-ui,sans-serif;font-size:13px;line-height:1.5;">
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:12px;">
+        <div>
+          <strong style="font-size:15px;color:var(--cyan)">SiPro Technologies</strong><br>
+          <span style="color:var(--muted)">GSTIN: 36AAACS1234A1Z5 · Hanamkonda, TS</span>
+        </div>
+        <div style="text-align:right;">
+          <strong style="color:var(--emerald)">PAID RECEIPT</strong><br>
+          <span style="font-family:monospace">${escapeHtml(invoiceId)}</span>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="color:var(--muted)">Date:</span>
+          <span>${today}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="color:var(--muted)">Engagement / Service:</span>
+          <strong>${escapeHtml(description)}</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="color:var(--muted)">Taxable Base Amount:</span>
+          <span>${formatINR.format(gstBase)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="color:var(--muted)">Integrated GST (18%):</span>
+          <span>${formatINR.format(gstTax)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:8px;font-size:15px;">
+          <strong>Total Settled Amount:</strong>
+          <strong style="color:var(--emerald)">${formatINR.format(totalAmount)}</strong>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);text-align:center;background:rgba(255,255,255,0.03);padding:8px;border-radius:6px;">
+        This is a digitally verified electronic tax invoice generated under the CGST/SGST Act 2017.
+      </div>
+    </div>
+  `;
+
+  modal(`GST Tax Receipt — ${invoiceId}`, receiptHtml);
+}
+
+/* ==========================================================================
+   Enterprise Pricing Auth Gate Engine
+   ========================================================================== */
+function initPricingAuthGate() {
+  const isPricingPage = document.body.dataset.page === 'pricing.html' || 
+                        location.pathname.includes('pricing') || 
+                        Boolean(document.querySelector('#b2b'));
+  if (!isPricingPage) return;
+
+  const user = AuthState.getUser();
+  const pricingContainer = document.querySelector('main .section .container');
+  const b2b = document.getElementById('b2b');
+  const b2c = document.getElementById('b2c');
+  const tabs = document.querySelector('.tabs');
+  const scopeSection = document.querySelector('#interactive-scope-calculator')?.closest('section');
+
+  // Clear existing gate elements
+  document.getElementById('pricing-auth-gate-wrapper')?.remove();
+  document.getElementById('pricing-unlocked-banner-el')?.remove();
+
+  if (!user) {
+    // Unauthenticated State: Render Enterprise Auth Gate
+    const gateWrapper = document.createElement('div');
+    gateWrapper.id = 'pricing-auth-gate-wrapper';
+    gateWrapper.className = 'pricing-auth-gate-box';
+    gateWrapper.innerHTML = `
+      <div class="pricing-lock-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="pricing-auth-gate-title">Enterprise Commercial Schedules & Retainer Cards</h2>
+      <p class="pricing-auth-gate-desc">
+        Commercial engineering retainers, fixed-milestone sprint pricing, dedicated pod rate calculators, and talent acceleration admissions require an active SiPro account. Sign in to your workspace or register to unlock transparent commercial schedules.
+      </p>
+      <div class="pricing-auth-gate-actions">
+        <button type="button" class="btn btn-primary btn-lg" data-auth-trigger="signin">
+          <span>Sign In to Unlock Pricing</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-lg" data-auth-trigger="signup">
+          <span>Create Free Workspace</span>
+        </button>
+      </div>
+    `;
+
+    if (tabs && tabs.parentNode) {
+      tabs.parentNode.insertBefore(gateWrapper, tabs);
+    } else if (pricingContainer) {
+      pricingContainer.insertBefore(gateWrapper, pricingContainer.firstChild);
+    }
+
+    // Shield locked cards & calculators
+    if (b2b) b2b.classList.add('pricing-locked-shield');
+    if (b2c) b2c.classList.add('pricing-locked-shield');
+    if (scopeSection) scopeSection.classList.add('pricing-locked-shield');
+
+    // Rebind triggers
+    bindAuthTriggers();
+  } else {
+    // Authenticated State: Remove locks & display active session indicator
+    if (b2b) b2b.classList.remove('pricing-locked-shield');
+    if (b2c) b2c.classList.remove('pricing-locked-shield');
+    if (scopeSection) scopeSection.classList.remove('pricing-locked-shield');
+
+    const banner = document.createElement('div');
+    banner.id = 'pricing-unlocked-banner-el';
+    banner.className = 'pricing-unlocked-banner';
+    const roleBadge = user.role === 'client' ? '🏢 Enterprise Client' : 
+                      user.role === 'candidate' ? '🚀 Accelerated Talent Cohort' : '💻 Core Platform Architect';
+    const dashLink = user.role === 'client' ? 'client-dashboard.html' : 
+                     user.role === 'candidate' ? 'candidate-dashboard.html' : 'employee-dashboard.html';
+
+    banner.innerHTML = `
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 9.9-1"/><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/></svg>
+        Enterprise Rates & Retainer Schedules Active for <strong>${escapeHtml(user.name || user.email)}</strong>
+      </span>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span class="tag emerald" style="margin:0">${roleBadge}</span>
+        <a href="${dashLink}" class="btn btn-ghost btn-sm">Open Workspace Dashboard →</a>
+      </div>
+    `;
+
+    if (tabs && tabs.parentNode) {
+      tabs.parentNode.insertBefore(banner, tabs);
+    }
+  }
+}
+
+/* ==========================================================================
+   Universal Enterprise Command Palette (Ctrl+K / Cmd+K)
+   ========================================================================== */
+function initCommandPalette() {
+  if (document.getElementById('cmd-palette-root')) return;
+
+  const COMMAND_ITEMS = [
+    { title: 'Home Overview', desc: 'Main digital engineering showcase', href: 'index.html', icon: 'globe', category: 'Navigation' },
+    { title: 'Careers & Open Positions', desc: 'Engineering squads and job applications', href: 'careers.html', icon: 'briefcase', category: 'Navigation' },
+    { title: 'Contact & RFP Discovery', desc: 'Schedule architectural consultation', href: 'contact.html', icon: 'mail', category: 'Navigation' },
+    { title: 'About SiPro Technologies', desc: 'MSME leadership & engineering ethos', href: 'about.html', icon: 'building', category: 'Navigation' },
+    { title: 'Cloud Architecture & Kubernetes', desc: 'Zero-downtime microservices & AWS/GCP IaC', href: 'services-cloud-architecture.html', icon: 'cloud', category: 'Services' },
+    { title: 'Custom Software & Microservices', desc: 'High-concurrency platforms & distributed systems', href: 'services-custom-software.html', icon: 'cpu', category: 'Services' },
+    { title: 'Intelligent APIs & Automation', desc: 'AI agent orchestration & ETL workflows', href: 'services-api-automation.html', icon: 'zap', category: 'Services' },
+    { title: 'All Solutions Catalog', desc: 'Comprehensive matrix of digital services', href: 'services.html', icon: 'code', category: 'Services' },
+    { title: 'Pricing & Retainers', desc: 'Commercial retainers & pod calculators (Auth required)', href: 'pricing.html', icon: 'layers', category: 'Workspaces' },
+    { title: 'Client Delivery Workspace', desc: 'Sprint tracker, telemetry & deliverables', href: 'client-dashboard.html', icon: 'building', category: 'Workspaces' },
+    { title: 'Candidate Learning Hub', desc: 'Interactive coding tracks & curriculum', href: 'candidate-dashboard.html', icon: 'code', category: 'Workspaces' },
+    { title: 'Candidate Code Assessments', desc: 'Technical challenge & evaluation runner', href: 'candidate-assessments.html', icon: 'code', category: 'Workspaces' },
+    { title: 'Employee Operations', desc: 'Sprint board, engineering wiki & tickets', href: 'employee-dashboard.html', icon: 'user', category: 'Workspaces' },
+    { title: 'Client Billing & GST Invoices', desc: 'Tax invoice generation & settlement', href: 'client-billing.html', icon: 'scale', category: 'Workspaces' },
+    { title: 'DPDP Act 2023 Privacy Portal', desc: 'Data principal rights, consent & DPO', href: 'privacy-portal.html', icon: 'shield', category: 'Governance' },
+    { title: 'Grievance Redressal Mechanism', desc: 'Statutory compliance & data grievances', href: 'grievance-redressal.html', icon: 'scale', category: 'Governance' }
+  ];
+
+  const paletteRoot = document.createElement('div');
+  paletteRoot.id = 'cmd-palette-root';
+  paletteRoot.className = 'cmd-palette-backdrop';
+  paletteRoot.innerHTML = `
+    <div class="cmd-palette-modal" role="dialog" aria-modal="true" aria-label="Command Palette">
+      <div class="cmd-palette-header">
+        <span class="cmd-palette-search-icon">${ICONS.code}</span>
+        <input type="text" class="cmd-palette-input" id="cmd-palette-input" placeholder="Search pages, services, portals, playbooks... (Esc to close)" autocomplete="off">
+        <kbd class="cmd-palette-kbd">ESC</kbd>
+      </div>
+      <div class="cmd-palette-results" id="cmd-palette-results"></div>
+      <div class="cmd-palette-footer">
+        <div style="display:flex;gap:12px">
+          <span><kbd class="cmd-palette-kbd">↑↓</kbd> Navigate</span>
+          <span><kbd class="cmd-palette-kbd">↵</kbd> Select</span>
+        </div>
+        <span>SiPro Global Command Bar</span>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(paletteRoot);
+
+  const input = paletteRoot.querySelector('#cmd-palette-input');
+  const resultsBox = paletteRoot.querySelector('#cmd-palette-results');
+  let selectedIndex = 0;
+  let filteredItems = [...COMMAND_ITEMS];
+
+  const renderResults = () => {
+    if (filteredItems.length === 0) {
+      resultsBox.innerHTML = `
+        <div style="padding:28px 16px;text-align:center;color:var(--muted);font-size:14px">
+          No matching pages or tools found for "<strong>${escapeHtml(input.value)}</strong>".
+        </div>
+      `;
+      return;
+    }
+
+    let currentCategory = '';
+    let html = '';
+    filteredItems.forEach((item, idx) => {
+      if (item.category !== currentCategory) {
+        currentCategory = item.category;
+        html += `<div class="cmd-palette-category-label">${currentCategory}</div>`;
+      }
+      const isSelected = idx === selectedIndex;
+      html += `
+        <a href="${item.href}" class="cmd-palette-item ${isSelected ? 'selected' : ''}" data-idx="${idx}">
+          <div class="cmd-palette-item-left">
+            <div class="cmd-palette-item-icon">${ICONS[item.icon] || ICONS.code}</div>
+            <div>
+              <div>${item.title}</div>
+              <div class="cmd-palette-item-desc">${item.desc}</div>
+            </div>
+          </div>
+          <span style="font-size:12px;color:var(--muted)">↵</span>
+        </a>
+      `;
+    });
+    resultsBox.innerHTML = html;
+
+    // Scroll selected into view
+    const selectedEl = resultsBox.querySelector('.cmd-palette-item.selected');
+    if (selectedEl) {
+      selectedEl.scrollIntoView({ block: 'nearest' });
+    }
+  };
+
+  const openPalette = () => {
+    paletteRoot.classList.add('active');
+    input.value = '';
+    filteredItems = [...COMMAND_ITEMS];
+    selectedIndex = 0;
+    renderResults();
+    setTimeout(() => input.focus(), 80);
+  };
+
+  const closePalette = () => {
+    paletteRoot.classList.remove('active');
+    input.blur();
+  };
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    if (!q) {
+      filteredItems = [...COMMAND_ITEMS];
+    } else {
+      filteredItems = COMMAND_ITEMS.filter(it => 
+        it.title.toLowerCase().includes(q) || 
+        it.desc.toLowerCase().includes(q) || 
+        it.category.toLowerCase().includes(q)
+      );
+    }
+    selectedIndex = 0;
+    renderResults();
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (filteredItems.length > 0) {
+        selectedIndex = (selectedIndex + 1) % filteredItems.length;
+        renderResults();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (filteredItems.length > 0) {
+        selectedIndex = (selectedIndex - 1 + filteredItems.length) % filteredItems.length;
+        renderResults();
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (filteredItems[selectedIndex]) {
+        location.href = filteredItems[selectedIndex].href;
+        closePalette();
+      }
+    } else if (e.key === 'Escape') {
+      closePalette();
+    }
+  });
+
+  paletteRoot.addEventListener('click', (e) => {
+    if (e.target === paletteRoot) {
+      closePalette();
+    }
+  });
+
+  // Global Shortcut: Ctrl+K / Cmd+K
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      if (paletteRoot.classList.contains('active')) {
+        closePalette();
+      } else {
+        openPalette();
+      }
+    }
+  });
+}
+
 // DOM Ready initialization
 document.addEventListener('DOMContentLoaded', () => {
   // Theme check
@@ -1785,6 +2665,18 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
   renderAuthModal();
+
+  // Command Palette
+  initCommandPalette();
+
+  // Accessibility & Display Preferences Engine
+  initAccessibilityPreferences();
+
+  // Deliverables & Document Generator (if on deliverables page)
+  initDeliverablesPortal();
+
+  // Pricing Auth Gate
+  initPricingAuthGate();
 
   // Network offline/online listener
   initNetworkMonitor();
@@ -2710,9 +3602,1346 @@ function renderEmptyState({ icon = '📂', title = 'No Data Found', desc = 'No r
   `;
 }
 
+/* ==========================================================================
+   Accessibility & Display Preferences Engine
+   ========================================================================== */
+function initAccessibilityPreferences() {
+  const savedSettings = JSON.parse(localStorage.getItem('sipro_a11y_settings') || '{}');
+
+  // Apply Font Scaling
+  if (savedSettings.fontSize) {
+    applyFontSize(savedSettings.fontSize);
+  }
+
+  // Apply High Contrast
+  if (savedSettings.highContrast) {
+    document.documentElement.classList.add('high-contrast');
+  }
+
+  // Apply Reduced Motion
+  if (savedSettings.reducedMotion) {
+    document.documentElement.classList.add('reduced-motion');
+  }
+}
+
+function applyFontSize(size) {
+  const root = document.documentElement;
+  if (size === 'sm') root.style.fontSize = '14px';
+  else if (size === 'lg') root.style.fontSize = '17.5px';
+  else if (size === 'xl') root.style.fontSize = '19px';
+  else root.style.fontSize = '16px';
+}
+
+function openAccessibilityModal() {
+  let modalEl = document.getElementById('sipro-a11y-modal');
+  if (!modalEl) {
+    modalEl = document.createElement('div');
+    modalEl.id = 'sipro-a11y-modal';
+    modalEl.className = 'auth-modal-backdrop';
+    document.body.appendChild(modalEl);
+  }
+
+  const saved = JSON.parse(localStorage.getItem('sipro_a11y_settings') || '{}');
+  const curSize = saved.fontSize || 'md';
+  const curContrast = !!saved.highContrast;
+  const curMotion = !!saved.reducedMotion;
+
+  modalEl.innerHTML = `
+    <div class="a11y-modal-card" role="dialog" aria-modal="true" aria-label="Accessibility Preferences">
+      <button class="auth-modal-close" onclick="closeAccessibilityModal()">×</button>
+      
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+        <div class="brand-badge" style="width:32px;height:32px;font-size:14px">SP</div>
+        <div>
+          <h3 style="font-size:18px;margin:0">Accessibility &amp; Display</h3>
+          <span style="font-size:12px;color:var(--muted)">Customize readability, contrast &amp; assistive features</span>
+        </div>
+      </div>
+
+      <div class="a11y-control-row">
+        <div>
+          <div class="a11y-label-title">Font Size &amp; Scaling</div>
+          <div class="a11y-label-sub">Adjust baseline typography scale</div>
+        </div>
+        <div class="a11y-btn-group" id="a11y-font-group">
+          <button type="button" class="a11y-opt-btn ${curSize === 'sm' ? 'active' : ''}" data-size="sm">Small</button>
+          <button type="button" class="a11y-opt-btn ${curSize === 'md' ? 'active' : ''}" data-size="md">Standard</button>
+          <button type="button" class="a11y-opt-btn ${curSize === 'lg' ? 'active' : ''}" data-size="lg">Large</button>
+          <button type="button" class="a11y-opt-btn ${curSize === 'xl' ? 'active' : ''}" data-size="xl">Extra</button>
+        </div>
+      </div>
+
+      <div class="a11y-control-row">
+        <div>
+          <div class="a11y-label-title">High Contrast Mode</div>
+          <div class="a11y-label-sub">Enhanced pure black/white borders &amp; text</div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-sm ${curContrast ? 'btn-primary' : 'btn-ghost'}" id="btn-toggle-contrast">
+            ${curContrast ? 'Active' : 'Disabled'}
+          </button>
+        </div>
+      </div>
+
+      <div class="a11y-control-row">
+        <div>
+          <div class="a11y-label-title">Reduced Motion</div>
+          <div class="a11y-label-sub">Minimizes animations &amp; visual transitions</div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-sm ${curMotion ? 'btn-primary' : 'btn-ghost'}" id="btn-toggle-motion">
+            ${curMotion ? 'Active' : 'Disabled'}
+          </button>
+        </div>
+      </div>
+
+      <div class="a11y-control-row">
+        <div>
+          <div class="a11y-label-title">Screen Readout / TTS Voice</div>
+          <div class="a11y-label-sub">Listen to spoken summary of the current page</div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-sm btn-ghost" id="btn-read-page-summary">
+            🔊 Read Summary
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center">
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-reset-a11y">Reset Defaults</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeAccessibilityModal()">Done</button>
+      </div>
+    </div>
+  `;
+
+  modalEl.classList.add('active');
+
+  // Event handlers
+  modalEl.querySelectorAll('#a11y-font-group .a11y-opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const size = btn.dataset.size;
+      modalEl.querySelectorAll('#a11y-font-group .a11y-opt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFontSize(size);
+      updateA11yStorage({ fontSize: size });
+      showToast(`Font scale updated to ${size.toUpperCase()}`, 'info');
+    });
+  });
+
+  const contrastBtn = modalEl.querySelector('#btn-toggle-contrast');
+  contrastBtn.addEventListener('click', () => {
+    const isNowActive = document.documentElement.classList.toggle('high-contrast');
+    contrastBtn.textContent = isNowActive ? 'Active' : 'Disabled';
+    contrastBtn.className = `btn btn-sm ${isNowActive ? 'btn-primary' : 'btn-ghost'}`;
+    updateA11yStorage({ highContrast: isNowActive });
+    showToast(isNowActive ? 'High Contrast Mode Enabled' : 'High Contrast Mode Disabled', 'info');
+  });
+
+  const motionBtn = modalEl.querySelector('#btn-toggle-motion');
+  motionBtn.addEventListener('click', () => {
+    const isNowActive = document.documentElement.classList.toggle('reduced-motion');
+    motionBtn.textContent = isNowActive ? 'Active' : 'Disabled';
+    motionBtn.className = `btn btn-sm ${isNowActive ? 'btn-primary' : 'btn-ghost'}`;
+    updateA11yStorage({ reducedMotion: isNowActive });
+    showToast(isNowActive ? 'Reduced Motion Enabled' : 'Standard Transitions Enabled', 'info');
+  });
+
+  const readBtn = modalEl.querySelector('#btn-read-page-summary');
+  readBtn.addEventListener('click', () => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const pageTitle = document.title || 'SiPro Technologies';
+      const metaDesc = document.querySelector('meta[name="description"]')?.content || 'Welcome to SiPro Technologies enterprise digital engineering portal.';
+      const msg = new SpeechSynthesisUtterance(`${pageTitle}. ${metaDesc}`);
+      msg.rate = 1.0;
+      window.speechSynthesis.speak(msg);
+      showToast('Speaking page summary...', 'info');
+    } else {
+      showToast('Text-to-speech is not supported in this browser.', 'error');
+    }
+  });
+
+  modalEl.querySelector('#btn-reset-a11y').addEventListener('click', () => {
+    localStorage.removeItem('sipro_a11y_settings');
+    document.documentElement.style.fontSize = '16px';
+    document.documentElement.classList.remove('high-contrast', 'reduced-motion');
+    closeAccessibilityModal();
+    showToast('Display preferences reset to default.', 'success');
+  });
+}
+
+function updateA11yStorage(partial) {
+  const cur = JSON.parse(localStorage.getItem('sipro_a11y_settings') || '{}');
+  const next = { ...cur, ...partial };
+  localStorage.setItem('sipro_a11y_settings', JSON.stringify(next));
+}
+
+function closeAccessibilityModal() {
+  const modalEl = document.getElementById('sipro-a11y-modal');
+  if (modalEl) modalEl.classList.remove('active');
+}
+
+/* ==========================================================================
+   Enterprise Deliverables & Document Generation Engine
+   ========================================================================== */
+function initDeliverablesPortal() {
+  const deliverablesGrid = document.getElementById('deliverables-grid');
+  if (!deliverablesGrid) return;
+
+  const tabButtons = document.querySelectorAll('#deliverables-tabs .d-tab');
+  const searchInput = document.getElementById('deliverables-search-input');
+  const openDocGenBtn = document.getElementById('btn-open-doc-generator');
+
+  if (openDocGenBtn) {
+    openDocGenBtn.addEventListener('click', () => generateDocument('sprint-qa'));
+  }
+
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  const filterCards = () => {
+    const cards = deliverablesGrid.querySelectorAll('.deliverable-card');
+    cards.forEach(card => {
+      const category = card.dataset.category || '';
+      const text = card.textContent.toLowerCase();
+      const matchesTab = activeFilter === 'all' || category === activeFilter;
+      const matchesSearch = !searchQuery || text.includes(searchQuery);
+
+      if (matchesTab && matchesSearch) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  };
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter || 'all';
+      filterCards();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      filterCards();
+    });
+  }
+
+  // Handle Milestone Sign-off Form
+  const signoffForm = document.getElementById('signoff-approval-form');
+  if (signoffForm) {
+    signoffForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const signatory = document.getElementById('signoff-signatory-name')?.value || 'Arjun Sharma';
+      const title = document.getElementById('signoff-signatory-title')?.value || 'Chief Technology Officer';
+
+      // Update UI on milestone card
+      const m2Tag = document.getElementById('milestone-2-tag');
+      const m2Status = document.getElementById('milestone-2-status');
+      const m2Btn = document.getElementById('btn-sign-off-m2');
+
+      if (m2Tag) {
+        m2Tag.textContent = 'Signed Off & Verified';
+        m2Tag.className = 'tag emerald';
+      }
+      if (m2Status) {
+        m2Status.textContent = `Approved by ${signatory}`;
+        m2Status.style.color = 'var(--emerald)';
+      }
+      if (m2Btn) {
+        m2Btn.innerHTML = '✔ Sign-off Recorded';
+        m2Btn.className = 'btn btn-ghost btn-sm';
+        m2Btn.disabled = true;
+      }
+
+      closeSignOffModal();
+      showToast(`Milestone 2 sign-off recorded by ${signatory} (${title}). Certificate generated!`, 'success');
+      setTimeout(() => generateDocument('sow-acceptance'), 600);
+    });
+  }
+}
+
+function openStagingSandbox(url, version) {
+  modal(`Staging Pod: Northstar ERP ${version}`, `
+    <div style="font-size:13.5px;line-height:1.6">
+      <p>Your dedicated staging sandbox pod is deployed in <strong>GCP us-central1 (Kubernetes Cluster)</strong> with zero-trust mTLS.</p>
+      <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border);padding:14px;border-radius:8px;margin:14px 0;font-family:ui-monospace,monospace;font-size:13px;color:var(--cyan);word-break:break-all">
+        ${url}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Launch Sandbox in New Tab ↗</a>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="copyToClipboard('${url}', 'Staging URL Copied')">Copy Link</button>
+      </div>
+    </div>
+  `);
+}
+
+function openSignOffModal(milestoneName, invoiceId, amount) {
+  const modalEl = document.getElementById('sign-off-modal');
+  if (!modalEl) return;
+  const nameEl = document.getElementById('signoff-milestone-name');
+  const subEl = document.getElementById('signoff-milestone-sub');
+  if (nameEl) nameEl.textContent = `Sign Off: ${milestoneName}`;
+  if (subEl) subEl.textContent = `Invoice Reference: ${invoiceId} · Milestone Value: ${amount}`;
+  modalEl.classList.add('active');
+}
+
+function closeSignOffModal() {
+  const modalEl = document.getElementById('sign-off-modal');
+  if (modalEl) modalEl.classList.remove('active');
+}
+
+/* ==========================================================================
+   High-Fidelity Printable Document Generator
+   ========================================================================== */
+function generateDocument(docType) {
+  const modalRoot = document.getElementById('doc-modal-root');
+  const titleEl = document.getElementById('doc-modal-title');
+  const paperEl = document.getElementById('doc-modal-paper-content');
+
+  if (!modalRoot || !paperEl) return;
+
+  const today = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+  let docTitle = 'Enterprise Delivery Artifact';
+  let paperHtml = '';
+
+  if (docType === 'sprint-qa') {
+    docTitle = 'Sprint 24 QA Acceptance Certificate';
+    paperHtml = `
+      <div class="doc-paper-header">
+        <div>
+          <div class="doc-paper-logo">SiPro<span>Technologies</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">MSME Reg: UDYAM-TS-18-0029141 · Hyderabad &amp; Hanamkonda</div>
+        </div>
+        <div style="text-align:right">
+          <span class="doc-paper-badge">VERIFIED RELEASE</span>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">Date: ${today}</div>
+        </div>
+      </div>
+
+      <h2 class="doc-paper-title">Sprint 24 Quality Assurance &amp; SLA Acceptance Certificate</h2>
+      <p style="font-size:13.5px;color:#475569;margin-bottom:18px">
+        This document certifies that the software artifacts delivered for <strong>NorthStar ERP &amp; Cloud Microservices</strong> under Sprint 24 have undergone comprehensive automated testing, load verification, and zero-trust vulnerability scanning.
+      </p>
+
+      <div class="doc-paper-grid">
+        <div>
+          <strong>Client Partner:</strong> NorthStar Enterprise Corp.<br>
+          <strong>Project Lead:</strong> Arjun Sharma (CTO)<br>
+          <strong>Git Commit Hash:</strong> <span class="font-mono">#9cf42a8d18</span>
+        </div>
+        <div>
+          <strong>Engineering Pod:</strong> Cloud Pod Delta-4<br>
+          <strong>Target Environment:</strong> GCP us-central1 (K8s)<br>
+          <strong>Deployment Status:</strong> STAGING VERIFIED
+        </div>
+      </div>
+
+      <h4 style="font-size:15px;margin:18px 0 8px;color:#0f172a">1. Test Automation &amp; Code Quality Metrics</h4>
+      <table class="doc-paper-table">
+        <thead>
+          <tr>
+            <th>Verification Suite</th>
+            <th>Executed</th>
+            <th>Passed</th>
+            <th>Coverage / Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unit &amp; Integration Tests</td>
+            <td>842</td>
+            <td>842</td>
+            <td><strong style="color:#059669">99.2% Line Coverage</strong></td>
+          </tr>
+          <tr>
+            <td>API Contract Fuzzing</td>
+            <td>120 Endpoints</td>
+            <td>120</td>
+            <td><strong style="color:#059669">100% Contract Conformant</strong></td>
+          </tr>
+          <tr>
+            <td>Stress &amp; Load Verification</td>
+            <td>25,000 req/sec</td>
+            <td>Sustained</td>
+            <td><strong style="color:#059669">p99 Latency &lt; 28ms</strong></td>
+          </tr>
+          <tr>
+            <td>OWASP Top 10 Security Audit</td>
+            <td>Static + Dynamic</td>
+            <td>Clean</td>
+            <td><strong style="color:#059669">0 High / 0 Critical CVEs</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-stamp-box">
+        <div class="doc-signature">
+          <div style="font-family:'Courier New',monospace;font-weight:700;color:#4f46e5;font-size:16px">/s/ Rajesh Varma</div>
+          <strong>Rajesh Varma</strong>
+          <span style="color:#64748b;font-size:12px">Principal Architect, SiPro Technologies</span>
+        </div>
+        <div class="doc-stamp-seal">
+          <span>SIPRO TECH</span>
+          <span>QA AUDIT</span>
+          <span>PASS ✔</span>
+        </div>
+      </div>
+    `;
+  } else if (docType === 'sow-acceptance') {
+    docTitle = 'Statement of Work & Milestone Sign-Off';
+    paperHtml = `
+      <div class="doc-paper-header">
+        <div>
+          <div class="doc-paper-logo">SiPro<span>Technologies</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">GSTIN: 36AAACS1234A1Z5 · Enterprise SOW Agreement</div>
+        </div>
+        <div style="text-align:right">
+          <span class="doc-paper-badge" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0">EXECUTED SOW</span>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">Ref: SOW-2026-NSTAR-02</div>
+        </div>
+      </div>
+
+      <h2 class="doc-paper-title">Milestone 2 Acceptance &amp; Sign-Off Certificate</h2>
+      <p style="font-size:13.5px;color:#475569;margin-bottom:18px">
+        Official milestone acceptance confirmation between <strong>SiPro Technologies</strong> and <strong>NorthStar Enterprise Corp.</strong>
+      </p>
+
+      <div class="doc-paper-grid">
+        <div>
+          <strong>Milestone Scope:</strong> Distributed Ledger &amp; Core ERP<br>
+          <strong>Tax Invoice Ref:</strong> INV-2026-0814<br>
+          <strong>Milestone Fee:</strong> ₹4,50,000 + 18% GST (₹5,31,000 Total)
+        </div>
+        <div>
+          <strong>Signatory Representative:</strong> Arjun Sharma<br>
+          <strong>Title:</strong> Chief Technology Officer<br>
+          <strong>Sign-off Date:</strong> ${today}
+        </div>
+      </div>
+
+      <h4 style="font-size:15px;margin:18px 0 8px;color:#0f172a">Accepted Milestone Deliverables</h4>
+      <ul style="font-size:13.5px;color:#334155;line-height:1.8;padding-left:20px;margin-bottom:20px">
+        <li>Distributed high-concurrency order ledger with idempotent retry handling.</li>
+        <li>Multi-tenant PostgreSQL schema sharding with connection pooling.</li>
+        <li>Zero-Trust mTLS microservice-to-microservice authentication.</li>
+        <li>Real-time telemetry event bus and Grafana monitoring dashboard.</li>
+      </ul>
+
+      <div class="doc-stamp-box">
+        <div class="doc-signature">
+          <div style="font-family:'Courier New',monospace;font-weight:700;color:#047857;font-size:16px">/s/ Arjun Sharma (CTO)</div>
+          <strong>Arjun Sharma</strong>
+          <span style="color:#64748b;font-size:12px">NorthStar Enterprise Corp.</span>
+        </div>
+        <div class="doc-stamp-seal" style="border-color:#047857;color:#047857">
+          <span>SIPRO TECH</span>
+          <span>MILESTONE</span>
+          <span>ACCEPTED</span>
+        </div>
+      </div>
+    `;
+  } else if (docType === 'arch-spec') {
+    docTitle = 'API & Cloud Architecture Specification';
+    paperHtml = `
+      <div class="doc-paper-header">
+        <div>
+          <div class="doc-paper-logo">SiPro<span>Technologies</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Cloud Engineering Pods · OpenAPI 3.1 Blueprint</div>
+        </div>
+        <div style="text-align:right">
+          <span class="doc-paper-badge">ARCH SPEC v2.1</span>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">Date: ${today}</div>
+        </div>
+      </div>
+
+      <h2 class="doc-paper-title">Cloud Microservices Topology &amp; API Blueprint</h2>
+      <p style="font-size:13.5px;color:#475569;margin-bottom:18px">
+        Technical architectural snapshot detailing core endpoints, data security schemas, and container orchestrations for NorthStar ERP.
+      </p>
+
+      <div class="doc-paper-grid">
+        <div>
+          <strong>Architecture Pattern:</strong> Event-Driven Microservices<br>
+          <strong>Orchestrator:</strong> Google Kubernetes Engine (GKE)<br>
+          <strong>Mesh Network:</strong> Istio Service Mesh with mTLS
+        </div>
+        <div>
+          <strong>Message Broker:</strong> Apache Kafka Cluster<br>
+          <strong>Database:</strong> Cloud Spanner + Redis Cache<br>
+          <strong>SLA Uptime Target:</strong> 99.95% Guaranteed
+        </div>
+      </div>
+
+      <h4 style="font-size:15px;margin:18px 0 8px;color:#0f172a">Primary Service Endpoints</h4>
+      <table class="doc-paper-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Endpoint</th>
+            <th>Auth Model</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>POST</code></td>
+            <td><code>/api/v2/orders/checkout</code></td>
+            <td>OAuth2 + JWT Bearer</td>
+            <td>High-speed transactional order settlement</td>
+          </tr>
+          <tr>
+            <td><code>GET</code></td>
+            <td><code>/api/v2/ledger/balances</code></td>
+            <td>mTLS Service Token</td>
+            <td>Real-time reconciled customer accounts</td>
+          </tr>
+          <tr>
+            <td><code>POST</code></td>
+            <td><code>/api/v2/webhooks/payment</code></td>
+            <td>HMAC SHA-256 Sig</td>
+            <td>Asynchronous payment gateway callback</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doc-stamp-box">
+        <div class="doc-signature">
+          <div style="font-family:'Courier New',monospace;font-weight:700;color:#4f46e5;font-size:16px">/s/ Architecture Review Board</div>
+          <strong>SiPro Cloud Infrastructure Team</strong>
+        </div>
+        <div class="doc-stamp-seal">
+          <span>CERTIFIED</span>
+          <span>BLUEPRINT</span>
+          <span>APPROVED</span>
+        </div>
+      </div>
+    `;
+  } else {
+    docTitle = 'DPDP Act 2023 & ISO 27001 Security Attestation';
+    paperHtml = `
+      <div class="doc-paper-header">
+        <div>
+          <div class="doc-paper-logo">SiPro<span>Technologies</span></div>
+          <div style="font-size:12px;color:#64748b;margin-top:2px">Statutory Compliance &amp; Data Security Fiduciary</div>
+        </div>
+        <div style="text-align:right">
+          <span class="doc-paper-badge" style="background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe">DPDP VERIFIED</span>
+          <div style="font-size:12px;color:#64748b;margin-top:4px">Audit Cycle: Q3 2026</div>
+        </div>
+      </div>
+
+      <h2 class="doc-paper-title">DPDP Act 2023 &amp; SOC 2 Type II Security Attestation</h2>
+      <p style="font-size:13.5px;color:#475569;margin-bottom:18px">
+        SiPro Technologies certifies compliance with the Digital Personal Data Protection (DPDP) Act 2023 and ISO/IEC 27001:2022 standards for enterprise cloud development and client workspaces.
+      </p>
+
+      <div class="doc-paper-grid">
+        <div>
+          <strong>Data Fiduciary:</strong> SiPro Technologies<br>
+          <strong>Data Protection Officer:</strong> grievance@sipro.tech<br>
+          <strong>Grievance Lead:</strong> Srikanth Rao
+        </div>
+        <div>
+          <strong>Encryption at Rest:</strong> AES-256 (Cloud KMS)<br>
+          <strong>Encryption in Transit:</strong> TLS 1.3 Strict<br>
+          <strong>Audit Result:</strong> 100% Compliant
+        </div>
+      </div>
+
+      <h4 style="font-size:15px;margin:18px 0 8px;color:#0f172a">Statutory Governance Guarantees</h4>
+      <ul style="font-size:13.5px;color:#334155;line-height:1.8;padding-left:20px;margin-bottom:20px">
+        <li>Granular consent capture with verifiable withdrawal mechanism under DPDP Section 6.</li>
+        <li>Data principal rights fulfillment (access, correction, erasure) within 48-hour SLA.</li>
+        <li>Strict multi-tenant cryptographic segregation with zero cross-tenant memory leakage.</li>
+      </ul>
+
+      <div class="doc-stamp-box">
+        <div class="doc-signature">
+          <div style="font-family:'Courier New',monospace;font-weight:700;color:#7c3aed;font-size:16px">/s/ Srikanth Rao (DPO)</div>
+          <strong>Srikanth Rao</strong>
+          <span style="color:#64748b;font-size:12px">Data Protection Officer, SiPro Technologies</span>
+        </div>
+        <div class="doc-stamp-seal" style="border-color:#7c3aed;color:#7c3aed">
+          <span>DPDP 2023</span>
+          <span>COMPLIANT</span>
+          <span>AUDITED ✔</span>
+        </div>
+      </div>
+    `;
+  }
+
+  if (titleEl) titleEl.textContent = docTitle;
+  paperEl.innerHTML = paperHtml;
+  modalRoot.classList.add('active');
+}
+
+function closeDocumentModal() {
+  const modalRoot = document.getElementById('doc-modal-root');
+  if (modalRoot) modalRoot.classList.remove('active');
+}
+
+/* ==========================================================================
+   Enterprise Gemini AI Studio & Veo Video Generation Suite
+   ========================================================================== */
+const AIStudioState = {
+  activeTab: 'chat',
+  chatHistory: [],
+  currentRole: 'solutions_architect',
+  currentModel: 'gemini-3.5-flash',
+  useGrounding: true,
+  imageAspect: '1:1',
+  imageSize: '1K',
+  sourceImageBase64: null,
+  sourceImageMime: 'image/png',
+  videoPollingInterval: null,
+  videoAspect: '16:9',
+  videoResolution: '720p',
+  videoSourceImageBase64: null
+};
+
+function formatAIMarkdown(text) {
+  if (!text) return '';
+  let formatted = escapeHtml(text);
+
+  // Handle code blocks: ```lang ... ```
+  formatted = formatted.replace(/```([a-zA-Z0-9_\-\+]*)\n([\s\S]*?)```/g, (_m, lang, code) => {
+    return `<div style="background:#030712;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px;margin:10px 0;font-family:ui-monospace,SFMono-Regular,monospace;font-size:12.5px;color:#38bdf8;overflow-x:auto;position:relative"><div style="font-size:10.5px;color:#94a3b8;margin-bottom:6px;text-transform:uppercase;font-weight:700">${lang || 'code'}</div><pre style="margin:0"><code>${code}</code></pre></div>`;
+  });
+
+  // Handle inline code: `code`
+  formatted = formatted.replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;font-family:monospace;color:#38bdf8;font-size:12px">$1</code>');
+
+  // Handle bold: **text**
+  formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:var(--text);font-weight:700">$1</strong>');
+
+  // Handle italic: *text*
+  formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  // Handle line breaks
+  formatted = formatted.replace(/\n/g, '<br>');
+
+  return formatted;
+}
+
+function initAIStudio() {
+  // Inject floating trigger button if not already present
+  if (!document.getElementById('sipro-floating-ai-btn')) {
+    const floatBtn = document.createElement('button');
+    floatBtn.id = 'sipro-floating-ai-btn';
+    floatBtn.className = 'ai-floating-trigger';
+    floatBtn.setAttribute('type', 'button');
+    floatBtn.innerHTML = `
+      <div class="ai-floating-pulse"></div>
+      <span>✨ Enterprise AI Studio</span>
+    `;
+    floatBtn.addEventListener('click', () => openAIStudio('chat'));
+    document.body.appendChild(floatBtn);
+  }
+
+  // Create Modal Structure if not already present
+  let modalEl = document.getElementById('sipro-ai-studio-modal');
+  if (!modalEl) {
+    modalEl = document.createElement('div');
+    modalEl.id = 'sipro-ai-studio-modal';
+    modalEl.className = 'ai-studio-modal-backdrop';
+    modalEl.innerHTML = `
+      <div class="ai-studio-card" role="dialog" aria-modal="true" aria-label="Enterprise Gemini AI Studio">
+        <div class="ai-studio-header">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="brand-badge" style="width:36px;height:36px;font-size:15px;background:linear-gradient(135deg,#4f46e5,#06b6d4)">AI</div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:6px">
+                <span>SiPro AI Architecture Studio</span>
+                <span class="tag emerald" style="font-size:10px;padding:2px 6px">Gemini 3.5 &amp; Veo</span>
+              </div>
+              <div style="font-size:11.5px;color:var(--muted)">Multimodal Engineering, DPDP Governance &amp; Video Studio</div>
+            </div>
+          </div>
+          <button type="button" class="auth-modal-close" style="position:static" onclick="closeAIStudio()">×</button>
+        </div>
+
+        <div class="ai-studio-tabs">
+          <button type="button" class="ai-studio-tab-btn active" data-tab="chat">
+            <span>💬 Architecture &amp; Compliance Chat</span>
+          </button>
+          <button type="button" class="ai-studio-tab-btn" data-tab="image">
+            <span>🎨 Visual &amp; Diagram Studio</span>
+          </button>
+          <button type="button" class="ai-studio-tab-btn" data-tab="video">
+            <span>🎬 Veo Video Generator</span>
+          </button>
+        </div>
+
+        <div class="ai-studio-body">
+          <!-- TAB 1: AI Chat & Search Grounding -->
+          <div class="ai-tab-pane active" id="ai-pane-chat">
+            <div class="ai-chat-toolbar">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <label style="font-size:12px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:4px">
+                  <span>Role:</span>
+                  <select id="ai-role-select" style="background:#0f172a;color:var(--text);border:1px solid var(--line-strong);border-radius:6px;padding:4px 8px;font-size:12px">
+                    <option value="solutions_architect">🏛️ Principal Solutions Architect</option>
+                    <option value="compliance_auditor">🛡️ DPDP 2023 Compliance &amp; DPO</option>
+                    <option value="talent_coordinator">🎓 Talent Acceleration Lead</option>
+                    <option value="tech_lead">⚡ Principal Full-Stack Lead</option>
+                  </select>
+                </label>
+
+                <label style="font-size:12px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:4px">
+                  <span>Model:</span>
+                  <select id="ai-model-select" style="background:#0f172a;color:var(--text);border:1px solid var(--line-strong);border-radius:6px;padding:4px 8px;font-size:12px">
+                    <option value="gemini-3.5-flash">Gemini 3.5 Flash (Fast &amp; Grounded)</option>
+                    <option value="gemini-3.1-pro-preview">Gemini 3.1 Pro (Complex Reasoning)</option>
+                    <option value="gemini-3.1-flash-lite">Gemini 3.1 Flash-Lite (Instant)</option>
+                  </select>
+                </label>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:12px">
+                <label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--text);font-weight:600">
+                  <input type="checkbox" id="ai-search-grounding-toggle" checked style="accent-color:var(--cyan)">
+                  <span>🌐 Google Search Grounding</span>
+                </label>
+                <button type="button" class="btn btn-ghost btn-xs" id="ai-clear-chat-btn" style="font-size:11px">Clear</button>
+              </div>
+            </div>
+
+            <div class="ai-chat-thread" id="ai-chat-thread-box">
+              <div class="ai-chat-bubble assistant">
+                <div style="font-weight:700;color:var(--cyan);font-size:12.5px;margin-bottom:4px">SiPro AI Architecture Assistant</div>
+                Namaste! I am your AI Consultant grounded in official enterprise cloud architectures, Kubernetes deployments, DPDP Act 2023 compliance, and full-stack software standards. How can I assist your engineering pod today?
+                <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+                  <button type="button" class="btn btn-ghost btn-xs ai-prompt-chip" data-prompt="Design a high-availability Kubernetes cluster architecture with Istio and PostgreSQL sharding.">K8s Cluster Blueprint</button>
+                  <button type="button" class="btn btn-ghost btn-xs ai-prompt-chip" data-prompt="Summarize the DPDP Act 2023 compliance obligations for data fiduciaries and consent management.">DPDP 2023 Checklist</button>
+                  <button type="button" class="btn btn-ghost btn-xs ai-prompt-chip" data-prompt="What are the latest enterprise best practices for Next.js 15 App Router caching and mTLS security?">Next.js &amp; mTLS Best Practices</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ai-chat-input-row">
+              <textarea id="ai-chat-input" class="ai-chat-textarea" placeholder="Ask architectural questions, request code blueprints, or analyze DPDP compliance..." rows="1"></textarea>
+              <button type="button" class="btn btn-primary" id="ai-chat-send-btn" style="height:48px;padding:0 20px">
+                <span>Send</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 2: Visual & Image Studio -->
+          <div class="ai-tab-pane" id="ai-pane-image">
+            <div class="ai-visual-studio-grid">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div>
+                  <label style="font-size:13px;font-weight:700;color:var(--text);display:block;margin-bottom:6px">Generation or Editing Prompt</label>
+                  <textarea id="ai-image-prompt" class="ai-chat-textarea" style="height:90px" placeholder="e.g., Enterprise cloud architecture diagram with Kubernetes pods and Redis cache cluster, neon cyber aesthetic"></textarea>
+                </div>
+
+                <div>
+                  <label style="font-size:13px;font-weight:700;color:var(--text);display:block;margin-bottom:6px">Source Image for Editing (Optional)</label>
+                  <div id="ai-image-dropzone" style="border:1.5px dashed var(--line-strong);border-radius:10px;padding:16px;text-align:center;cursor:pointer;background:rgba(15,23,42,0.3)">
+                    <div style="font-size:12px;color:var(--muted)">Click or Drag &amp; Drop an image to edit/transform</div>
+                    <input type="file" id="ai-image-file-input" accept="image/*" style="display:none">
+                    <div id="ai-image-source-preview" style="margin-top:8px;display:none">
+                      <img id="ai-image-source-thumb" style="max-height:80px;border-radius:6px" alt="Preview">
+                      <button type="button" class="btn btn-ghost btn-xs" id="ai-image-clear-source" style="margin-top:4px">Remove</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                  <div>
+                    <label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:4px">Aspect Ratio</label>
+                    <select id="ai-image-aspect" style="width:100%;background:#0f172a;color:var(--text);border:1px solid var(--line-strong);border-radius:8px;padding:8px;font-size:13px">
+                      <option value="1:1">1:1 Square (Social/Avatar)</option>
+                      <option value="16:9">16:9 Landscape (Hero/Banner)</option>
+                      <option value="4:3">4:3 Standard</option>
+                      <option value="9:16">9:16 Portrait</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:4px">Resolution</label>
+                    <select id="ai-image-size" style="width:100%;background:#0f172a;color:var(--text);border:1px solid var(--line-strong);border-radius:8px;padding:8px;font-size:13px">
+                      <option value="1K">1K High Definition</option>
+                      <option value="512px">512px Fast Preview</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="ai-image-generate-btn" style="margin-top:6px">
+                  <span>✨ Generate / Edit Image</span>
+                </button>
+              </div>
+
+              <div class="ai-studio-preview-box" id="ai-image-result-box">
+                <div id="ai-image-placeholder" style="color:var(--muted);font-size:13px">
+                  <div style="font-size:36px;margin-bottom:8px">🎨</div>
+                  Enter a prompt and click Generate to create high-fidelity cloud diagrams or visuals with Gemini 3.1 Flash Image.
+                </div>
+                <img id="ai-image-output" style="display:none" alt="Generated Visual">
+                <div id="ai-image-actions" style="margin-top:14px;display:none;gap:8px">
+                  <a id="ai-image-download-btn" class="btn btn-ghost btn-sm" download="sipro-generated-visual.png">⬇ Download PNG</a>
+                  <button type="button" class="btn btn-primary btn-sm" id="ai-image-animate-btn">🎬 Animate with Veo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: Veo Video Studio -->
+          <div class="ai-tab-pane" id="ai-pane-video">
+            <div class="ai-visual-studio-grid">
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div>
+                  <label style="font-size:13px;font-weight:700;color:var(--text);display:block;margin-bottom:6px">Video Animation Prompt</label>
+                  <textarea id="ai-video-prompt" class="ai-chat-textarea" style="height:90px" placeholder="e.g., Cinematic camera zoom into an illuminated cloud server cluster with glowing data packets flowing in 4k"></textarea>
+                </div>
+
+                <div>
+                  <label style="font-size:13px;font-weight:700;color:var(--text);display:block;margin-bottom:6px">Initial Keyframe Image (Optional)</label>
+                  <div id="ai-video-dropzone" style="border:1.5px dashed var(--line-strong);border-radius:10px;padding:16px;text-align:center;cursor:pointer;background:rgba(15,23,42,0.3)">
+                    <div style="font-size:12px;color:var(--muted)">Click or Drag &amp; Drop starting frame (Image-to-Video)</div>
+                    <input type="file" id="ai-video-file-input" accept="image/*" style="display:none">
+                    <div id="ai-video-source-preview" style="margin-top:8px;display:none">
+                      <img id="ai-video-source-thumb" style="max-height:80px;border-radius:6px" alt="Video Keyframe">
+                      <button type="button" class="btn btn-ghost btn-xs" id="ai-video-clear-source" style="margin-top:4px">Remove</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                  <div>
+                    <label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:4px">Aspect Ratio</label>
+                    <select id="ai-video-aspect" style="width:100%;background:#0f172a;color:var(--text);border:1px solid var(--line-strong);border-radius:8px;padding:8px;font-size:13px">
+                      <option value="16:9">16:9 Widescreen (1280x720)</option>
+                      <option value="9:16">9:16 Vertical (720x1280)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:4px">Resolution</label>
+                    <select id="ai-video-resolution" style="width:100%;background:#0f172a;color:var(--text);border:1px solid var(--line-strong);border-radius:8px;padding:8px;font-size:13px">
+                      <option value="720p">720p HD (Fastest)</option>
+                      <option value="1080p">1080p Full HD</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="ai-video-generate-btn" style="margin-top:6px">
+                  <span>🎬 Render Cinematic Video (Veo)</span>
+                </button>
+              </div>
+
+              <div class="ai-studio-preview-box" id="ai-video-result-box">
+                <div id="ai-video-placeholder" style="color:var(--muted);font-size:13px">
+                  <div style="font-size:36px;margin-bottom:8px">🎬</div>
+                  Enter animation instructions to generate video with Google's Veo video model.
+                </div>
+                
+                <div id="ai-video-loading-state" style="display:none;flex-direction:column;align-items:center;text-align:center">
+                  <div class="spin-loader" style="width:36px;height:36px;border-color:var(--cyan);border-top-color:transparent;border-width:3px;border-radius:50%;margin-bottom:12px"></div>
+                  <strong style="color:var(--text);font-size:14px" id="ai-video-status-text">Submitting Veo Generation Pipeline...</strong>
+                  <div style="font-size:12px;color:var(--muted);margin-top:4px">Veo video synthesis runs asynchronous diffusion rendering.</div>
+                  <div class="ai-video-progress-wrap">
+                    <div class="ai-progress-bar">
+                      <div class="ai-progress-fill indeterminate"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <video id="ai-video-output" controls autoplay loop playsinline style="display:none" alt="Rendered Veo Video"></video>
+                <div id="ai-video-actions" style="margin-top:14px;display:none;gap:8px">
+                  <a id="ai-video-download-btn" class="btn btn-primary btn-sm" download="sipro-veo-video.mp4">⬇ Download Video (MP4)</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modalEl);
+    setupAIStudioEvents(modalEl);
+  }
+}
+
+function openAIStudio(tab) {
+  const targetTab = tab || 'chat';
+  initAIStudio();
+  const modalEl = document.getElementById('sipro-ai-studio-modal');
+  if (!modalEl) return;
+  modalEl.classList.add('active');
+  switchAIStudioTab(targetTab);
+}
+
+function closeAIStudio() {
+  const modalEl = document.getElementById('sipro-ai-studio-modal');
+  if (modalEl) modalEl.classList.remove('active');
+  if (AIStudioState.videoPollingInterval) {
+    clearInterval(AIStudioState.videoPollingInterval);
+    AIStudioState.videoPollingInterval = null;
+  }
+}
+
+function switchAIStudioTab(tabId) {
+  AIStudioState.activeTab = tabId;
+  const modalEl = document.getElementById('sipro-ai-studio-modal');
+  if (!modalEl) return;
+
+  modalEl.querySelectorAll('.ai-studio-tab-btn').forEach(btn => {
+    if (btn.getAttribute('data-tab') === tabId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  modalEl.querySelectorAll('.ai-tab-pane').forEach(pane => {
+    if (pane.id === `ai-pane-${tabId}`) {
+      pane.classList.add('active');
+    } else {
+      pane.classList.remove('active');
+    }
+  });
+}
+
+function setupAIStudioEvents(modalEl) {
+  // Tab Switching
+  modalEl.querySelectorAll('.ai-studio-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab') || 'chat';
+      switchAIStudioTab(targetTab);
+    });
+  });
+
+  // Prompt chips
+  modalEl.querySelectorAll('.ai-prompt-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const prompt = chip.getAttribute('data-prompt');
+      const input = modalEl.querySelector('#ai-chat-input');
+      if (input && prompt) {
+        input.value = prompt;
+        input.focus();
+        handleChatSend();
+      }
+    });
+  });
+
+  // Chat Send Events
+  const sendBtn = modalEl.querySelector('#ai-chat-send-btn');
+  const chatInput = modalEl.querySelector('#ai-chat-input');
+  const clearBtn = modalEl.querySelector('#ai-clear-chat-btn');
+
+  if (sendBtn) sendBtn.addEventListener('click', handleChatSend);
+  if (chatInput) {
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleChatSend();
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      AIStudioState.chatHistory = [];
+      const thread = modalEl.querySelector('#ai-chat-thread-box');
+      if (thread) {
+        thread.innerHTML = `
+          <div class="ai-chat-bubble assistant">
+            <div style="font-weight:700;color:var(--cyan);font-size:12.5px;margin-bottom:4px">SiPro AI Architecture Assistant</div>
+            Chat history cleared. How can I assist your engineering architecture or compliance requirements?
+          </div>
+        `;
+      }
+    });
+  }
+
+  // Image Generation Events
+  setupImageStudioEvents(modalEl);
+
+  // Video Generation Events
+  setupVideoStudioEvents(modalEl);
+}
+
+async function handleChatSend() {
+  const modalEl = document.getElementById('sipro-ai-studio-modal');
+  if (!modalEl) return;
+
+  const input = modalEl.querySelector('#ai-chat-input');
+  const thread = modalEl.querySelector('#ai-chat-thread-box');
+  const sendBtn = modalEl.querySelector('#ai-chat-send-btn');
+  const roleSelect = modalEl.querySelector('#ai-role-select');
+  const modelSelect = modalEl.querySelector('#ai-model-select');
+  const groundingToggle = modalEl.querySelector('#ai-search-grounding-toggle');
+
+  if (!input || !thread || !sendBtn) return;
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Add user bubble
+  const userBubble = document.createElement('div');
+  userBubble.className = 'ai-chat-bubble user';
+  userBubble.textContent = text;
+  thread.appendChild(userBubble);
+
+  AIStudioState.chatHistory.push({ role: 'user', content: text });
+  input.value = '';
+  input.style.height = '52px';
+  thread.scrollTop = thread.scrollHeight;
+
+  // Add Assistant Loading Bubble
+  const assistantBubble = document.createElement('div');
+  assistantBubble.className = 'ai-chat-bubble assistant';
+  assistantBubble.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="spin-loader" style="width:16px;height:16px;border-color:var(--cyan);border-top-color:transparent;border-width:2px;border-radius:50%"></div>
+      <span style="font-size:13px;color:var(--muted)">Formulating architecture &amp; grounding sources...</span>
+    </div>
+  `;
+  thread.appendChild(assistantBubble);
+  thread.scrollTop = thread.scrollHeight;
+
+  sendBtn.disabled = true;
+
+  try {
+    const res = await fetch('/api/v1/ai/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: AIStudioState.chatHistory,
+        message: text,
+        roleType: roleSelect ? roleSelect.value : 'solutions_architect',
+        model: modelSelect ? modelSelect.value : 'gemini-3.5-flash',
+        useGrounding: groundingToggle ? groundingToggle.checked : true
+      })
+    });
+
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error(data.error || 'Failed to receive AI response.');
+    }
+
+    AIStudioState.chatHistory.push({ role: 'model', content: data.text });
+
+    let sourceHtml = '';
+    if (data.grounding && data.grounding.sources && data.grounding.sources.length > 0) {
+      sourceHtml = `
+        <div class="ai-grounding-sources">
+          <strong style="color:var(--muted)">Grounding Sources:</strong>
+          ${data.grounding.sources.map((s) => `
+            <a href="${escapeHtml(s.uri)}" target="_blank" rel="noopener noreferrer" class="ai-source-pill">
+              🌐 ${escapeHtml(s.title || 'Web Citation')} ↗
+            </a>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    assistantBubble.innerHTML = `
+      <div style="font-weight:700;color:var(--cyan);font-size:12.5px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between">
+        <span>SiPro Architectural Assistant</span>
+        <span style="font-size:10px;color:var(--muted)">${escapeHtml(data.model || 'Gemini')}</span>
+      </div>
+      <div>${formatAIMarkdown(data.text)}</div>
+      ${sourceHtml}
+    `;
+  } catch (err) {
+    assistantBubble.innerHTML = `
+      <div style="color:var(--rose);font-weight:700;font-size:13px">Assistant Error</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px">${escapeHtml(err.message || 'Error executing request')}</div>
+    `;
+  } finally {
+    sendBtn.disabled = false;
+    thread.scrollTop = thread.scrollHeight;
+  }
+}
+
+function setupImageStudioEvents(modalEl) {
+  const dropzone = modalEl.querySelector('#ai-image-dropzone');
+  const fileInput = modalEl.querySelector('#ai-image-file-input');
+  const previewDiv = modalEl.querySelector('#ai-image-source-preview');
+  const thumb = modalEl.querySelector('#ai-image-source-thumb');
+  const clearBtn = modalEl.querySelector('#ai-image-clear-source');
+  const generateBtn = modalEl.querySelector('#ai-image-generate-btn');
+  const promptInput = modalEl.querySelector('#ai-image-prompt');
+  const aspectSelect = modalEl.querySelector('#ai-image-aspect');
+  const sizeSelect = modalEl.querySelector('#ai-image-size');
+
+  const placeholder = modalEl.querySelector('#ai-image-placeholder');
+  const outputImg = modalEl.querySelector('#ai-image-output');
+  const actionsDiv = modalEl.querySelector('#ai-image-actions');
+  const downloadBtn = modalEl.querySelector('#ai-image-download-btn');
+  const animateBtn = modalEl.querySelector('#ai-image-animate-btn');
+
+  if (dropzone && fileInput) {
+    dropzone.addEventListener('click', (e) => {
+      if (e.target !== clearBtn) fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const res = ev.target && ev.target.result;
+          AIStudioState.sourceImageBase64 = res;
+          AIStudioState.sourceImageMime = file.type || 'image/png';
+          if (thumb) thumb.src = res;
+          if (previewDiv) previewDiv.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      AIStudioState.sourceImageBase64 = null;
+      if (fileInput) fileInput.value = '';
+      if (previewDiv) previewDiv.style.display = 'none';
+    });
+  }
+
+  if (generateBtn) {
+    generateBtn.addEventListener('click', async () => {
+      const prompt = promptInput && promptInput.value && promptInput.value.trim();
+      if (!prompt) {
+        showToast('Please enter an image prompt description.', 'warning');
+        return;
+      }
+
+      generateBtn.disabled = true;
+      generateBtn.innerHTML = `<span>⏳ Synthesizing Visual...</span>`;
+      if (placeholder) placeholder.style.display = 'none';
+      if (outputImg) outputImg.style.display = 'none';
+      if (actionsDiv) actionsDiv.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/v1/ai/image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt,
+            image: AIStudioState.sourceImageBase64,
+            mimeType: AIStudioState.sourceImageMime,
+            aspectRatio: aspectSelect ? aspectSelect.value : '1:1',
+            imageSize: sizeSelect ? sizeSelect.value : '1K'
+          })
+        });
+
+        const data = await res.json();
+        if (!data.success) {
+          throw new Error(data.error || 'Failed to generate visual.');
+        }
+
+        if (outputImg) {
+          outputImg.src = data.imageUrl;
+          outputImg.style.display = 'block';
+        }
+        if (downloadBtn) {
+          downloadBtn.href = data.imageUrl;
+        }
+        if (actionsDiv) {
+          actionsDiv.style.display = 'flex';
+        }
+        showToast('Image generated successfully!', 'success');
+      } catch (err) {
+        showToast(err.message || 'Image generation failed.', 'error');
+        if (placeholder) placeholder.style.display = 'block';
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.innerHTML = `<span>✨ Generate / Edit Image</span>`;
+      }
+    });
+  }
+
+  if (animateBtn) {
+    animateBtn.addEventListener('click', () => {
+      if (outputImg && outputImg.src) {
+        AIStudioState.videoSourceImageBase64 = outputImg.src;
+        const videoThumb = modalEl.querySelector('#ai-video-source-thumb');
+        const videoPreviewDiv = modalEl.querySelector('#ai-video-source-preview');
+        if (videoThumb) videoThumb.src = outputImg.src;
+        if (videoPreviewDiv) videoPreviewDiv.style.display = 'block';
+        switchAIStudioTab('video');
+        showToast('Visual imported into Veo Video Studio!', 'info');
+      }
+    });
+  }
+}
+
+function setupVideoStudioEvents(modalEl) {
+  const dropzone = modalEl.querySelector('#ai-video-dropzone');
+  const fileInput = modalEl.querySelector('#ai-video-file-input');
+  const previewDiv = modalEl.querySelector('#ai-video-source-preview');
+  const thumb = modalEl.querySelector('#ai-video-source-thumb');
+  const clearBtn = modalEl.querySelector('#ai-video-clear-source');
+  const generateBtn = modalEl.querySelector('#ai-video-generate-btn');
+  const promptInput = modalEl.querySelector('#ai-video-prompt');
+  const aspectSelect = modalEl.querySelector('#ai-video-aspect');
+  const resolutionSelect = modalEl.querySelector('#ai-video-resolution');
+
+  const placeholder = modalEl.querySelector('#ai-video-placeholder');
+  const loadingState = modalEl.querySelector('#ai-video-loading-state');
+  const statusText = modalEl.querySelector('#ai-video-status-text');
+  const outputVideo = modalEl.querySelector('#ai-video-output');
+  const actionsDiv = modalEl.querySelector('#ai-video-actions');
+  const downloadBtn = modalEl.querySelector('#ai-video-download-btn');
+
+  if (dropzone && fileInput) {
+    dropzone.addEventListener('click', (e) => {
+      if (e.target !== clearBtn) fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const res = ev.target && ev.target.result;
+          AIStudioState.videoSourceImageBase64 = res;
+          if (thumb) thumb.src = res;
+          if (previewDiv) previewDiv.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      AIStudioState.videoSourceImageBase64 = null;
+      if (fileInput) fileInput.value = '';
+      if (previewDiv) previewDiv.style.display = 'none';
+    });
+  }
+
+  if (generateBtn) {
+    generateBtn.addEventListener('click', async () => {
+      const prompt = promptInput && promptInput.value && promptInput.value.trim();
+      if (!prompt && !AIStudioState.videoSourceImageBase64) {
+        showToast('Please provide an animation prompt or a keyframe image.', 'warning');
+        return;
+      }
+
+      generateBtn.disabled = true;
+      if (placeholder) placeholder.style.display = 'none';
+      if (outputVideo) outputVideo.style.display = 'none';
+      if (actionsDiv) actionsDiv.style.display = 'none';
+      if (loadingState) loadingState.style.display = 'flex';
+      if (statusText) statusText.textContent = 'Submitting Veo video pipeline...';
+
+      try {
+        const initRes = await fetch('/api/v1/ai/video/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt,
+            image: AIStudioState.videoSourceImageBase64,
+            aspectRatio: aspectSelect ? aspectSelect.value : '16:9',
+            resolution: resolutionSelect ? resolutionSelect.value : '720p'
+          })
+        });
+
+        const initData = await initRes.json();
+        if (!initData.success || !initData.operationName) {
+          throw new Error(initData.error || 'Failed to start video rendering.');
+        }
+
+        const operationName = initData.operationName;
+        if (statusText) statusText.textContent = 'Rendering video frames with Veo model...';
+
+        // Poll operation status every 10 seconds
+        let elapsed = 0;
+        AIStudioState.videoPollingInterval = setInterval(async () => {
+          elapsed += 10;
+          if (statusText) statusText.textContent = `Rendering video with Veo... (${elapsed}s elapsed)`;
+
+          try {
+            const pollRes = await fetch('/api/v1/ai/video/status', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ operationName })
+            });
+
+            const pollData = await pollRes.json();
+            if (pollData.error) {
+              clearInterval(AIStudioState.videoPollingInterval);
+              throw new Error(pollData.error);
+            }
+
+            if (pollData.done) {
+              clearInterval(AIStudioState.videoPollingInterval);
+              if (statusText) statusText.textContent = 'Downloading completed video MP4...';
+
+              const dlRes = await fetch('/api/v1/ai/video/download', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ operationName })
+              });
+
+              if (!dlRes.ok) {
+                throw new Error('Failed to stream video bytes from storage.');
+              }
+
+              const blob = await dlRes.blob();
+              const videoObjectUrl = URL.createObjectURL(blob);
+
+              if (loadingState) loadingState.style.display = 'none';
+              if (outputVideo) {
+                outputVideo.src = videoObjectUrl;
+                outputVideo.style.display = 'block';
+                outputVideo.play();
+              }
+              if (downloadBtn) {
+                downloadBtn.href = videoObjectUrl;
+              }
+              if (actionsDiv) {
+                actionsDiv.style.display = 'flex';
+              }
+              generateBtn.disabled = false;
+              showToast('Veo video generation completed!', 'success');
+            }
+          } catch (pollErr) {
+            clearInterval(AIStudioState.videoPollingInterval);
+            if (loadingState) loadingState.style.display = 'none';
+            if (placeholder) placeholder.style.display = 'block';
+            generateBtn.disabled = false;
+            showToast(pollErr.message || 'Polling video failed.', 'error');
+          }
+        }, 10000);
+
+      } catch (err) {
+        if (loadingState) loadingState.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'block';
+        generateBtn.disabled = false;
+        showToast(err.message || 'Failed to start video rendering.', 'error');
+      }
+    });
+  }
+}
+
 // Global Exports
+window.openAccessibilityModal = openAccessibilityModal;
+window.closeAccessibilityModal = closeAccessibilityModal;
+window.initAccessibilityPreferences = initAccessibilityPreferences;
+window.initDeliverablesPortal = initDeliverablesPortal;
+window.generateDocument = generateDocument;
+window.closeDocumentModal = closeDocumentModal;
+window.openSignOffModal = openSignOffModal;
+window.closeSignOffModal = closeSignOffModal;
+window.openStagingSandbox = openStagingSandbox;
 window.triggerNamasteCelebration = triggerNamasteCelebration;
 window.initNetworkMonitor = initNetworkMonitor;
 window.initDPDPConsent = initDPDPConsent;
 window.renderEmptyState = renderEmptyState;
+window.modal = modal;
+window.downloadReceipt = downloadReceipt;
+window.initAIStudio = initAIStudio;
+window.openAIStudio = openAIStudio;
+window.closeAIStudio = closeAIStudio;
 

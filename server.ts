@@ -4,10 +4,31 @@ import cors from 'cors';
 import fs from 'fs';
 import { initializeApp, getApps, getApp } from 'firebase-admin/app';
 import { getFirestore, Firestore } from 'firebase-admin/firestore';
+import { GoogleGenAI, GenerateVideosOperation } from '@google/genai';
 
 const app = express();
 const PORT = 3000;
 const HOST = '0.0.0.0';
+
+// Gemini GenAI Client Helper
+let geminiClient: GoogleGenAI | null = null;
+function getGeminiClient(): GoogleGenAI {
+  if (!geminiClient) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GEMINI_API_KEY environment variable is required');
+    }
+    geminiClient = new GoogleGenAI({
+      apiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build'
+        }
+      }
+    });
+  }
+  return geminiClient;
+}
 
 // Read Firebase config
 let firebaseConfig: any = null;
@@ -20,6 +41,8 @@ try {
 
 // Initialize Firebase Admin
 let db: Firestore | null = null;
+let isFirestoreAvailable = false;
+
 try {
   if (firebaseConfig && firebaseConfig.projectId) {
     if (!getApps().length) {
@@ -29,10 +52,9 @@ try {
     }
     const dbId = firebaseConfig.firestoreDatabaseId || '(default)';
     db = getFirestore(getApp(), dbId);
-    console.log(`Firebase Admin initialized with Project: ${firebaseConfig.projectId}, Database: ${dbId}`);
   }
 } catch (err) {
-  console.error('Failed to initialize Firebase Admin Firestore:', err);
+  // Graceful fallback to memory store
 }
 
 // In-Memory Backup Stores
@@ -206,60 +228,44 @@ const inMemoryStore = {
   ]
 };
 
-// Seed initial Firestore data if empty
-async function seedInitialFirestore() {
-  if (!db) return;
+// Probe Firestore connectivity on startup and seed if accessible
+async function initDatabase() {
+  if (!db) {
+    isFirestoreAvailable = false;
+    return;
+  }
   try {
-    const projectsSnap = await db.collection('client_projects').limit(1).get();
-    if (projectsSnap.empty) {
-      console.log('Seeding initial client_projects to Firestore...');
+    const pingDoc = await db.collection('client_projects').limit(1).get();
+    isFirestoreAvailable = true;
+    
+    if (pingDoc.empty) {
       for (const p of inMemoryStore.projects) {
         await db.collection('client_projects').doc(p.id).set(p);
       }
-    }
-
-    const invoicesSnap = await db.collection('invoices').limit(1).get();
-    if (invoicesSnap.empty) {
-      console.log('Seeding initial invoices to Firestore...');
       for (const inv of inMemoryStore.invoices) {
         await db.collection('invoices').doc(inv.id).set(inv);
       }
-    }
-
-    const tasksSnap = await db.collection('employee_tasks').limit(1).get();
-    if (tasksSnap.empty) {
-      console.log('Seeding initial employee_tasks to Firestore...');
       for (const t of inMemoryStore.tasks) {
         await db.collection('employee_tasks').doc(t.id).set(t);
       }
-    }
-
-    const candidatesSnap = await db.collection('candidate_applications').limit(1).get();
-    if (candidatesSnap.empty) {
-      console.log('Seeding initial candidate_applications to Firestore...');
       for (const c of inMemoryStore.candidates) {
         await db.collection('candidate_applications').doc(c.id).set(c);
       }
-    }
-
-    const reviewsSnap = await db.collection('client_reviews').limit(1).get();
-    if (reviewsSnap.empty) {
-      console.log('Seeding initial client_reviews to Firestore...');
       for (const r of inMemoryStore.reviews) {
         await db.collection('client_reviews').doc(r.id).set(r);
       }
     }
   } catch (err) {
-    console.warn('Could not complete Firestore initial seed (will use fallback store):', err);
+    isFirestoreAvailable = false;
   }
 }
 
-seedInitialFirestore();
+initDatabase();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '25mb' }));
+app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
 // Serve Public Firebase Client Config for Frontend
 app.get('/api/firebase-config', (_req: Request, res: Response) => {
@@ -296,7 +302,7 @@ app.get('/api/v1/system/stats', async (_req: Request, res: Response) => {
     let enrolledCandidates = inMemoryStore.candidates.length;
     let openTasks = inMemoryStore.tasks.filter(t => t.status !== 'done').length;
 
-    if (db) {
+    if (db && isFirestoreAvailable) {
       try {
         const pSnap = await db.collection('client_projects').get();
         activeProjectsCount = pSnap.size;
@@ -307,7 +313,7 @@ app.get('/api/v1/system/stats', async (_req: Request, res: Response) => {
         const tSnap = await db.collection('employee_tasks').where('status', '!=', 'done').get();
         openTasks = tSnap.size;
       } catch (e) {
-        console.warn('Error fetching Firestore stats, using fallback memory stats');
+        isFirestoreAvailable = false;
       }
     }
 
@@ -370,7 +376,7 @@ app.post('/api/v1/auth/send-otp', async (req: Request, res: Response) => {
   otpMemoryCache.set(cleanEmail, record);
 
   // Firestore sync for durability
-  if (db) {
+  if (db && isFirestoreAvailable) {
     try {
       await db.collection('otp_verifications').doc(cleanEmail).set({
         email: cleanEmail,
@@ -381,7 +387,7 @@ app.post('/api/v1/auth/send-otp', async (req: Request, res: Response) => {
         createdAt
       });
     } catch (dbErr) {
-      console.warn('Firestore OTP save warning (using memory cache):', dbErr);
+      isFirestoreAvailable = false;
     }
   }
 
@@ -410,7 +416,7 @@ app.post('/api/v1/auth/verify-otp', async (req: Request, res: Response) => {
   let storedRecord = otpMemoryCache.get(cleanEmail);
 
   // Fallback to Firestore if not in memory
-  if (!storedRecord && db) {
+  if (!storedRecord && db && isFirestoreAvailable) {
     try {
       const snap = await db.collection('otp_verifications').doc(cleanEmail).get();
       if (snap.exists) {
@@ -427,7 +433,7 @@ app.post('/api/v1/auth/verify-otp', async (req: Request, res: Response) => {
         }
       }
     } catch (dbErr) {
-      console.warn('Firestore OTP lookup warning:', dbErr);
+      isFirestoreAvailable = false;
     }
   }
 
@@ -465,7 +471,7 @@ app.post('/api/v1/auth/verify-otp', async (req: Request, res: Response) => {
 
   // OTP is valid! Clear OTP cache
   otpMemoryCache.delete(cleanEmail);
-  if (db) {
+  if (db && isFirestoreAvailable) {
     try {
       await db.collection('otp_verifications').doc(cleanEmail).delete();
     } catch (e) {
@@ -494,7 +500,7 @@ app.post('/api/v1/auth/verify-otp', async (req: Request, res: Response) => {
   };
 
   // Persist verified user in Firestore and memory store
-  if (db) {
+  if (db && isFirestoreAvailable) {
     try {
       const userRef = db.collection('users').doc(cleanEmail);
       const snap = await userRef.get();
@@ -507,7 +513,7 @@ app.post('/api/v1/auth/verify-otp', async (req: Request, res: Response) => {
         await userRef.update(userProfile);
       }
     } catch (dbErr) {
-      console.warn('Firestore user update warning:', dbErr);
+      isFirestoreAvailable = false;
     }
   }
 
@@ -543,7 +549,7 @@ app.post('/api/v1/auth/user', async (req: Request, res: Response) => {
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       try {
         const userRef = db.collection('users').doc(userProfile.email);
         const snap = await userRef.get();
@@ -556,7 +562,7 @@ app.post('/api/v1/auth/user', async (req: Request, res: Response) => {
           await userRef.update(userProfile);
         }
       } catch (dbErr) {
-        console.warn('Firestore user profile sync warning (using memory store):', dbErr);
+        isFirestoreAvailable = false;
       }
     }
     
@@ -578,14 +584,14 @@ app.post('/api/v1/auth/user', async (req: Request, res: Response) => {
 app.get('/api/v1/auth/user/:email', async (req: Request, res: Response) => {
   const email = (req.params.email || '').toLowerCase().trim();
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       try {
         const snap = await db.collection('users').doc(email).get();
         if (snap.exists) {
           return res.json({ success: true, user: snap.data() });
         }
       } catch (dbErr) {
-        console.warn('Firestore user lookup warning (checking memory store):', dbErr);
+        isFirestoreAvailable = false;
       }
     }
     const found = inMemoryStore.users.find(u => u.email === email);
@@ -644,7 +650,7 @@ const handleFormSubmission = async (req: Request, res: Response) => {
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       if (formId === 'contact' || formId === 'rfp') {
         await db.collection('contact_inquiries').doc(submissionId).set(submissionData);
       } else if (formId === 'candidate' || formId === 'career') {
@@ -690,7 +696,7 @@ app.post('/api/v1/forms/submit', handleFormSubmission);
 
 app.get('/api/v1/forms/submissions', async (_req: Request, res: Response) => {
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       const snap = await db.collection('contact_inquiries').orderBy('createdAt', 'desc').limit(50).get();
       const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       if (list.length > 0) {
@@ -707,7 +713,7 @@ app.get('/api/v1/forms/submissions', async (_req: Request, res: Response) => {
 app.get('/api/v1/projects', async (req: Request, res: Response) => {
   const clientEmail = (req.query.email as string)?.toLowerCase();
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       let query: any = db.collection('client_projects');
       if (clientEmail) {
         query = query.where('clientEmail', '==', clientEmail);
@@ -745,7 +751,7 @@ app.post('/api/v1/projects', async (req: Request, res: Response) => {
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       await db.collection('client_projects').doc(newProject.id).set(newProject);
     }
     inMemoryStore.projects.unshift(newProject);
@@ -760,7 +766,7 @@ app.post('/api/v1/projects', async (req: Request, res: Response) => {
 app.get('/api/v1/invoices', async (req: Request, res: Response) => {
   const clientEmail = (req.query.email as string)?.toLowerCase();
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       let query: any = db.collection('invoices');
       if (clientEmail) {
         query = query.where('clientEmail', '==', clientEmail);
@@ -805,7 +811,7 @@ app.post('/api/v1/invoices', async (req: Request, res: Response) => {
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       await db.collection('invoices').doc(newInvoice.id).set(newInvoice);
     }
     inMemoryStore.invoices.unshift(newInvoice);
@@ -819,7 +825,7 @@ app.post('/api/v1/invoices', async (req: Request, res: Response) => {
 // Employee Sprint Tasks CRUD Endpoints
 app.get('/api/v1/tasks', async (_req: Request, res: Response) => {
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       const snap = await db.collection('employee_tasks').get();
       const tasks = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       if (tasks.length > 0) {
@@ -847,7 +853,7 @@ app.post('/api/v1/tasks', async (req: Request, res: Response) => {
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       await db.collection('employee_tasks').doc(newTask.id).set(newTask);
     }
     inMemoryStore.tasks.unshift(newTask);
@@ -863,7 +869,7 @@ app.patch('/api/v1/tasks/:id', async (req: Request, res: Response) => {
   const updates = req.body || {};
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       await db.collection('employee_tasks').doc(taskId).update(updates);
     }
     const idx = inMemoryStore.tasks.findIndex(t => t.id === taskId);
@@ -884,11 +890,11 @@ app.patch('/api/v1/tasks/:id', async (req: Request, res: Response) => {
 app.delete('/api/v1/tasks/:id', async (req: Request, res: Response) => {
   const taskId = req.params.id;
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       try {
         await db.collection('employee_tasks').doc(taskId).delete();
       } catch (dbErr) {
-        console.warn('Firestore task delete warning:', dbErr);
+        isFirestoreAvailable = false;
       }
     }
     const idx = inMemoryStore.tasks.findIndex(t => t.id === taskId);
@@ -909,7 +915,7 @@ app.delete('/api/v1/tasks/:id', async (req: Request, res: Response) => {
 // Candidate & Assessment Endpoints
 app.get('/api/v1/candidates', async (_req: Request, res: Response) => {
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       const snap = await db.collection('candidate_applications').get();
       const candidates = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       if (candidates.length > 0) {
@@ -935,7 +941,7 @@ app.post('/api/v1/candidates/assessments', async (req: Request, res: Response) =
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       await db.collection('candidate_assessments').doc(record.id).set(record);
     }
     res.status(201).json({ success: true, assessment: record });
@@ -947,7 +953,7 @@ app.post('/api/v1/candidates/assessments', async (req: Request, res: Response) =
 // Client Reviews & Feedback Endpoints
 app.get('/api/v1/reviews', async (_req: Request, res: Response) => {
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       try {
         const snap = await db.collection('client_reviews').orderBy('createdAt', 'desc').limit(20).get();
         if (!snap.empty) {
@@ -955,7 +961,7 @@ app.get('/api/v1/reviews', async (_req: Request, res: Response) => {
           return res.json({ success: true, reviews: list });
         }
       } catch (dbErr) {
-        console.warn('Firestore reviews query warning (using fallback memory store):', dbErr);
+        isFirestoreAvailable = false;
       }
     }
     res.json({ success: true, reviews: inMemoryStore.reviews });
@@ -965,36 +971,43 @@ app.get('/api/v1/reviews', async (_req: Request, res: Response) => {
 });
 
 app.post('/api/v1/reviews', async (req: Request, res: Response) => {
-  const { author, role, company, rating, message, service } = req.body || {};
+  const body = req.body || {};
+  const author = (body.author || body.name || '').trim().slice(0, 120);
+  const company = (body.company || 'Verified Client').trim().slice(0, 150);
+  const role = (body.role || 'Enterprise Partner').trim().slice(0, 120);
+  const service = (body.service || 'Custom Web & Software Engineering').trim().slice(0, 150);
+  const message = (body.message || body.feedback || '').trim().slice(0, 2500);
+  const rating = Math.max(1, Math.min(5, parseInt(String(body.rating || 5), 10) || 5));
 
-  if (!author || typeof author !== 'string' || !author.trim()) {
+  if (!author) {
     return res.status(400).json({ success: false, message: 'Author name is required.' });
   }
-  if (!message || typeof message !== 'string' || message.trim().length < 5) {
+  if (!message || message.length < 5) {
     return res.status(400).json({ success: false, message: 'Review feedback message is required (min 5 characters).' });
   }
 
-  const numRating = Math.max(1, Math.min(5, Number(rating) || 5));
   const reviewId = 'rev-' + Date.now();
 
   const newReview = {
     id: reviewId,
-    author: author.trim(),
-    role: (role || 'Enterprise Partner').trim(),
-    company: (company || 'Verified Client').trim(),
-    rating: numRating,
-    message: message.trim(),
-    service: (service || 'Custom Web & Software Engineering').trim(),
+    author,
+    name: author,
+    role,
+    company,
+    rating,
+    message,
+    feedback: message,
+    service,
     verifiedClient: true,
     createdAt: new Date().toISOString()
   };
 
   try {
-    if (db) {
+    if (db && isFirestoreAvailable) {
       try {
         await db.collection('client_reviews').doc(reviewId).set(newReview);
       } catch (dbErr) {
-        console.warn('Firestore review save warning (using memory store):', dbErr);
+        isFirestoreAvailable = false;
       }
     }
 
@@ -1011,6 +1024,318 @@ app.post('/api/v1/reviews', async (req: Request, res: Response) => {
       success: true,
       message: 'Review saved to local cache.',
       review: newReview
+    });
+  }
+});
+
+/* ==========================================================================
+   Gemini AI & Veo Video Suite Endpoints
+   ========================================================================== */
+
+// 1. Multi-turn AI Chat & Search Grounding
+app.post('/api/v1/ai/chat', async (req: Request, res: Response) => {
+  const { messages, message, roleType, model, useGrounding } = req.body || {};
+
+  if (!message && (!Array.isArray(messages) || messages.length === 0)) {
+    return res.status(400).json({ success: false, error: 'Message content is required.' });
+  }
+
+  let selectedModel = model || 'gemini-3.5-flash';
+  if (useGrounding) {
+    selectedModel = 'gemini-3.5-flash';
+  }
+
+  let systemInstruction = 'You are an intelligent enterprise AI assistant representing SiPro Technologies, an MSME-registered enterprise cloud architecture and software engineering firm located in Hanamkonda, Telangana. Provide concise, professional, accurate, and actionable technical advice.';
+
+  if (roleType === 'solutions_architect') {
+    systemInstruction = 'You are a Principal Cloud & Solutions Architect at SiPro Technologies. You advise enterprise CTOs and VPs on Kubernetes (GKE/EKS), Istio service mesh, microservices decomposition, multi-region failover, PostgreSQL sharding, Kafka event meshes, and sizing dedicated engineering pods. Provide production-ready, security-first architectural blueprints.';
+  } else if (roleType === 'compliance_auditor') {
+    systemInstruction = 'You are an Enterprise Compliance Officer & Data Protection Officer (DPO) at SiPro Technologies. You guide clients on the India Digital Personal Data Protection (DPDP) Act 2023, data fiduciary obligations, consent artifacts, notice requirements, GST tax compliance (36AAACS1234A1Z5), and complete IP copyright transfer.';
+  } else if (roleType === 'talent_coordinator') {
+    systemInstruction = 'You are the Talent Development & Internship Program Lead at SiPro Technologies. You guide developers and university graduates on full-stack curriculum tracks (Cloud, React/Next.js, Go/Node, DevOps, PostgreSQL), sprint assessments, code reviews, and enterprise readiness.';
+  } else if (roleType === 'tech_lead') {
+    systemInstruction = 'You are the Principal Full-Stack Tech Lead at SiPro Technologies. You provide exact code snippets, debugging solutions, type-safe API patterns, performance optimizations, and CI/CD best practices across TypeScript, Python, and Go.';
+  }
+
+  try {
+    const ai = getGeminiClient();
+
+    let contents: any;
+    if (Array.isArray(messages) && messages.length > 0) {
+      contents = messages.map(m => ({
+        role: m.role === 'model' || m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: String(m.content || m.text || '') }]
+      }));
+    } else {
+      contents = String(message);
+    }
+
+    const config: any = {
+      systemInstruction
+    };
+
+    if (useGrounding) {
+      config.tools = [{ googleSearch: {} }];
+    }
+
+    const response = await ai.models.generateContent({
+      model: selectedModel,
+      contents,
+      config
+    });
+
+    const responseText = response.text || '';
+    const candidate = response.candidates?.[0] as any;
+    const groundingChunks = candidate?.groundingMetadata?.groundingChunks || [];
+    const webSearchQueries = candidate?.groundingMetadata?.webSearchQueries || [];
+    const searchSources = groundingChunks
+      .map((c: any) => c.web)
+      .filter((w: any) => w && w.uri && w.title)
+      .slice(0, 5);
+
+    res.json({
+      success: true,
+      text: responseText,
+      model: selectedModel,
+      grounding: {
+        queries: webSearchQueries,
+        sources: searchSources
+      }
+    });
+  } catch (err: any) {
+    console.error('Gemini Chat Error:', err);
+    res.status(500).json({
+      success: false,
+      error: err.message || 'Error processing AI chat request.'
+    });
+  }
+});
+
+// 2. AI Image Generation & Editing
+app.post('/api/v1/ai/image', async (req: Request, res: Response) => {
+  const { prompt, image, mimeType, aspectRatio, imageSize } = req.body || {};
+
+  if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
+    return res.status(400).json({ success: false, error: 'Prompt is required for image generation.' });
+  }
+
+  try {
+    const ai = getGeminiClient();
+    const cleanAspect = aspectRatio || '1:1';
+    const cleanSize = imageSize || '1K';
+
+    if (image && typeof image === 'string') {
+      const cleanBase64 = image.includes('base64,') ? image.split('base64,')[1] : image;
+      const cleanMime = mimeType || 'image/png';
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.1-flash-image',
+        contents: {
+          parts: [
+            {
+              inlineData: {
+                data: cleanBase64,
+                mimeType: cleanMime
+              }
+            },
+            {
+              text: prompt.trim()
+            }
+          ]
+        },
+        config: {
+          imageConfig: {
+            aspectRatio: cleanAspect,
+            imageSize: cleanSize
+          }
+        }
+      });
+
+      let generatedImageUrl: string | null = null;
+      let generatedText = '';
+      const parts = response.candidates?.[0]?.content?.parts || [];
+      for (const part of parts) {
+        if (part.inlineData && part.inlineData.data) {
+          const type = part.inlineData.mimeType || 'image/png';
+          generatedImageUrl = `data:${type};base64,${part.inlineData.data}`;
+        } else if (part.text) {
+          generatedText += part.text;
+        }
+      }
+
+      if (!generatedImageUrl) {
+        return res.status(500).json({
+          success: false,
+          error: 'No image was returned by the editing model.',
+          text: generatedText
+        });
+      }
+
+      return res.json({
+        success: true,
+        imageUrl: generatedImageUrl,
+        text: generatedText
+      });
+    } else {
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.1-flash-image',
+        contents: {
+          parts: [{ text: prompt.trim() }]
+        },
+        config: {
+          imageConfig: {
+            aspectRatio: cleanAspect,
+            imageSize: cleanSize
+          }
+        }
+      });
+
+      let generatedImageUrl: string | null = null;
+      let generatedText = '';
+      const parts = response.candidates?.[0]?.content?.parts || [];
+      for (const part of parts) {
+        if (part.inlineData && part.inlineData.data) {
+          const type = part.inlineData.mimeType || 'image/png';
+          generatedImageUrl = `data:${type};base64,${part.inlineData.data}`;
+        } else if (part.text) {
+          generatedText += part.text;
+        }
+      }
+
+      if (!generatedImageUrl) {
+        return res.status(500).json({
+          success: false,
+          error: 'No image was generated.',
+          text: generatedText
+        });
+      }
+
+      return res.json({
+        success: true,
+        imageUrl: generatedImageUrl,
+        text: generatedText
+      });
+    }
+  } catch (err: any) {
+    console.error('Gemini Image Generation Error:', err);
+    res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to generate image.'
+    });
+  }
+});
+
+// 3. Veo Video Generation (Start Long-Running Operation)
+app.post('/api/v1/ai/video/generate', async (req: Request, res: Response) => {
+  const { prompt, image, mimeType, aspectRatio, resolution } = req.body || {};
+
+  if (!prompt && !image) {
+    return res.status(400).json({ success: false, error: 'Prompt or source image is required.' });
+  }
+
+  try {
+    const ai = getGeminiClient();
+    const cleanAspect = aspectRatio === '9:16' ? '9:16' : '16:9';
+    const cleanRes = resolution === '1080p' ? '1080p' : '720p';
+
+    const videoParams: any = {
+      model: 'veo-3.1-lite-generate-preview',
+      prompt: prompt ? String(prompt).trim() : 'Cinematic enterprise software animation with high detail',
+      config: {
+        numberOfVideos: 1,
+        resolution: cleanRes,
+        aspectRatio: cleanAspect
+      }
+    };
+
+    if (image && typeof image === 'string') {
+      const cleanBase64 = image.includes('base64,') ? image.split('base64,')[1] : image;
+      videoParams.image = {
+        imageBytes: cleanBase64,
+        mimeType: mimeType || 'image/png'
+      };
+    }
+
+    const operation = await ai.models.generateVideos(videoParams);
+
+    res.json({
+      success: true,
+      operationName: operation.name
+    });
+  } catch (err: any) {
+    console.error('Veo Video Generation Error:', err);
+    res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to initiate video generation.'
+    });
+  }
+});
+
+// 4. Veo Video Status Polling
+app.post('/api/v1/ai/video/status', async (req: Request, res: Response) => {
+  const { operationName } = req.body || {};
+  if (!operationName) {
+    return res.status(400).json({ success: false, error: 'operationName is required.' });
+  }
+
+  try {
+    const ai = getGeminiClient();
+    const op = new GenerateVideosOperation();
+    op.name = operationName;
+    const updated = await ai.operations.getVideosOperation({ operation: op });
+
+    res.json({
+      success: true,
+      done: Boolean(updated.done),
+      error: updated.error ? String((updated.error as any).message || updated.error) : null
+    });
+  } catch (err: any) {
+    console.error('Veo Video Status Error:', err);
+    res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to check video status.'
+    });
+  }
+});
+
+// 5. Veo Video Download Stream
+app.post('/api/v1/ai/video/download', async (req: Request, res: Response) => {
+  const { operationName } = req.body || {};
+  if (!operationName) {
+    return res.status(400).json({ success: false, error: 'operationName is required.' });
+  }
+
+  try {
+    const ai = getGeminiClient();
+    const op = new GenerateVideosOperation();
+    op.name = operationName;
+    const updated = await ai.operations.getVideosOperation({ operation: op });
+
+    const uri = updated.response?.generatedVideos?.[0]?.video?.uri;
+    if (!uri) {
+      return res.status(404).json({ success: false, error: 'Video URI not ready or available.' });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY || '';
+    const videoRes = await fetch(uri, {
+      headers: {
+        'x-goog-api-key': apiKey
+      }
+    });
+
+    if (!videoRes.ok) {
+      return res.status(502).json({ success: false, error: `Failed to fetch video from storage: ${videoRes.statusText}` });
+    }
+
+    res.setHeader('Content-Type', 'video/mp4');
+    const arrayBuffer = await videoRes.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    res.send(buffer);
+  } catch (err: any) {
+    console.error('Veo Video Download Error:', err);
+    res.status(500).json({
+      success: false,
+      error: err.message || 'Failed to download video.'
     });
   }
 });

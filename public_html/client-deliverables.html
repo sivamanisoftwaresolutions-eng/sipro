@@ -1,1 +1,347 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Client deliverables | SiPro Tech</title><link rel="stylesheet" href="sipro.css"></head><body data-page="portals.html"><div data-header></div><main class="dashboard"><div class="container"><div class="dash-top"><div><span class="eyebrow">Client workspace</span><h1>Deliverables</h1><p>Northstar ERP · staging and sign-offs.</p></div></div><div class="dash-layout"><nav class="side-nav"><a href="client-dashboard.html">Overview</a><a class="active" href="client-deliverables.html">Deliverables</a><a href="client-billing.html">Billing</a><a href="client-support.html">Support</a></nav><section class="grid two"><div class="card"><span class="tag">Ready for review</span><h3>Build 0.8.4</h3><p>Staging link · role permissions and reporting dashboard.</p><button class="btn btn-primary" onclick="modal('Staging link','<p>https://staging.sipro.tech/northstar</p><button class=\"btn btn-ghost\" onclick=\"this.closest(\'.modal-backdrop\').remove()\">Close</button>')">Open staging</button></div><div class="card"><span class="tag amber">Awaiting sign-off</span><h3>Milestone 2 · Testing</h3><p>QA report, API contract, and release notes.</p><button class="btn btn-primary" onclick="modal('Sign-off recorded','<div class=\"notice\">Demo approval recorded for INV-2026-0814.</div>')">Sign off</button></div></section></div></div></main><div data-footer></div><script src="sipro.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enterprise Deliverables & Document Generation | SiPro Tech</title>
+  <meta name="description" content="Access production builds, sprint QA reports, architectural blueprints, and generate verified enterprise sign-off documents.">
+  <link rel="stylesheet" href="sipro.css">
+</head>
+<body data-page="portals.html" data-role="client">
+  <div data-header></div>
+
+  <main class="dashboard">
+    <div class="container">
+      <!-- Top Title Bar -->
+      <div class="dash-top">
+        <div>
+          <span class="eyebrow">Enterprise Client Workspace</span>
+          <h1>Deliverables & Document Hub</h1>
+          <p>Northstar ERP & Cloud Microservices Pod · Verified Milestones, Sandbox Deployments & Certified Audit SOWs.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button type="button" class="btn btn-ghost" id="btn-open-doc-generator">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>Generate Document</span>
+          </button>
+          <a class="btn btn-primary" href="client-dashboard.html">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Overview Dashboard</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dash-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="side-nav">
+          <a href="client-dashboard.html">Overview</a>
+          <a class="active" href="client-deliverables.html">Deliverables &amp; Docs</a>
+          <a href="client-billing.html">Billing &amp; GST Ledger</a>
+          <a href="client-support.html">Escalation &amp; Support</a>
+        </nav>
+
+        <!-- Main Deliverables Workspace -->
+        <section>
+          <!-- Deliverables Filter & Search Ribbon -->
+          <div class="deliverables-control-bar">
+            <div class="deliverables-tab-group" id="deliverables-tabs">
+              <button class="d-tab active" data-filter="all">All Artifacts (6)</button>
+              <button class="d-tab" data-filter="staging">Staging &amp; Builds (2)</button>
+              <button class="d-tab" data-filter="sprint">Sprint QA Reports (2)</button>
+              <button class="d-tab" data-filter="docs">Architecture &amp; SOWs (2)</button>
+            </div>
+            <div class="deliverables-search-wrap">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="deliverables-search-input" placeholder="Search builds, tickets, or reports..." aria-label="Search Deliverables">
+            </div>
+          </div>
+
+          <!-- Document Generation Quick Launcher Strip -->
+          <div class="doc-gen-banner">
+            <div class="doc-gen-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="doc-gen-text">
+              <h4>Enterprise Document &amp; Formal SOW Engine</h4>
+              <p>Instantly generate verifiable, cryptographic PDF/Printable documents including Sprint Delivery Certificates, Statement of Work (SOW) Acceptance, and DPDP Security Attestations.</p>
+            </div>
+            <div class="doc-gen-actions">
+              <button type="button" class="btn btn-sm btn-primary" onclick="generateDocument('sprint-qa')">Sprint 24 QA Report</button>
+              <button type="button" class="btn btn-sm btn-ghost" onclick="generateDocument('sow-acceptance')">SOW Acceptance</button>
+              <button type="button" class="btn btn-sm btn-ghost" onclick="generateDocument('arch-spec')">API Blueprint</button>
+            </div>
+          </div>
+
+          <!-- Deliverables Dynamic Grid -->
+          <div class="grid two" id="deliverables-grid">
+            <!-- Staging Build 0.8.4 -->
+            <div class="card deliverable-card" data-category="staging">
+              <div class="deliverable-header">
+                <span class="tag emerald">Active Sandbox</span>
+                <span class="deliverable-date">Deployed Today, 08:30 IST</span>
+              </div>
+              <h3 class="deliverable-title">Release Candidate v0.8.4</h3>
+              <p class="deliverable-desc">Zero-trust RBAC permissions, realtime telemetry stream, and high-concurrency order engine.</p>
+              
+              <div class="deliverable-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Git Commit</span>
+                  <span class="meta-val font-mono">#9cf42a8</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Test Coverage</span>
+                  <span class="meta-val" style="color:var(--emerald)">99.2%</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Environment</span>
+                  <span class="meta-val">GCP us-central1</span>
+                </div>
+              </div>
+
+              <div class="deliverable-footer">
+                <button type="button" class="btn btn-primary btn-sm" onclick="openStagingSandbox('https://staging-northstar.sipro.tech', 'v0.8.4')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Launch Sandbox
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="generateDocument('sprint-qa')">View QA Report</button>
+              </div>
+            </div>
+
+            <!-- Milestone 2 Testing Sign-off -->
+            <div class="card deliverable-card" data-category="sprint" id="card-milestone-2">
+              <div class="deliverable-header">
+                <span class="tag amber" id="milestone-2-tag">Awaiting Sign-off</span>
+                <span class="deliverable-date">Sprint 24 · Due Sept 05</span>
+              </div>
+              <h3 class="deliverable-title">Milestone 2: Distributed Ledger &amp; Core ERP</h3>
+              <p class="deliverable-desc">Comprehensive test automation suite, stress-testing telemetry under 25,000 req/sec, and API contract freeze.</p>
+
+              <div class="deliverable-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Sign-off Status</span>
+                  <span class="meta-val" style="color:var(--amber)" id="milestone-2-status">Pending Client Lead</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Passed Tests</span>
+                  <span class="meta-val">842 / 842</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Deliverable Value</span>
+                  <span class="meta-val">₹4,50,000</span>
+                </div>
+              </div>
+
+              <div class="deliverable-footer">
+                <button type="button" class="btn btn-primary btn-sm" id="btn-sign-off-m2" onclick="openSignOffModal('Milestone 2 · Core ERP', 'INV-2026-0814', '₹4,50,000')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg>
+                  Sign Off Milestone
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="generateDocument('sow-acceptance')">Generate SOW Cert</button>
+              </div>
+            </div>
+
+            <!-- API Architecture Specification -->
+            <div class="card deliverable-card" data-category="docs">
+              <div class="deliverable-header">
+                <span class="tag cyan">Architecture Blueprint</span>
+                <span class="deliverable-date">v2.1 Updated</span>
+              </div>
+              <h3 class="deliverable-title">OpenAPI 3.1 &amp; Cloud Microservices Spec</h3>
+              <p class="deliverable-desc">Formal schema definitions for multi-tenant catalog, payment webhooks, and Kafka message brokers.</p>
+
+              <div class="deliverable-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Endpoints</span>
+                  <span class="meta-val">48 Defined</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Format</span>
+                  <span class="meta-val">Swagger / JSON</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">mTLS Zero Trust</span>
+                  <span class="meta-val" style="color:var(--emerald)">Enforced</span>
+                </div>
+              </div>
+
+              <div class="deliverable-footer">
+                <button type="button" class="btn btn-primary btn-sm" onclick="generateDocument('arch-spec')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Export Spec PDF
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="modal('API Explorer', '<p>Interactive Swagger UI sandbox available in staging pod:</p><pre style=\'background:rgba(0,0,0,0.4);padding:12px;border-radius:8px;font-size:12px;color:var(--cyan)\'>https://api-staging.sipro.tech/v2/docs</pre>')">View Endpoints</button>
+              </div>
+            </div>
+
+            <!-- DPDP Security & Audit Attestation -->
+            <div class="card deliverable-card" data-category="docs">
+              <div class="deliverable-header">
+                <span class="tag violet">Compliance Attestation</span>
+                <span class="deliverable-date">Certified Aug 2026</span>
+              </div>
+              <h3 class="deliverable-title">DPDP Act 2023 &amp; SOC2 Data Security Audit</h3>
+              <p class="deliverable-desc">Independent security audit certifying end-to-end data encryption at rest (AES-256) and TLS 1.3 in transit.</p>
+
+              <div class="deliverable-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Vulnerabilities</span>
+                  <span class="meta-val" style="color:var(--emerald)">0 Critical / 0 High</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Compliance</span>
+                  <span class="meta-val">DPDP &amp; ISO 27001</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Auditor</span>
+                  <span class="meta-val">SiPro SecOps</span>
+                </div>
+              </div>
+
+              <div class="deliverable-footer">
+                <button type="button" class="btn btn-primary btn-sm" onclick="generateDocument('dpdp-security')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Generate Attestation
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="location.href='privacy-portal.html'">Privacy Portal</button>
+              </div>
+            </div>
+
+            <!-- Staging Build 0.8.3 Archive -->
+            <div class="card deliverable-card" data-category="staging">
+              <div class="deliverable-header">
+                <span class="tag">Archived Build</span>
+                <span class="deliverable-date">Aug 20, 2026</span>
+              </div>
+              <h3 class="deliverable-title">Sprint 23 Release Build v0.8.3</h3>
+              <p class="deliverable-desc">Core customer portal interface, OAuth login federation, and baseline database schema migration.</p>
+
+              <div class="deliverable-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Status</span>
+                  <span class="meta-val" style="color:var(--emerald)">Signed Off</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Build Hash</span>
+                  <span class="meta-val font-mono">#3ba780e</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Signatory</span>
+                  <span class="meta-val">A. Sharma (CTO)</span>
+                </div>
+              </div>
+
+              <div class="deliverable-footer">
+                <button type="button" class="btn btn-ghost btn-sm" onclick="openStagingSandbox('https://staging-v083.sipro.tech', 'v0.8.3')">Sandbox Snapshot</button>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="generateDocument('sprint-qa')">Download Report</button>
+              </div>
+            </div>
+
+            <!-- Sprint 23 QA Delivery Report -->
+            <div class="card deliverable-card" data-category="sprint">
+              <div class="deliverable-header">
+                <span class="tag emerald">Completed</span>
+                <span class="deliverable-date">Sprint 23</span>
+              </div>
+              <h3 class="deliverable-title">Sprint 23 Final QA &amp; SLA Certificate</h3>
+              <p class="deliverable-desc">Certified acceptance for Sprint 23 deliverables, verified against contractual SLA metrics and unit tests.</p>
+
+              <div class="deliverable-meta-grid">
+                <div class="meta-item">
+                  <span class="meta-label">Velocity</span>
+                  <span class="meta-val">44 Story Points</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">SLA Uptime</span>
+                  <span class="meta-val" style="color:var(--emerald)">99.98%</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Settlement</span>
+                  <span class="meta-val">Verified Paid</span>
+                </div>
+              </div>
+
+              <div class="deliverable-footer">
+                <button type="button" class="btn btn-primary btn-sm" onclick="generateDocument('sprint-qa')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Generate PDF
+                </button>
+                <a href="client-billing.html" class="btn btn-ghost btn-sm">View Invoices</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Document Generation Modal (Printable Sheet View) -->
+  <div class="doc-modal-backdrop" id="doc-modal-root" role="dialog" aria-modal="true" aria-label="Generated Enterprise Document">
+    <div class="doc-modal-card">
+      <div class="doc-modal-header no-print">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="brand-badge" style="width:30px;height:30px;font-size:13px">SP</div>
+          <span style="font-weight:800;font-size:16px;color:var(--text)" id="doc-modal-title">Document Preview</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button type="button" class="btn btn-primary btn-sm" onclick="window.print()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save as PDF
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm" onclick="closeDocumentModal()">Close</button>
+        </div>
+      </div>
+
+      <div class="doc-modal-body" id="doc-modal-paper-content">
+        <!-- Injected Document Template -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestone Sign-off Modal -->
+  <div class="auth-modal-backdrop" id="sign-off-modal" role="dialog" aria-modal="true" aria-label="Milestone Sign-off">
+    <div class="auth-card" style="max-width:540px;text-align:left;">
+      <button class="auth-modal-close" onclick="closeSignOffModal()">×</button>
+      
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div class="brand-badge" style="width:32px;height:32px;font-size:14px">SP</div>
+        <div>
+          <h3 style="font-size:18px;margin:0" id="signoff-milestone-name">Milestone Sign-Off Approval</h3>
+          <span style="font-size:12px;color:var(--muted)" id="signoff-milestone-sub">Record official enterprise milestone acceptance</span>
+        </div>
+      </div>
+
+      <form id="signoff-approval-form" style="display:flex;flex-direction:column;gap:14px">
+        <div class="notice" style="font-size:13px;line-height:1.5">
+          By signing off, you confirm that all test cases for this milestone have passed staging review and authorize SiPro Technologies to proceed to production deployment.
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px">AUTHORISED SIGNATORY NAME</label>
+          <input type="text" class="input" id="signoff-signatory-name" value="Arjun Sharma" required>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px">OFFICIAL CORPORATE TITLE</label>
+          <input type="text" class="input" id="signoff-signatory-title" value="Chief Technology Officer" required>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px">CONFIRMATION REMARKS (OPTIONAL)</label>
+          <textarea class="input" id="signoff-remarks" rows="2" placeholder="e.g., Staging approved. Ready for production cutover."></textarea>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:10px">
+          <button type="button" class="btn btn-ghost btn-sm" onclick="closeSignOffModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn-submit-signoff">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg>
+            Record Formal Sign-Off
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div data-footer></div>
+  <script src="sipro.js"></script>
+</body>
+</html>
