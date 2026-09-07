@@ -11,9 +11,10 @@ const formatINR = new Intl.NumberFormat('en-IN', {
 });
 
 const NAV_LINKS = [
-  ['Home', 'index.html'],
+  ['Home', '/'],
   ['Careers', 'careers.html'],
-  ['Contact', 'contact.html']
+  ['Contact', 'contact.html'],
+  ['Client Portal', 'login-client.html']
 ];
 
 // SVG Icons
@@ -53,10 +54,36 @@ const ICONS = {
 const MEGA_MENUS = {
   whatWeDo: {
     id: 'mega-what-we-do',
-    label: 'What We Do',
+    label: 'Solutions & Architecture',
     columns: [
       {
-        title: 'Core Capabilities',
+        title: 'App & Website Engineering',
+        items: [
+          {
+            title: 'Custom Mobile & Web Apps',
+            desc: 'Native iOS & Android, React Native & Progressive Web Apps',
+            href: 'services.html#apps',
+            icon: 'cpu',
+            badge: 'Apps'
+          },
+          {
+            title: 'Modern Website Engineering',
+            desc: 'Enterprise websites, CMS & SEO-optimized frontends',
+            href: 'services.html#websites',
+            icon: 'globe',
+            badge: 'Websites'
+          },
+          {
+            title: 'Cloud Hosting & 24/7 DevOps',
+            desc: 'Managed AWS/GCP hosting, server monitoring & zero downtime',
+            href: 'services.html#hosting',
+            icon: 'shield',
+            badge: '24/7 Hosting'
+          }
+        ]
+      },
+      {
+        title: 'Cloud Infrastructure & Pods',
         items: [
           {
             title: 'Cloud Architecture & Kubernetes',
@@ -66,51 +93,29 @@ const MEGA_MENUS = {
             badge: 'Enterprise'
           },
           {
-            title: 'Custom Software & Microservices',
-            desc: 'High-concurrency platforms & distributed Go/Node services',
-            href: 'services-custom-software.html',
-            icon: 'cpu'
-          },
-          {
-            title: 'Intelligent APIs & Automation',
-            desc: 'Workflow automation, AI agent orchestration & ETL pipelines',
+            title: 'Intelligent APIs & Microservices',
+            desc: 'High-throughput Go/Node microservices & event streaming',
             href: 'services-api-automation.html',
-            icon: 'zap'
-          }
-        ]
-      },
-      {
-        title: 'Delivery & Workspaces',
-        items: [
+            icon: 'zap',
+            badge: 'APIs'
+          },
           {
             title: 'Dedicated Engineering Pods',
             desc: '5-day deployment squads & transparent INR retainers',
             href: 'pricing.html',
             icon: 'layers',
             badge: 'Pods'
-          },
-          {
-            title: 'All Solutions Catalog',
-            desc: 'Comprehensive index of digital engineering offerings',
-            href: 'services.html',
-            icon: 'code'
-          },
-          {
-            title: 'Client Deliverables & Workspace',
-            desc: 'Sprint milestones, live telemetry & GST invoices',
-            href: 'portals.html',
-            icon: 'building'
           }
         ]
       }
     ],
     spotlight: {
-      tag: 'FEATURED CAPABILITY',
-      title: 'Zero-Downtime Cloud Pods',
-      desc: 'Deploy dedicated senior squads delivering 99.95% SLA availability with sub-5ms edge latency for fintech & SaaS.',
-      linkText: 'Explore Cloud Architecture',
-      href: 'services-cloud-architecture.html',
-      badge: '99.95% SLA'
+      tag: 'CORE OFFERINGS',
+      title: 'Apps, Websites & 24/7 Cloud Hosting',
+      desc: 'Turnkey enterprise software engineering, resilient cloud hosting, and dedicated senior engineering pods with 99.95% SLA.',
+      linkText: 'Explore All Solutions',
+      href: 'services.html',
+      badge: 'Full Stack'
     }
   },
   whatWeThink: {
@@ -159,7 +164,7 @@ const MEGA_MENUS = {
           {
             title: 'Verified Client Reviews',
             desc: 'Enterprise testimonials, verified ratings & feedback',
-            href: 'index.html#reviews',
+            href: '/#reviews',
             icon: 'star',
             badge: '4.9/5'
           }
@@ -219,10 +224,10 @@ const MEGA_MENUS = {
             icon: 'code'
           },
           {
-            title: 'Enterprise Consultation & RFP',
-            desc: 'Schedule technical discovery with solutions architects',
-            href: 'contact.html',
-            icon: 'mail'
+            title: 'Client Portal & RFP Discovery',
+            desc: 'Sign in to submit project briefs, review sprints & estimates',
+            href: 'login-client.html',
+            icon: 'user'
           }
         ]
       }
@@ -264,7 +269,7 @@ const AuthState = {
     showToast('Signed out successfully.', 'info');
     setTimeout(() => {
       if (location.pathname.includes('dashboard') || location.pathname.includes('billing')) {
-        location.href = 'index.html';
+        location.href = '/';
       }
     }, 600);
   }
@@ -304,7 +309,9 @@ function renderHeader() {
   const headerContainer = document.querySelector('[data-header]');
   if (!headerContainer) return;
 
-  const page = document.body.dataset.page || (location.pathname.split('/').pop() || 'index.html');
+  const rawPage = document.body.dataset.page || (location.pathname.split('/').pop() || '');
+  const isHomePage = rawPage === 'index.html' || rawPage === 'home' || rawPage === '' || location.pathname === '/' || location.pathname.endsWith('/index.html');
+  const page = isHomePage ? 'home' : rawPage;
   const user = AuthState.getUser();
 
   // Helper to render Mega-Menu Desktop Dropdown Item
@@ -366,6 +373,7 @@ function renderHeader() {
   // Helper to render Mobile Accordion Section
   const renderMobileAccordion = (menuKey, menu) => {
     const isAnyActive = menu.columns.some(col => col.items.some(item => page === item.href));
+    const isDefaultOpen = isAnyActive || menuKey === 'whatWeDo';
     const totalItems = menu.columns.reduce((acc, col) => acc + col.items.length, 0);
     const menuIcons = {
       whatWeDo: ICONS.cpu,
@@ -378,7 +386,7 @@ function renderHeader() {
       whoWeAre: 'accent-amber'
     };
     const subtitleMap = {
-      whatWeDo: 'Cloud, Microservices, AI & Pods',
+      whatWeDo: 'Apps, Websites, 24/7 Hosting & Pods',
       whatWeThink: 'DPDP Governance, Security & Wiki',
       whoWeAre: 'Leadership, Hubs & 12 Open Roles'
     };
@@ -389,8 +397,8 @@ function renderHeader() {
     };
 
     return `
-      <div class="mobile-accordion ${isAnyActive ? 'open' : ''}" data-accordion="${menuKey}">
-        <button type="button" class="mobile-accordion-trigger" aria-expanded="${isAnyActive ? 'true' : 'false'}">
+      <div class="mobile-accordion ${isDefaultOpen ? 'open' : ''}" data-accordion="${menuKey}">
+        <button type="button" class="mobile-accordion-trigger" aria-expanded="${isDefaultOpen ? 'true' : 'false'}">
           <div class="mobile-nav-item-left">
             <div class="mobile-nav-icon-badge ${accentColors[menuKey] || ''}">
               ${menuIcons[menuKey] || ICONS.code}
@@ -450,8 +458,9 @@ function renderHeader() {
 
   // Generate desktop direct links
   const directDesktopLinks = NAV_LINKS.map(([label, href]) => {
-    const isActive = page === href || (href === 'index.html' && page === '');
-    return `<a class="nav-link ${isActive ? 'active' : ''}" href="${href}">${label}</a>`;
+    const isActive = (href === '/' && isHomePage) || page === href;
+    const targetHref = (href === '/' && isHomePage) ? '#home' : href;
+    return `<a class="nav-link ${isActive ? 'active' : ''}" href="${targetHref}">${label}</a>`;
   }).join('');
 
   // Auth block for desktop
@@ -513,20 +522,21 @@ function renderHeader() {
     <header class="site-header">
       <div class="container">
         <div class="header-nav">
-          <a class="brand" href="index.html">
+          <a class="brand" href="/">
             <div class="brand-badge">SP</div>
             <span class="brand-name">SiPro<span class="brand-tech">Tech</span></span>
           </a>
 
           <!-- Enterprise Mega-Menu Desktop Navigation (Accenture/Wipro Style) -->
           <nav class="nav-links-desktop" aria-label="Enterprise Navigation">
-            <a class="nav-link ${page === 'index.html' || page === '' ? 'active' : ''}" href="index.html">Home</a>
+            <a class="nav-link ${isHomePage ? 'active' : ''}" href="${isHomePage ? '#home' : '/'}">Home</a>
             ${renderDesktopMegaMenu('whatWeDo', MEGA_MENUS.whatWeDo)}
             ${renderDesktopMegaMenu('whatWeThink', MEGA_MENUS.whatWeThink)}
             ${renderDesktopMegaMenu('whoWeAre', MEGA_MENUS.whoWeAre)}
-            <a class="nav-link ${page === 'careers.html' ? 'active' : ''}" href="careers.html">Careers</a>
+            <a class="nav-link ${page === 'careers.html' ? 'active' : ''}" href="${isHomePage ? '#careers' : 'careers.html'}">Careers</a>
+            <a class="nav-link ${page === 'contact.html' ? 'active' : ''}" href="${isHomePage ? '#contact' : 'contact.html'}">Contact</a>
             ${user ? `<a class="nav-link ${page === 'pricing.html' ? 'active' : ''}" href="pricing.html">Pricing</a>` : ''}
-            <a class="nav-link ${page === 'contact.html' ? 'active' : ''}" href="contact.html">Contact</a>
+            <a class="nav-link ${page === 'portals.html' || page.includes('login') ? 'active' : ''}" href="portals.html">Portals</a>
           </nav>
 
           <div class="header-actions">
@@ -561,7 +571,7 @@ function renderHeader() {
       <!-- Mobile Slide-Over Glassmorphic Drawer -->
       <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
         <div class="mobile-drawer-header">
-          <a class="brand" href="index.html">
+          <a class="brand" href="/">
             <div class="brand-badge" style="width:32px;height:32px;font-size:14px">SP</div>
             <span class="brand-name" style="font-size:17px">SiPro<span class="brand-tech">Tech</span></span>
           </a>
@@ -580,7 +590,7 @@ function renderHeader() {
 
           <!-- Main Navigation Group -->
           <div class="mobile-group-label">OVERVIEW</div>
-          <a href="index.html" class="mobile-nav-link ${page === 'index.html' || page === '' ? 'active' : ''}">
+          <a href="${isHomePage ? '#home' : '/'}" class="mobile-nav-link ${isHomePage ? 'active' : ''}">
             <div class="mobile-nav-item-left">
               <div class="mobile-nav-icon-badge accent-blue">${ICONS.home}</div>
               <div class="mobile-nav-item-meta">
@@ -593,11 +603,13 @@ function renderHeader() {
 
           <div class="mobile-group-label">SOLUTIONS &amp; ARCHITECTURE</div>
           ${renderMobileAccordion('whatWeDo', MEGA_MENUS.whatWeDo)}
+
+          <div class="mobile-group-label">GOVERNANCE &amp; ORGANIZATION</div>
           ${renderMobileAccordion('whatWeThink', MEGA_MENUS.whatWeThink)}
           ${renderMobileAccordion('whoWeAre', MEGA_MENUS.whoWeAre)}
 
           <div class="mobile-group-label">COMMERCIAL &amp; OPPORTUNITIES</div>
-          <a href="careers.html" class="mobile-nav-link ${page === 'careers.html' ? 'active' : ''}">
+          <a href="${isHomePage ? '#careers' : 'careers.html'}" class="mobile-nav-link ${page === 'careers.html' ? 'active' : ''}">
             <div class="mobile-nav-item-left">
               <div class="mobile-nav-icon-badge accent-amber">${ICONS.sparkles}</div>
               <div class="mobile-nav-item-meta">
@@ -606,6 +618,20 @@ function renderHeader() {
                   <span class="mobile-badge-pill amber">6 Openings</span>
                 </div>
                 <span class="mobile-nav-item-sub">Software Internships &amp; Engineering Roles</span>
+              </div>
+            </div>
+            <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
+          </a>
+
+          <a href="${isHomePage ? '#contact' : 'contact.html'}" class="mobile-nav-link ${page === 'contact.html' ? 'active' : ''}">
+            <div class="mobile-nav-item-left">
+              <div class="mobile-nav-icon-badge accent-blue">${ICONS.mail}</div>
+              <div class="mobile-nav-item-meta">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="mobile-nav-item-title">Contact &amp; Scoping</span>
+                  <span class="mobile-badge-pill cyan">Inquiries</span>
+                </div>
+                <span class="mobile-nav-item-sub">Connect with Principal Architects &amp; Hubs</span>
               </div>
             </div>
             <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
@@ -626,12 +652,15 @@ function renderHeader() {
             <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
           </a>` : ''}
 
-          <a href="contact.html" class="mobile-nav-link ${page === 'contact.html' ? 'active' : ''}">
+          <a href="login-client.html" class="mobile-nav-link ${page === 'login-client.html' ? 'active' : ''}">
             <div class="mobile-nav-item-left">
-              <div class="mobile-nav-icon-badge accent-cyan">${ICONS.phone}</div>
+              <div class="mobile-nav-icon-badge accent-cyan">${ICONS.user}</div>
               <div class="mobile-nav-item-meta">
-                <span class="mobile-nav-item-title">Contact &amp; RFP</span>
-                <span class="mobile-nav-item-sub">Schedule Consultation &amp; RFP Submissions</span>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="mobile-nav-item-title">Client Portal Login</span>
+                  <span class="mobile-badge-pill cyan">Client Hub</span>
+                </div>
+                <span class="mobile-nav-item-sub">Sign in for Sprints, Invoices &amp; Retainer Estimator</span>
               </div>
             </div>
             <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
@@ -642,10 +671,10 @@ function renderHeader() {
               <div class="mobile-nav-icon-badge accent-violet">${ICONS.building}</div>
               <div class="mobile-nav-item-meta">
                 <div style="display:flex;align-items:center;gap:6px">
-                  <span class="mobile-nav-item-title">Workspaces &amp; Portals</span>
-                  <span class="mobile-badge-pill cyan">Live</span>
+                  <span class="mobile-nav-item-title">3 Dedicated Portals</span>
+                  <span class="mobile-badge-pill emerald">Live</span>
                 </div>
-                <span class="mobile-nav-item-sub">Client Hub, Employee Board &amp; Assessments</span>
+                <span class="mobile-nav-item-sub">Client Hub, Employee Board &amp; Candidate Portal</span>
               </div>
             </div>
             <span class="mobile-nav-arrow">${ICONS.arrowRight}</span>
@@ -665,6 +694,9 @@ function renderHeader() {
             </div>
           </div>
           <div class="mobile-footer-actions">
+            <button class="a11y-toggle-btn" type="button" onclick="openAccessibilityModal()" aria-label="Accessibility settings" title="Accessibility & Display Settings" style="width:36px;height:36px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+            </button>
             <button class="theme-toggle-btn" type="button" aria-label="Toggle theme in mobile menu">
               ${ICONS.sun}
               ${ICONS.moon}
@@ -799,7 +831,7 @@ function renderFooter() {
       <div class="container">
         <div class="footer-content">
           <div class="footer-brand">
-            <a class="brand" href="index.html">
+            <a class="brand" href="/">
               <div class="brand-badge">SP</div>
               <span class="brand-name">SiPro<span class="brand-tech">Tech</span></span>
             </a>
@@ -809,10 +841,11 @@ function renderFooter() {
           <div class="footer-col">
             <h4>Capabilities</h4>
             <ul>
-              <li><a href="services.html">Cloud Architecture</a></li>
-              <li><a href="services.html">Enterprise Web Systems</a></li>
-              <li><a href="services.html">AI & Machine Learning</a></li>
-              <li><a href="services.html">Cybersecurity Reviews</a></li>
+              <li><a href="services.html#apps">Mobile & Web Apps</a></li>
+              <li><a href="services.html#websites">Modern Websites</a></li>
+              <li><a href="services.html#hosting">24/7 Cloud Hosting</a></li>
+              <li><a href="services-cloud-architecture.html">Cloud Architecture</a></li>
+              <li><a href="services-api-automation.html">Microservices & APIs</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -825,11 +858,11 @@ function renderFooter() {
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Contact</h4>
+            <h4>Client Access</h4>
             <ul>
+              <li><a href="login-client.html">Client Portal Login</a></li>
+              <li><a href="portals.html">3 Dedicated Portals</a></li>
               <li><a href="mailto:contact@sipro.tech">contact@sipro.tech</a></li>
-              <li><a href="mailto:support@sipro.tech">support@sipro.tech</a></li>
-              <li><a href="contact.html">Send an Inquiry</a></li>
               <li><a href="about.html">About SiPro</a></li>
             </ul>
           </div>
@@ -2495,13 +2528,17 @@ function initCommandPalette() {
   if (document.getElementById('cmd-palette-root')) return;
 
   const COMMAND_ITEMS = [
-    { title: 'Home Overview', desc: 'Main digital engineering showcase', href: 'index.html', icon: 'globe', category: 'Navigation' },
+    { title: 'Home Overview', desc: 'Main digital engineering showcase', href: '/', icon: 'globe', category: 'Navigation' },
     { title: 'Careers & Open Positions', desc: 'Engineering squads and job applications', href: 'careers.html', icon: 'briefcase', category: 'Navigation' },
-    { title: 'Contact & RFP Discovery', desc: 'Schedule architectural consultation', href: 'contact.html', icon: 'mail', category: 'Navigation' },
+    { title: 'Contact & Architecture Consultation', desc: 'Connect with Principal Architects & Hubs', href: 'contact.html', icon: 'mail', category: 'Navigation' },
+    { title: 'Client Portal Login', desc: 'Sign in to access deliverables, estimates & invoices', href: 'login-client.html', icon: 'user', category: 'Navigation' },
     { title: 'About SiPro Technologies', desc: 'MSME leadership & engineering ethos', href: 'about.html', icon: 'building', category: 'Navigation' },
+    { title: 'Custom Mobile & Web Apps', desc: 'iOS, Android, React Native & Web platforms', href: 'services.html#apps', icon: 'cpu', category: 'Services' },
+    { title: 'Modern Website Engineering', desc: 'Enterprise websites, CMS & fast frontends', href: 'services.html#websites', icon: 'globe', category: 'Services' },
+    { title: 'Cloud Hosting & 24/7 DevOps', desc: 'AWS/GCP hosting, server monitoring & zero-downtime maintenance', href: 'services.html#hosting', icon: 'shield', category: 'Services' },
     { title: 'Cloud Architecture & Kubernetes', desc: 'Zero-downtime microservices & AWS/GCP IaC', href: 'services-cloud-architecture.html', icon: 'cloud', category: 'Services' },
-    { title: 'Custom Software & Microservices', desc: 'High-concurrency platforms & distributed systems', href: 'services-custom-software.html', icon: 'cpu', category: 'Services' },
-    { title: 'Intelligent APIs & Automation', desc: 'AI agent orchestration & ETL workflows', href: 'services-api-automation.html', icon: 'zap', category: 'Services' },
+    { title: 'Intelligent APIs & Microservices', desc: 'Go/Node microservices & Kafka event streaming', href: 'services-api-automation.html', icon: 'zap', category: 'Services' },
+    { title: 'Dedicated Engineering Pods', desc: '5-day deployment squads & transparent INR retainers', href: 'pricing.html', icon: 'layers', category: 'Services' },
     { title: 'All Solutions Catalog', desc: 'Comprehensive matrix of digital services', href: 'services.html', icon: 'code', category: 'Services' },
     { title: 'Pricing & Retainers', desc: 'Commercial retainers & pod calculators (Auth required)', href: 'pricing.html', icon: 'layers', category: 'Workspaces' },
     { title: 'Client Delivery Workspace', desc: 'Sprint tracker, telemetry & deliverables', href: 'client-dashboard.html', icon: 'building', category: 'Workspaces' },

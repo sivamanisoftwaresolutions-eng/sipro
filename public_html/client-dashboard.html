@@ -63,6 +63,111 @@
             </div>
           </div>
 
+          <!-- Interactive Client Pod & Retainer Sizing Engine -->
+          <div class="card" style="margin-top:28px;background:var(--card-bg);border:2px solid var(--border);border-radius:18px;padding:24px">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+              <div>
+                <span class="tag" style="background:rgba(6,182,212,0.15);color:var(--cyan);font-weight:700">Client Scope &amp; Pod Engine</span>
+                <h3 style="font-size:22px;margin-top:8px;font-weight:800">Engineering Pod Retainer &amp; Sizing Calculator</h3>
+                <p style="font-size:14px;color:var(--muted);margin-top:4px">Model your upcoming sprint requirements, squad sizing, and transparent monthly retainer.</p>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:16px">
+              <!-- Left: Controls -->
+              <div style="display:flex;flex-direction:column;gap:18px">
+                <!-- Track selection -->
+                <div>
+                  <label style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">1. Engagement Track</label>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="portal-calc-tracks">
+                    <button type="button" class="portal-calc-track active" data-track="apps" data-base="320000" style="padding:12px;border-radius:12px;border:2px solid var(--cyan);background:rgba(6,182,212,0.08);text-align:left;cursor:pointer;color:var(--text)">
+                      <div style="font-size:15px;font-weight:700;margin-bottom:2px">📱 Mobile &amp; Web Apps</div>
+                      <div style="font-size:11px;color:var(--muted)">iOS, Android, React Native</div>
+                    </button>
+                    <button type="button" class="portal-calc-track" data-track="websites" data-base="240000" style="padding:12px;border-radius:12px;border:2px solid var(--border);background:var(--bg);text-align:left;cursor:pointer;color:var(--text)">
+                      <div style="font-size:15px;font-weight:700;margin-bottom:2px">🌐 Modern Websites</div>
+                      <div style="font-size:11px;color:var(--muted)">Next.js, CMS &amp; SEO</div>
+                    </button>
+                    <button type="button" class="portal-calc-track" data-track="cloud" data-base="360000" style="padding:12px;border-radius:12px;border:2px solid var(--border);background:var(--bg);text-align:left;cursor:pointer;color:var(--text)">
+                      <div style="font-size:15px;font-weight:700;margin-bottom:2px">☁️ Cloud &amp; K8s</div>
+                      <div style="font-size:11px;color:var(--muted)">Multi-Cloud AWS/GCP</div>
+                    </button>
+                    <button type="button" class="portal-calc-track" data-track="hosting" data-base="180000" style="padding:12px;border-radius:12px;border:2px solid var(--border);background:var(--bg);text-align:left;cursor:pointer;color:var(--text)">
+                      <div style="font-size:15px;font-weight:700;margin-bottom:2px">🛡️ 24/7 Managed Hosting</div>
+                      <div style="font-size:11px;color:var(--muted)">99.95% SLA &amp; SRE</div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Squad size slider -->
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                    <label style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted)">2. Dedicated Squad Size</label>
+                    <span id="portal-engineers-display" style="font-weight:800;color:var(--cyan);font-size:14px">4 Engineers (Dedicated Squad)</span>
+                  </div>
+                  <input type="range" id="portal-engineers-slider" min="2" max="8" step="1" value="4" style="width:100%;cursor:pointer;accent-color:var(--cyan)">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:monospace;margin-top:4px">
+                    <span>2 (Starter Pod)</span>
+                    <span>4 (Balanced Squad)</span>
+                    <span>8 (Enterprise Scale)</span>
+                  </div>
+                </div>
+
+                <!-- Deployment Cadence -->
+                <div>
+                  <label style="display:block;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">3. Delivery Cadence</label>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="portal-calc-cadence">
+                    <button type="button" class="portal-cadence-btn active" data-cadence="weekly" data-mult="1.1" style="padding:10px 14px;border-radius:10px;border:2px solid var(--cyan);background:rgba(6,182,212,0.08);text-align:left;cursor:pointer;color:var(--text)">
+                      <div style="font-size:13px;font-weight:700">Weekly Production Sprints</div>
+                      <div style="font-size:11px;color:var(--muted)">Rapid continuous PR merges</div>
+                    </button>
+                    <button type="button" class="portal-cadence-btn" data-cadence="biweekly" data-mult="1.0" style="padding:10px 14px;border-radius:10px;border:2px solid var(--border);background:var(--bg);text-align:left;cursor:pointer;color:var(--text)">
+                      <div style="font-size:13px;font-weight:700">Bi-Weekly Sprints</div>
+                      <div style="font-size:11px;color:var(--muted)">Milestone &amp; feature releases</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Pricing Card & Action -->
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column;justify-content:space-between">
+                <div>
+                  <span style="font-size:11px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted)">Monthly Retainer Calculation</span>
+                  <div style="margin-top:8px">
+                    <div style="font-size:32px;font-weight:900;color:var(--text)" id="portal-price-calc">₹3,20,000<span style="font-size:14px;font-weight:500;color:var(--muted)"> / month</span></div>
+                    <div style="font-size:12px;color:var(--muted);margin-top:2px" id="portal-gst-calc">+ 18% GST (₹57,600 Input Tax Credit)</div>
+                  </div>
+
+                  <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)">
+                    <div style="display:flex;justify-content:space-between">
+                      <span>Sprint Velocity:</span>
+                      <strong style="color:var(--text)" id="portal-calc-velocity">~40 Story Points / sprint</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between">
+                      <span>Ramp-up SLA:</span>
+                      <strong style="color:var(--cyan)">5 Business Days</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between">
+                      <span>Intellectual Property:</span>
+                      <strong style="color:var(--text)">100% Client Ownership</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between">
+                      <span>Lead Architect:</span>
+                      <strong style="color:var(--text)">Dedicated / Included</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top:24px">
+                  <button type="button" id="portal-save-scope-btn" class="btn btn-primary" style="width:100%;padding:12px;font-weight:800;display:flex;justify-content:center;align-items:center">
+                    Lock Pod Scope &amp; Request Kickoff →
+                  </button>
+                  <p id="portal-calc-saved-hint" style="display:none;font-size:12px;color:var(--emerald);text-align:center;margin-top:8px;font-weight:600">✓ Scope configuration logged to your workspace!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="grid two" style="margin-top:24px">
             <div class="card">
               <span class="eyebrow">Sprint Milestones</span>
@@ -139,7 +244,89 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadClientDashboardData);
+    function initPortalCalculator() {
+      const trackBtns = document.querySelectorAll('.portal-calc-track');
+      const cadenceBtns = document.querySelectorAll('.portal-cadence-btn');
+      const slider = document.getElementById('portal-engineers-slider');
+      const engDisplay = document.getElementById('portal-engineers-display');
+      const priceDisplay = document.getElementById('portal-price-calc');
+      const gstDisplay = document.getElementById('portal-gst-calc');
+      const velDisplay = document.getElementById('portal-calc-velocity');
+      const saveBtn = document.getElementById('portal-save-scope-btn');
+      const hint = document.getElementById('portal-calc-saved-hint');
+
+      let currentBase = 320000;
+      let currentCadenceMult = 1.1;
+      let engineers = 4;
+
+      function updateCalc() {
+        engineers = parseInt(slider.value, 10);
+        engDisplay.textContent = engineers === 2 ? '2 Engineers (Starter Pod)' :
+                                engineers === 4 ? '4 Engineers (Dedicated Squad)' :
+                                `${engineers} Engineers (${engineers > 5 ? 'Enterprise Scale' : 'Scaled Pod'})`;
+
+        const baseSquadPrice = (currentBase / 4) * engineers * currentCadenceMult;
+        const roundedPrice = Math.round(baseSquadPrice / 1000) * 1000;
+        const gst = Math.round(roundedPrice * 0.18);
+        const storyPoints = Math.round(engineers * 10.5);
+
+        priceDisplay.innerHTML = `₹${roundedPrice.toLocaleString('en-IN')}<span style="font-size:14px;font-weight:500;color:var(--muted)"> / month</span>`;
+        gstDisplay.textContent = `+ 18% GST (₹${gst.toLocaleString('en-IN')} Input Tax Credit)`;
+        velDisplay.textContent = `~${storyPoints} Story Points / sprint`;
+      }
+
+      trackBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          trackBtns.forEach(b => {
+            b.classList.remove('active');
+            b.style.borderColor = 'var(--border)';
+            b.style.background = 'var(--bg)';
+          });
+          btn.classList.add('active');
+          btn.style.borderColor = 'var(--cyan)';
+          btn.style.background = 'rgba(6,182,212,0.08)';
+          currentBase = parseInt(btn.dataset.base, 10);
+          updateCalc();
+        });
+      });
+
+      cadenceBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          cadenceBtns.forEach(b => {
+            b.classList.remove('active');
+            b.style.borderColor = 'var(--border)';
+            b.style.background = 'var(--bg)';
+          });
+          btn.classList.add('active');
+          btn.style.borderColor = 'var(--cyan)';
+          btn.style.background = 'rgba(6,182,212,0.08)';
+          currentCadenceMult = parseFloat(btn.dataset.mult);
+          updateCalc();
+        });
+      });
+
+      slider?.addEventListener('input', updateCalc);
+
+      saveBtn?.addEventListener('click', () => {
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving to Workspace...';
+        setTimeout(() => {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Scope Saved & Sent to Lead Architect ✓';
+          if (hint) hint.style.display = 'block';
+          if (typeof showToast === 'function') {
+            showToast('Engineering Pod configuration logged to your workspace!', 'success');
+          }
+        }, 600);
+      });
+
+      updateCalc();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadClientDashboardData();
+      initPortalCalculator();
+    });
   </script>
 </body>
 </html>

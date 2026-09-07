@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import cors from 'cors';
+import compression from 'compression';
 import fs from 'fs';
 import { initializeApp, getApps, getApp } from 'firebase-admin/app';
 import { getFirestore, Firestore } from 'firebase-admin/firestore';
@@ -263,6 +264,7 @@ async function initDatabase() {
 initDatabase();
 
 // Middleware
+app.use(compression());
 app.use(cors());
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
@@ -1343,25 +1345,48 @@ app.post('/api/v1/ai/video/download', async (req: Request, res: Response) => {
 // Serve static assets from public_html directory
 const publicDir = path.join(process.cwd(), 'public_html');
 
+// Permanent 301 Redirect: Strip /index.html to canonical clean URL (/)
+app.use((req: Request, res: Response, next) => {
+  if (req.method === 'GET' && (req.path === '/index.html' || req.path.endsWith('/index.html'))) {
+    const cleanUrl = req.path.replace(/\/index\.html$/, '') || '/';
+    const query = req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : '';
+    return res.redirect(301, cleanUrl + query);
+  }
+  next();
+});
+
 // Route clean URLs (e.g. /services -> /services.html)
 app.use((req: Request, res: Response, next) => {
   if (req.method === 'GET') {
     const requestedPath = path.join(publicDir, req.path);
     const htmlPath = `${requestedPath}.html`;
     if (!fs.existsSync(requestedPath) && fs.existsSync(htmlPath)) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       return res.sendFile(htmlPath);
     }
   }
   next();
 });
 
-// Serve static files
-app.use(express.static(publicDir));
+// Serve static files with production caching headers
+app.use(express.static(publicDir, {
+  maxAge: '1y',
+  etag: true,
+  lastModified: true,
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else if (filePath.match(/\.(css|js|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$/)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+  }
+}));
 
 // Fallback for HTML navigation
 app.get('*', (req: Request, res: Response) => {
   const indexPath = path.join(publicDir, 'index.html');
   if (fs.existsSync(indexPath)) {
+    res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
     res.sendFile(indexPath);
   } else {
     res.status(404).send('Not Found');

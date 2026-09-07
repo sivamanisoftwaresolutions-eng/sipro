@@ -1,11 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SiPro Technologies | Enterprise Cloud Architecture & Custom Software Engineering</title>
   <meta name="description" content="SiPro Technologies delivers high-concurrency cloud architecture, microservices, Kubernetes orchestration, DPDP-compliant web systems, and dedicated engineering pods.">
+
+  <!-- Google Fonts: Plus Jakarta Sans for clean geometric typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Precompiled & Minified Production Stylesheet (Eliminates Render-Blocking CDN & CLS) -->
+  <link rel="preload" href="/css/tailwind.min.css" as="style">
+  <link rel="stylesheet" href="/css/tailwind.min.css">
   <link rel="stylesheet" href="sipro.css">
+
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light');
+    }
+  </script>
+
+  <!-- Structured Schema Data (Enhanced for Google Sitelinks & Brand Authority) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -15,8 +32,9 @@
         "@id": "https://sipro.tech/#organization",
         "name": "SiPro Technologies",
         "url": "https://sipro.tech",
-        "logo": "https://sipro.tech/logo.svg",
-        "description": "Enterprise cloud architecture, custom software development, microservices, and DPDP-compliant engineering pods.",
+        "logo": "https://sipro.tech/favicon.svg",
+        "description": "Enterprise cloud architecture, custom software development, mobile apps, websites, 24/7 cloud hosting, and DPDP-compliant engineering pods.",
+        "email": "contact@sipro.tech",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Subedari",
@@ -25,14 +43,79 @@
           "postalCode": "506001",
           "addressCountry": "IN"
         },
-        "taxID": "36AAACS1234A1Z5"
+        "taxID": "36AAACS1234A1Z5",
+        "sameAs": [
+          "https://www.linkedin.com/company/siprotechnologies",
+          "https://github.com/siprotechnologies"
+        ]
       },
       {
         "@type": "WebSite",
         "@id": "https://sipro.tech/#website",
         "url": "https://sipro.tech",
         "name": "SiPro Technologies",
-        "publisher": { "@id": "https://sipro.tech/#organization" }
+        "publisher": { "@id": "https://sipro.tech/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://sipro.tech/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://sipro.tech/#sitelinks-list",
+        "name": "SiPro Technologies Primary Navigation",
+        "itemListElement": [
+          {
+            "@type": "SiteNavigationElement",
+            "position": 1,
+            "name": "Home",
+            "description": "Enterprise software engineering, cloud pods & modern websites",
+            "url": "https://sipro.tech/"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 2,
+            "name": "Services",
+            "description": "Cloud architecture, custom web & mobile software, microservices",
+            "url": "https://sipro.tech/services.html"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 3,
+            "name": "Careers",
+            "description": "Software internships, engineering roles & talent acceleration",
+            "url": "https://sipro.tech/careers.html"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 4,
+            "name": "Contact",
+            "description": "Architecture consultation, pod sizing & client inquiries",
+            "url": "https://sipro.tech/contact.html"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 5,
+            "name": "Pricing & Retainers",
+            "description": "Transparent engineering sprint velocity & retainer models",
+            "url": "https://sipro.tech/pricing.html"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 6,
+            "name": "About Us",
+            "description": "Company foundation, leadership & engineering standards",
+            "url": "https://sipro.tech/about.html"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 7,
+            "name": "Client Delivery Portal",
+            "description": "Secure portal for client sprint velocity, deliverables & billing",
+            "url": "https://sipro.tech/login-client.html"
+          }
+        ]
       },
       {
         "@type": "FAQPage",
@@ -66,392 +149,1227 @@
     ]
   }
   </script>
+
 </head>
-<body data-page="index.html">
+
+<body data-page="home" class="theme-canvas font-sans antialiased selection:bg-brand-accent selection:text-ink-900 min-h-screen flex flex-col">
+
+  <!-- ========================================================================= -->
+  <!-- DYNAMIC HEADER ([SP] SiProTech, Original Menus, ⌘K, Acc, Theme & Auth) -->
+  <!-- ========================================================================= -->
   <div data-header></div>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="hero-eyebrow-gold">
-            ENTERPRISE DIGITAL SOLUTIONS
-          </div>
-          <h1 class="hero-headline">
-            <span class="hero-text-white italic">Empower Your</span><br>
-            <span class="hero-text-white">Business</span> <span class="hero-text-violet italic">Digitally</span> <span class="hero-text-white">&amp;</span><br>
-            <span class="hero-text-white">Cultivate</span> <span class="hero-text-gold italic">Next-Gen</span><br>
-            <span class="hero-text-gold italic">Talent</span>
-          </h1>
-          <p class="hero-lead">SiPro Technologies delivers enterprise-grade SaaS platforms, digital transformation services, and world-class internship programs from Hanamkonda, Telangana.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" href="#services">🚀 Explore Capabilities</a>
-            <a class="btn btn-secondary btn-lg" href="contact.html">💬 Schedule Consultation</a>
-            <button type="button" class="btn btn-ghost btn-lg" data-auth-trigger="signup">✨ Get Started</button>
-          </div>
+  <!-- ========================================================================= -->
+  <!-- HERO SECTION (Mentimeter Aesthetic: Generous Spacing, Clean Typography, Live Interactive Mockup) -->
+  <!-- ========================================================================= -->
+  <section id="home" class="relative pt-16 pb-24 md:pt-24 md:pb-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      
+      <!-- Top Eyebrow Chip -->
+      <div class="flex justify-center mb-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full theme-surface border theme-border shadow-menti-sm text-xs font-semibold theme-heading">
+          <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+          <span>Apps, Modern Websites &amp; 24/7 Cloud Hosting</span>
+          <span class="opacity-40">•</span>
+          <span class="text-brand-accent font-bold">Hanamkonda &amp; Global</span>
+        </div>
+      </div>
+
+      <!-- Main Display Headline (Clean, Fluid Responsive, Never Clips) -->
+      <div class="text-center max-w-4xl mx-auto px-2">
+        <h1 class="text-[clamp(1.85rem,5.2vw,4.25rem)] font-extrabold theme-heading tracking-tight leading-[1.12] break-words hyphens-none">
+          Build enterprise software with
+          <span class="relative inline-block">
+            <span class="relative z-10 theme-heading">unmatched velocity.</span>
+            <span class="absolute bottom-1.5 left-0 right-0 h-4 bg-brand-accent/35 -z-0 rounded-sm"></span>
+          </span>
+        </h1>
+
+        <!-- Subheadline (Fluid Responsive Scale, Business Offerings Included) -->
+        <p class="mt-6 text-[clamp(1rem,2vw,1.25rem)] theme-muted font-normal max-w-2xl mx-auto leading-relaxed break-words">
+          SiPro Technologies engineers custom iOS/Android mobile apps, modern enterprise websites, managed 24/7 cloud hosting, and dedicated 5-day delivery pods.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#core-business-offerings" class="w-full sm:w-auto px-8 py-4 rounded-full text-base font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all shadow-menti hover:shadow-menti-lg text-center flex items-center justify-center gap-2">
+            <span>🚀 Explore Solutions</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="login-client.html" class="w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold theme-surface theme-heading border theme-border hover:border-brand-accent transition-all shadow-menti-sm text-center flex items-center justify-center gap-2">
+            <span>🔐 Client Portal Sign In</span>
+          </a>
         </div>
 
-        <div class="hero-panel">
-          <span class="eyebrow">Enterprise Delivery Model</span>
-          <div class="signal-list">
-            <div class="signal">
-              <span>Engineering Pods</span>
-              <strong>Dedicated Sprints</strong>
+        <!-- Micro-Trust Signals -->
+        <div class="mt-8 flex items-center justify-center gap-6 text-xs theme-muted font-medium flex-wrap">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-brand-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            100% Client IP Ownership
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-brand-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            99.9% Production SLA
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-brand-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            DPDP Act 2023 &amp; GSTIN Verified
+          </span>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- MENTIMETER SIGNATURE ELEMENT: INTERACTIVE LIVE PRESENTATION BOARD -->
+      <!-- ========================================================================= -->
+      <div id="interactive-challenge" class="mt-16 md:mt-20 max-w-5xl mx-auto">
+        <div class="relative theme-surface rounded-3xl p-6 sm:p-10 shadow-menti-lg border theme-border overflow-hidden">
+          
+          <!-- Mock Header Bar / Presenter status -->
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b theme-divider">
+            <div class="flex items-center gap-3">
+              <span class="flex h-3 w-3 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
+              </span>
+              <span class="text-xs font-bold uppercase tracking-wider theme-muted">
+                Live Interactive Diagnostic • Join Session #SIPRO-2026
+              </span>
             </div>
-            <div class="signal">
-              <span>Production SLA</span>
-              <strong style="color:var(--emerald)">99.9% Availability</strong>
-            </div>
-            <div class="signal">
-              <span>Code Ownership</span>
-              <strong style="color:var(--cyan)">100% Client IP</strong>
-            </div>
-            <div class="signal">
-              <span>Statutory Compliance</span>
-              <strong>DPDP &amp; GSTIN Verified</strong>
+            <div class="flex items-center gap-2 text-xs font-semibold theme-muted theme-surface px-3 py-1.5 rounded-full border theme-border">
+              <span>👥</span>
+              <span id="live-voter-count" class="theme-heading font-bold">1,482</span> engineering leaders participating
             </div>
           </div>
-          <p style="color:var(--muted);font-size:13px;margin-top:14px">Modern cloud architecture across AWS, GCP, Docker/Kubernetes, and relational data pipelines.</p>
-        </div>
-      </div>
-    </section>
 
-    <!-- Trust Badges Strip -->
-    <section style="background:var(--navy-surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0">
-      <div class="container" style="display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--text-dim)">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:18px">🛡️</span>
-          <span><strong>DPDP Act 2023</strong> Verified Data Fiduciary</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:18px">📜</span>
-          <span><strong>100% Client IP</strong> Ownership Guarantee</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:18px">🏛️</span>
-          <span><strong>GSTIN Verified:</strong> 36AAACS1234A1Z5</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="font-size:18px">⚡</span>
-          <span><strong>99.9% Uptime</strong> Production SLA</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interactive Live Architecture Explorer Section -->
-    <section class="section" style="padding-top:40px">
-      <div class="container">
-        <div id="interactive-arch-visualizer"></div>
-      </div>
-    </section>
-
-    <!-- Core Capabilities Grid -->
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Core Pillars</span>
-            <h2>Technology that compounds velocity.</h2>
+          <!-- Interactive Question Header -->
+          <div class="pt-8 pb-4 text-center">
+            <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+              Interactive Poll
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading mt-3">
+              What is your primary engineering priority this quarter?
+            </h3>
+            <p class="text-xs sm:text-sm theme-muted mt-1">
+              Click any architecture track to simulate real-time stakeholder feedback and benchmark your roadmap.
+            </p>
           </div>
-          <p>Every engagement is engineered for verifiable speed, security-first posture, and clean separation of concerns.</p>
-        </div>
 
-        <div class="grid three">
-          <article class="card">
-            <div style="font-size:28px;margin-bottom:12px">☁️</div>
-            <h3>Cloud Architecture & Kubernetes</h3>
-            <p>Multi-region GKE/EKS clusters, Istio service mesh, Terraform automation, and 99.99% high availability.</p>
-            <a class="btn btn-ghost btn-sm" href="services-cloud-architecture.html" style="margin-top:12px">Cloud Deep-Dive →</a>
-          </article>
-
-          <article class="card">
-            <div style="font-size:28px;margin-bottom:12px">💻</div>
-            <h3>Custom Enterprise Web Systems</h3>
-            <p>Type-safe full-stack React, Next.js, and Node.js architectures tailored for high transaction volume.</p>
-            <a class="btn btn-ghost btn-sm" href="services-custom-software.html" style="margin-top:12px">Custom Software →</a>
-          </article>
-
-          <article class="card">
-            <div style="font-size:28px;margin-bottom:12px">🤖</div>
-            <h3>Intelligent APIs & Automation</h3>
-            <p>High-speed REST/gRPC gateways, Kafka event streaming meshes, and secure enterprise LLM RAG pipelines.</p>
-            <a class="btn btn-ghost btn-sm" href="services-api-automation.html" style="margin-top:12px">API Automation →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interactive Scope & Retainer Calculator -->
-    <section class="section alt">
-      <div class="container">
-        <div id="interactive-scope-calculator"></div>
-      </div>
-    </section>
-
-    <!-- Global Edge Telemetry & Developer Terminal Section -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Production Telemetry</span>
-            <h2>Live Observability & Control</h2>
-          </div>
-          <p>Inspect real-time edge response times and run simulated infrastructure diagnostics via our interactive console.</p>
-        </div>
-
-        <div class="grid two" style="align-items:start">
-          <div id="interactive-edge-radar"></div>
-          <div id="interactive-terminal-simulator"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Client Testimonials & Social Proof & Interactive Review System -->
-    <section class="section alt" id="reviews-section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Enterprise Validation</span>
-            <h2>Client Feedback & Verified Reviews</h2>
-          </div>
-          <p>Read authenticated experiences from engineering leaders and submit your feedback on SiPro deliverables.</p>
-        </div>
-
-        <!-- Dynamic Reviews Grid -->
-        <div class="grid three" id="client-reviews-list">
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-quote">"SiPro architected our entire Kubernetes cluster and reduced our database query latency by 64%. The pod integrated seamlessly with our internal sprint cadence."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">VS</div>
-              <div>
-                <div class="testimonial-name">Vikram Sethi</div>
-                <div class="testimonial-role">CTO, NorthStar FinTech · Mumbai</div>
+          <!-- Interactive Voting Options List (Mentimeter Signature Bar Results) -->
+          <div class="mt-6 space-y-3.5 max-w-2xl mx-auto" id="poll-container">
+            
+            <!-- Option 1 -->
+            <button type="button" class="poll-option group w-full text-left p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 theme-border hover:border-brand-accent theme-surface transition-all duration-200 relative overflow-hidden" data-id="1" data-votes="642">
+              <div class="poll-bar absolute inset-0 bg-brand-accent/20 transition-all duration-700 pointer-events-none" style="width: 43%;"></div>
+              <div class="relative z-10 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                  <span class="w-7 h-7 rounded-lg theme-num-badge border theme-border flex items-center justify-center font-bold text-xs shadow-sm shrink-0">A</span>
+                  <span class="font-bold text-xs sm:text-base theme-heading break-words">Kubernetes Orchestration &amp; Cloud Migration</span>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <span class="poll-pct text-xs sm:text-sm font-extrabold theme-heading">43%</span>
+                  <span class="poll-check hidden text-brand-accent font-bold text-xs sm:text-sm">✓</span>
+                </div>
               </div>
-            </div>
-          </div>
+            </button>
 
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-quote">"Their DPDP compliance safeguards and automated CI/CD pipeline saved us months of regulatory audit cycles. Exceptional engineering discipline."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">AK</div>
-              <div>
-                <div class="testimonial-name">Ananya Krishnan</div>
-                <div class="testimonial-role">VP Engineering, HealthGrid · Bengaluru</div>
+            <!-- Option 2 -->
+            <button type="button" class="poll-option group w-full text-left p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 theme-border hover:border-brand-accent theme-surface transition-all duration-200 relative overflow-hidden" data-id="2" data-votes="418">
+              <div class="poll-bar absolute inset-0 bg-brand-accent/20 transition-all duration-700 pointer-events-none" style="width: 28%;"></div>
+              <div class="relative z-10 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                  <span class="w-7 h-7 rounded-lg theme-num-badge border theme-border flex items-center justify-center font-bold text-xs shadow-sm shrink-0">B</span>
+                  <span class="font-bold text-xs sm:text-base theme-heading break-words">Custom High-Throughput Web Microservices</span>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <span class="poll-pct text-xs sm:text-sm font-extrabold theme-heading">28%</span>
+                  <span class="poll-check hidden text-brand-accent font-bold text-xs sm:text-sm">✓</span>
+                </div>
               </div>
-            </div>
-          </div>
+            </button>
 
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-quote">"From initial scope calculator to production rollout, SiPro provided total transparency on GST invoicing, sprint milestones, and code ownership."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">RM</div>
-              <div>
-                <div class="testimonial-name">Rohan Mukherjee</div>
-                <div class="testimonial-role">Founder & CEO, ScaleLogix · Hyderabad</div>
+            <!-- Option 3 -->
+            <button type="button" class="poll-option group w-full text-left p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 theme-border hover:border-brand-accent theme-surface transition-all duration-200 relative overflow-hidden" data-id="3" data-votes="298">
+              <div class="poll-bar absolute inset-0 bg-brand-accent/20 transition-all duration-700 pointer-events-none" style="width: 20%;"></div>
+              <div class="relative z-10 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                  <span class="w-7 h-7 rounded-lg theme-num-badge border theme-border flex items-center justify-center font-bold text-xs shadow-sm shrink-0">C</span>
+                  <span class="font-bold text-xs sm:text-base theme-heading break-words">Dedicated 5-Day Senior Engineering Pods</span>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <span class="poll-pct text-xs sm:text-sm font-extrabold theme-heading">20%</span>
+                  <span class="poll-check hidden text-brand-accent font-bold text-xs sm:text-sm">✓</span>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </button>
 
-        <!-- Interactive Review Submission Box -->
-        <div class="interactive-panel" style="margin-top:36px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:28px 24px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
-            <div>
-              <span class="eyebrow" style="margin-bottom:4px">Client Engagement</span>
-              <h3 style="font-size:20px;margin-top:2px;">Submit Client Review or Engagement Rating</h3>
-              <p style="font-size:13px;color:var(--muted);margin-top:4px;">Have you partnered with SiPro Technologies? Share your experience with our engineering leadership.</p>
-            </div>
-            <span class="tag emerald" style="margin:0;">Verified Enterprise Feedback</span>
-          </div>
-
-          <form id="client-review-form" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;">
-            <div class="form-group" style="margin:0;">
-              <label for="review-author-name" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Your Full Name</label>
-              <input id="review-author-name" type="text" required placeholder="e.g. Sravan Varma" class="auth-input" style="width:100%;">
-            </div>
-
-            <div class="form-group" style="margin:0;">
-              <label for="review-company-role" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Company & Role</label>
-              <input id="review-company-role" type="text" required placeholder="e.g. Head of Product, CloudScale" class="auth-input" style="width:100%;">
-            </div>
-
-            <div class="form-group" style="margin:0;">
-              <label for="review-service-category" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Service Engagement</label>
-              <select id="review-service-category" class="auth-input" style="width:100%;background:var(--card-bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 14px;">
-                <option value="Custom Web & Software Engineering">Custom Web & Software Engineering</option>
-                <option value="Cloud Infrastructure & DevOps">Cloud Infrastructure & DevOps</option>
-                <option value="API & Automation Architecture">API & Automation Architecture</option>
-                <option value="Full Retainer Dedicated Pod">Full Retainer Dedicated Pod</option>
-              </select>
-            </div>
-
-            <div class="form-group" style="margin:0;">
-              <label style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Rating (1 to 5 Stars)</label>
-              <div id="star-rating-selector" style="display:flex;align-items:center;gap:6px;padding:8px 0;">
-                <button type="button" class="star-rating-btn" data-star="1" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
-                <button type="button" class="star-rating-btn" data-star="2" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
-                <button type="button" class="star-rating-btn" data-star="3" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
-                <button type="button" class="star-rating-btn" data-star="4" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
-                <button type="button" class="star-rating-btn" data-star="5" style="background:none;border:none;font-size:22px;color:#f59e0b;cursor:pointer;padding:0;">★</button>
-                <span id="star-rating-label" style="font-size:13px;color:var(--muted);margin-left:8px;">5 Stars (Outstanding)</span>
+            <!-- Option 4 -->
+            <button type="button" class="poll-option group w-full text-left p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 theme-border hover:border-brand-accent theme-surface transition-all duration-200 relative overflow-hidden" data-id="4" data-votes="124">
+              <div class="poll-bar absolute inset-0 bg-brand-accent/20 transition-all duration-700 pointer-events-none" style="width: 9%;"></div>
+              <div class="relative z-10 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                  <span class="w-7 h-7 rounded-lg theme-num-badge border theme-border flex items-center justify-center font-bold text-xs shadow-sm shrink-0">D</span>
+                  <span class="font-bold text-xs sm:text-base theme-heading break-words">DPDP Act 2023 &amp; Security Architecture Audit</span>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <span class="poll-pct text-xs sm:text-sm font-extrabold theme-heading">9%</span>
+                  <span class="poll-check hidden text-brand-accent font-bold text-xs sm:text-sm">✓</span>
+                </div>
               </div>
-            </div>
+            </button>
 
-            <div class="form-group" style="margin:0;grid-column:1 / -1;">
-              <label for="review-feedback-msg" style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;">Feedback & Engagement Review</label>
-              <textarea id="review-feedback-msg" rows="3" required placeholder="Describe project delivery, architectural quality, communication, and overall ROI..." class="auth-input" style="width:100%;resize:vertical;"></textarea>
-            </div>
+          </div>
 
-            <div style="grid-column:1 / -1;display:flex;justify-content:flex-end;gap:12px;align-items:center;margin-top:8px;">
-              <span id="review-form-status" style="font-size:13px;color:var(--muted);"></span>
-              <button type="submit" class="btn btn-primary" id="btn-submit-review">
-                <span>Publish Verified Review</span>
+          <!-- Floating Interactive Reactions (Mentimeter signature emoji reactions) -->
+          <div class="mt-8 pt-6 border-t theme-divider flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold theme-muted">Instant reactions:</span>
+              <button type="button" class="reaction-btn px-3 py-1.5 rounded-full theme-surface border theme-border text-xs font-bold theme-heading hover:scale-110 active:scale-95 transition-transform" data-count="84">
+                🚀 <span class="reaction-count">84</span>
+              </button>
+              <button type="button" class="reaction-btn px-3 py-1.5 rounded-full theme-surface border theme-border text-xs font-bold theme-heading hover:scale-110 active:scale-95 transition-transform" data-count="128">
+                ⚡ <span class="reaction-count">128</span>
+              </button>
+              <button type="button" class="reaction-btn px-3 py-1.5 rounded-full theme-surface border theme-border text-xs font-bold theme-heading hover:scale-110 active:scale-95 transition-transform" data-count="62">
+                🛡️ <span class="reaction-count">62</span>
+              </button>
+              <button type="button" class="reaction-btn px-3 py-1.5 rounded-full theme-surface border theme-border text-xs font-bold theme-heading hover:scale-110 active:scale-95 transition-transform" data-count="95">
+                💡 <span class="reaction-count">95</span>
               </button>
             </div>
-          </form>
+
+            <!-- Polling Toast / Feedback -->
+            <div id="poll-toast" class="text-xs font-semibold theme-chip px-3 py-1.5 rounded-full border theme-border transition-opacity">
+              Tap any option to cast your live vote
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
 
-    <!-- FAQ Accordion -->
-    <section class="section">
-      <div class="container" style="max-width:860px">
-        <div class="section-head" style="text-align:center">
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SOCIAL PROOF / STATS STRIP (Mentimeter Clean Logos & Real Metrics) -->
+  <!-- ========================================================================= -->
+  <section class="py-16 theme-strip border-y theme-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <p class="text-center text-xs font-bold uppercase tracking-widest theme-subtle mb-10">
+        Engineered for leaders across fintech, healthcare, logistics, and SaaS
+      </p>
+
+      <!-- 4 High Impact Metric Columns -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x theme-divider">
+        <div class="pt-4 md:pt-0">
+          <p class="text-4xl md:text-5xl font-extrabold theme-heading tracking-tight">99.99%</p>
+          <p class="text-sm font-semibold theme-muted mt-1">Production Uptime SLA</p>
+          <p class="text-xs theme-subtle mt-0.5">Multi-cloud AWS &amp; GCP</p>
+        </div>
+        <div class="pt-4 md:pt-0">
+          <p class="text-4xl md:text-5xl font-extrabold theme-heading tracking-tight">5 Days</p>
+          <p class="text-sm font-semibold theme-muted mt-1">Pod Ramp-Up Speed</p>
+          <p class="text-xs theme-subtle mt-0.5">Direct into client repos</p>
+        </div>
+        <div class="pt-4 md:pt-0">
+          <p class="text-4xl md:text-5xl font-extrabold theme-heading tracking-tight">&lt; 4.2ms</p>
+          <p class="text-sm font-semibold theme-muted mt-1">P99 Edge Latency</p>
+          <p class="text-xs theme-subtle mt-0.5">High-speed gRPC &amp; APIs</p>
+        </div>
+        <div class="pt-4 md:pt-0">
+          <p class="text-4xl md:text-5xl font-extrabold theme-heading tracking-tight">100%</p>
+          <p class="text-sm font-semibold theme-muted mt-1">Intellectual Property</p>
+          <p class="text-xs theme-subtle mt-0.5">Full copyright assignment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- CORE BUSINESS SOLUTIONS: APPS, WEBSITES & MANAGED HOSTING -->
+  <!-- ========================================================================= -->
+  <section id="services" class="py-20 md:py-28 theme-strip border-t theme-border">
+    <a id="core-business-offerings" class="sr-only">Core Business Offerings</a>
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+          Full-Cycle Digital Engineering
+        </span>
+        <h2 class="text-[clamp(1.5rem,3.8vw,2.75rem)] font-extrabold theme-heading mt-4 tracking-tight break-words">
+          Building high-impact apps, websites &amp; 24/7 cloud hosting.
+        </h2>
+        <p class="text-[clamp(0.95rem,1.5vw,1.15rem)] theme-muted mt-3 max-w-2xl mx-auto leading-relaxed break-words">
+          From concept and iOS/Android store launch to multi-region cloud infrastructure and automated 24/7 monitoring, we manage your entire digital surface.
+        </p>
+      </div>
+
+      <!-- 3 Core Business Pillar Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Pillar 1: Mobile & Web App Development -->
+        <div class="theme-surface rounded-3xl p-8 border theme-border hover:shadow-menti transition-all flex flex-col justify-between">
           <div>
-            <span class="eyebrow">Frequently Answered</span>
-            <h2>Everything you need to know.</h2>
+            <div class="w-12 h-12 rounded-2xl bg-brand-accent/15 text-brand-accent flex items-center justify-center text-2xl mb-6">
+              📱
+            </div>
+            <span class="text-xs font-extrabold uppercase tracking-wider theme-chip px-2.5 py-0.5 rounded-md border theme-border">
+              App Development
+            </span>
+            <h3 class="text-xl sm:text-2xl font-extrabold theme-heading mt-3">
+              Custom Mobile &amp; Web Apps
+            </h3>
+            <p class="text-sm theme-muted mt-3 leading-relaxed">
+              We design and ship fluid native &amp; cross-platform applications (iOS, Android, React Native, Flutter, and Progressive Web Apps) with offline-first syncing, real-time WebSockets, and enterprise security.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-xs sm:text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Native iOS (Swift) &amp; Android (Kotlin)
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Cross-platform React Native &amp; Flutter
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Biometric login, push notifications &amp; offline DB
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Complete App Store &amp; Play Store deployment
+              </li>
+            </ul>
+          </div>
+          <div class="pt-8 mt-6 border-t theme-divider">
+            <a href="login-client.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+              Scope App Development →
+            </a>
           </div>
         </div>
 
-        <div class="faq-accordion">
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              <span>How quickly can a SiPro dedicated pod begin sprint execution?</span>
-              <span class="faq-toggle-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              Our engineering pods are staffed with pre-vetted senior architects and engineers, typically initiating kickoff and repository setup within 5 business days of scope approval.
+        <!-- Pillar 2: Modern Websites & Enterprise Portals -->
+        <div class="theme-surface rounded-3xl p-8 border theme-border hover:shadow-menti transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center text-2xl mb-6">
+              🌐
+            </div>
+            <span class="text-xs font-extrabold uppercase tracking-wider theme-chip px-2.5 py-0.5 rounded-md border theme-border">
+              Web &amp; Portals
+            </span>
+            <h3 class="text-xl sm:text-2xl font-extrabold theme-heading mt-3">
+              Modern Websites &amp; CMS
+            </h3>
+            <p class="text-sm theme-muted mt-3 leading-relaxed">
+              High-converting, lightning-fast digital storefronts and enterprise web portals powered by Next.js, Tailwind CSS, headless CMS (Sanity/Strapi), and dynamic internationalization.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-xs sm:text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> 100/100 Core Web Vitals &amp; sub-second loads
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Headless CMS integration with marketing autonomy
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Full technical SEO &amp; OpenGraph optimization
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> WCAG AA accessible &amp; fluid responsive design
+              </li>
+            </ul>
+          </div>
+          <div class="pt-8 mt-6 border-t theme-divider">
+            <a href="login-client.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+              Scope Website Project →
+            </a>
+          </div>
+        </div>
+
+        <!-- Pillar 3: 24/7 Managed Cloud Hosting & DevOps -->
+        <div class="theme-surface rounded-3xl p-8 border theme-border hover:shadow-menti transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center text-2xl mb-6">
+              🛡️
+            </div>
+            <span class="text-xs font-extrabold uppercase tracking-wider theme-chip px-2.5 py-0.5 rounded-md border theme-border">
+              Managed Infrastructure
+            </span>
+            <h3 class="text-xl sm:text-2xl font-extrabold theme-heading mt-3">
+              24/7 Managed Cloud Hosting
+            </h3>
+            <p class="text-sm theme-muted mt-3 leading-relaxed">
+              Never worry about downtime, server updates, or security patches. Our Site Reliability Engineers manage your AWS, GCP, or containerized clouds with guaranteed 99.95% uptime and instant incident response.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-xs sm:text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> 99.95% Production SLA &amp; 15-min incident response
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Daily automated encrypted backups &amp; 1-click restore
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Automatic SSL/TLS renewals &amp; DDoS shielding
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-brand-accent font-bold">✓</span> Continuous Prometheus &amp; Grafana health monitoring
+              </li>
+            </ul>
+          </div>
+          <div class="pt-8 mt-6 border-t theme-divider">
+            <a href="login-client.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+              Explore Managed Hosting →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- INTERACTIVE CAPABILITY NAVIGATOR (Mentimeter-style Pill Switcher) -->
+  <!-- ========================================================================= -->
+  <section class="py-24 md:py-32 theme-band-canvas">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+          Core Capabilities
+        </span>
+        <h2 class="text-[clamp(1.5rem,3.8vw,2.75rem)] font-extrabold theme-heading mt-4 tracking-tight break-words">
+          Everything required for production scale.
+        </h2>
+        <p class="text-[clamp(0.95rem,1.5vw,1.15rem)] theme-muted mt-3 break-words">
+          Explore how our specialized engineering pods solve high-concurrency demands with clean, observable code.
+        </p>
+      </div>
+
+      <!-- Pill Tab Switcher -->
+      <div class="flex items-center justify-center gap-2 flex-wrap mb-12">
+        <button type="button" class="cap-tab active px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200" data-target="apps">
+          📱 Mobile &amp; Web Apps
+        </button>
+        <button type="button" class="cap-tab px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200" data-target="websites">
+          🌐 Modern Websites &amp; CMS
+        </button>
+        <button type="button" class="cap-tab px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200" data-target="hosting">
+          🛡️ 24/7 Managed Cloud Hosting
+        </button>
+        <button type="button" class="cap-tab px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200" data-target="cloud">
+          ☁️ Cloud Architecture &amp; K8s
+        </button>
+        <button type="button" class="cap-tab px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200" data-target="software">
+          💻 Custom Software
+        </button>
+        <button type="button" class="cap-tab px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200" data-target="pods">
+          👥 5-Day Pods
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="theme-surface rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-menti-lg border theme-border">
+        
+        <!-- Pane: Apps (Default Active) -->
+        <div id="pane-apps" class="cap-pane grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              Native &amp; Cross-Platform
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              iOS, Android &amp; React Native Mobile Apps
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              We engineer beautiful, fluid mobile applications that perform under heavy consumer and enterprise workloads. Featuring offline SQLite sync, biometric security, real-time chat, and automated Google Play and Apple App Store CI/CD pipelines.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Swift, Kotlin, React Native, and Flutter codebases
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Offline data caching with background background reconciliation
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                End-to-end publishing, testflight builds &amp; release governance
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="login-client.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                Plan Your Mobile App in Client Portal →
+              </a>
             </div>
           </div>
 
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              <span>Who retains ownership of the source code and patents?</span>
-              <span class="faq-toggle-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              100% of all authored code, Docker manifests, architecture blueprints, and documentation belong exclusively to your enterprise upon settlement of associated sprint invoices.
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>AppContainer.tsx</span>
+              <span class="text-brand-accent font-bold">● 60 FPS Fluid</span>
+            </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code><span class="text-brand-accent">import</span> { useOfflineSync } <span class="text-brand-accent">from</span> '@sipro/mobile-core';
+
+<span class="text-brand-accent">export function</span> MobileClientWorkspace() {
+  <span class="text-brand-accent">const</span> { isSynced, pendingQueue } = useOfflineSync({
+    storage: 'sqlite-encrypted',
+    biometricAuth: true,
+    autoRetry: true
+  });
+
+  <span class="opacity-50">// Ready for iOS App Store &amp; Google Play Store</span>
+  return &lt;SyncState status={isSynced ? 'LIVE' : 'BUFFERED'} /&gt;;
+}</code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Platforms: iOS 17+, Android 14+</span>
+              <span class="theme-heading font-bold">Render: 120Hz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane: Websites (Hidden by default) -->
+        <div id="pane-websites" class="cap-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              Performance Web
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              Next.js, Headless CMS &amp; High-Conversion Websites
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              Fast web pages turn visitors into paying customers. We architect websites that score 100/100 on Google PageSpeed, integrate seamlessly with marketing tools, and give your editors a structured headless CMS without breaking design systems.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Next.js App Router, SSR, and dynamic edge caching
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Headless CMS (Sanity / Strapi) with live preview
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Complete semantic markup &amp; DPDP compliance
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="login-client.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                Request Website Build in Client Portal →
+              </a>
             </div>
           </div>
 
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              <span>Are payments fully GST compliant for B2B input tax credits?</span>
-              <span class="faq-toggle-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              Yes, SiPro Technologies provides official Tax Invoices featuring our registered GSTIN (36AAACS1234A1Z5) and integrated 18% GST breakdowns for seamless corporate reconciliation.
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>lighthouse-audit.json</span>
+              <span class="text-brand-accent font-bold">● 100/100 Score</span>
+            </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code>{
+  "performance": 100,
+  "accessibility": 100,
+  "bestPractices": 100,
+  "seo": 100,
+  "firstContentfulPaint": "0.4s",
+  "largestContentfulPaint": "0.7s",
+  "cumulativeLayoutShift": 0
+}</code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Core Web Vitals: All Green</span>
+              <span class="theme-heading font-bold">LCP: 0.7s</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane: Hosting (Hidden by default) -->
+        <div id="pane-hosting" class="cap-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              Managed DevOps &amp; SRE
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              24/7 Managed Cloud Hosting &amp; Continuous Maintenance
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              Rest easy knowing certified Cloud Architects and SREs are monitoring your infrastructure around the clock. Automated vulnerability scans, daily encrypted backups, zero-downtime rolling upgrades, and guaranteed 99.95% uptime SLA.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                AWS &amp; GCP multi-region managed clusters
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Continuous 24/7 uptime monitoring &amp; automated failover
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Daily encrypted off-site backups &amp; disaster recovery drills
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="login-client.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                Review Managed Hosting Retainers →
+              </a>
             </div>
           </div>
 
-          <div class="faq-item">
-            <button class="faq-question" type="button">
-              <span>How does SiPro handle data privacy under the DPDP Act 2023?</span>
-              <span class="faq-toggle-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              We provide granular consent management, instant JSON data export portability, and verified right-to-erasure requests through our dedicated <a href="privacy-portal.html" style="color:var(--cyan);text-decoration:underline">Privacy Rights Portal</a>.
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>uptime-sla-monitor.yaml</span>
+              <span class="text-brand-accent font-bold">● 99.99% Live</span>
             </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code>apiVersion: sipro.tech/v1
+kind: ManagedHostingContract
+metadata:
+  name: enterprise-cloud-sla
+spec:
+  guaranteedUptime: "99.95%"
+  incidentResponseSLA: "15m"
+  automatedBackups: "Every 6 Hours"
+  encryptionAtRest: "AES-256-GCM"
+  ddosShield: "Cloudflare Enterprise Active"</code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Incident Response: 15 min max</span>
+              <span class="theme-heading font-bold">Uptime: 99.99%</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Pane 1: Cloud Architecture (Hidden by default since Apps is first) -->
+        <div id="pane-cloud" class="cap-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              Infrastructure &amp; SRE
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              Multi-Cloud Kubernetes &amp; Automated Zero-Downtime Pipelines
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              We design and operate fault-tolerant multi-region Google Cloud (GKE) and AWS (EKS) infrastructure. Using declarative Terraform IaC and Istio service mesh, your services achieve continuous canary deployments and automated self-healing.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Multi-region GKE &amp; EKS with Istio mTLS encryption
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Infrastructure as Code via modular Terraform &amp; Helm charts
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Prometheus, Grafana, and OpenTelemetry observability
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="services-cloud-architecture.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                Explore Cloud Architecture Solutions →
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>terraform-main.tf</span>
+              <span class="text-brand-accent font-bold">● Production Active</span>
+            </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code><span class="text-brand-accent">module</span> "sipro_k8s_cluster" {
+  source       = "./modules/gke-enterprise"
+  cluster_name = "sipro-prod-asia-south1"
+  region       = "asia-south1-a"
+  nodes_min    = 3
+  nodes_max    = 24
+  mtls_mesh    = true
+  dpdp_crypto  = "AES-256-GCM"
+  sla_target   = "99.99%"
+}
+
+<span class="opacity-50">// Status: 0 downtime recorded in 180 days</span></code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Cluster nodes: 12 active</span>
+              <span class="theme-heading font-bold">P99: 3.8ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 2: Custom Software (Hidden by default) -->
+        <div id="pane-software" class="cap-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              High-Concurrency Full-Stack
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              Type-Safe Modern Web Platforms Built for Scale
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              We engineer enterprise web applications that never freeze under load. From custom customer portals and billing workflows to complex data visualizations, every layer is written with strict TypeScript, React, and modular Go/Node microservices.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Next.js, React, and modern microfrontend architectures
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                100% Client Intellectual Property assignment upon settlement
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Sub-second page transitions &amp; WCAG AA accessible layouts
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="services-custom-software.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                Explore Custom Software Engineering →
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>client-portal-service.ts</span>
+              <span class="text-brand-accent font-bold">● Type-Checked</span>
+            </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code><span class="text-brand-accent">interface</span> PodDeliverable {
+  sprintId: <span class="text-brand-accent">string</span>;
+  repoUrl: <span class="text-brand-accent">string</span>;
+  ipTransferVerified: <span class="text-brand-accent">boolean</span>;
+  complianceDoc: <span class="text-brand-accent">"DPDP-2023"</span>;
+}
+
+<span class="text-brand-accent">export async function</span> deploySprint(): Promise&lt;PodDeliverable&gt; {
+  <span class="opacity-50">// Direct automated PR into your enterprise repo</span>
+  return await siproEngine.mergeVerifiedSprint();
+}</code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Test coverage: 98.4%</span>
+              <span class="theme-heading font-bold">Audit: Clean</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 3: API & Automation (Hidden by default) -->
+        <div id="pane-api" class="cap-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              Streaming &amp; Event-Driven
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              High-Speed gRPC, Kafka Streaming &amp; AI Pipelines
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              Eliminate architectural bottlenecks with event-driven message brokers, distributed job workers, and high-performance gRPC microservices. We also embed secure enterprise LLM RAG pipelines with verifiable data isolation.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Apache Kafka event streams processing 10k+ msgs/sec
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                High-speed gRPC contracts with protobuf serialization
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                pgvector and Gemini AI RAG pipelines with privacy filters
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="services-api-automation.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                Explore Intelligent APIs →
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>event-stream.proto</span>
+              <span class="text-brand-accent font-bold">● Streaming Active</span>
+            </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code>service SiproTelemetryGateway {
+  rpc StreamTelemetry(TelemetryRequest) 
+    returns (stream TelemetryFrame);
+}
+
+<span class="opacity-50">// Ingesting 2.4M events/day with 0 message drops</span></code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Throughput: 14,200 msg/sec</span>
+              <span class="theme-heading font-bold">Latency: 2.1ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 4: Dedicated 5-Day Pods (Hidden by default) -->
+        <div id="pane-pods" class="cap-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider theme-chip border theme-border">
+              Turnkey Team Delivery
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading">
+              Deploy Senior Engineering Squads in 5 Business Days
+            </h3>
+            <p class="theme-muted leading-relaxed">
+              Avoid lengthy 3-month hiring cycles. Our pre-vetted senior software architects and full-stack squads plug directly into your Slack, Jira, and Git repositories with transparent monthly INR retainers and clear milestone commitments.
+            </p>
+            <ul class="space-y-2.5 text-sm font-medium theme-heading">
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Pre-vetted Senior Tech Leads &amp; Full-Stack Engineers
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                Daily standups, bi-weekly sprint demos, and direct comms
+              </li>
+              <li class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-brand-accent/20 text-brand-accent flex items-center justify-center font-bold text-xs">✓</span>
+                GST Tax Invoicing with input credit for corporate tax savings
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="pricing.html" class="inline-flex items-center gap-2 text-sm font-bold text-brand-accent hover:underline">
+                View Pod Retainer Pricing →
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 theme-inset rounded-2xl p-6 border theme-border">
+            <div class="flex items-center justify-between pb-4 border-b theme-divider text-xs font-mono theme-muted">
+              <span>pod-allocation-matrix.json</span>
+              <span class="text-brand-accent font-bold">● 5-Day SLA</span>
+            </div>
+            <pre class="mt-4 font-mono text-xs theme-heading overflow-x-auto leading-relaxed custom-scrollbar"><code>{
+  "podModel": "Enterprise Squad Alpha",
+  "leadArchitect": "Principal (10+ Yrs Exp)",
+  "seniorEngineers": 3,
+  "qaAutomation": 1,
+  "onboardingTime": "5 Business Days",
+  "taxInvoiceGST": "18% Input Tax Credit Eligible",
+  "contractType": "Rolling Monthly Retainer"
+}</code></pre>
+            <div class="mt-4 pt-4 border-t theme-divider flex items-center justify-between text-xs theme-muted">
+              <span>Ramp-up status: Ready</span>
+              <span class="theme-heading font-bold">SLA: 99.9%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- BENTO GRID: WHY ENTERPRISES CHOOSE SIPRO (Mentimeter Soft Bento Style) -->
+  <!-- ========================================================================= -->
+  <section class="py-24 theme-strip border-t theme-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+          The SiPro Standard
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold theme-heading mt-4 tracking-tight">
+          Engineered for trust, speed, and peace of mind.
+        </h2>
+      </div>
+
+      <!-- Bento Grid (Clean borders, relaxed padding, soft accents) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Tile 1 -->
+        <div class="theme-surface rounded-3xl p-8 border theme-border hover:shadow-menti transition-shadow">
+          <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 text-brand-accent flex items-center justify-center text-2xl font-bold mb-6">
+            🛡️
+          </div>
+          <h3 class="text-xl font-bold theme-heading mb-2">DPDP Act 2023 Compliant</h3>
+          <p class="text-sm theme-muted leading-relaxed">
+            Registered Indian Data Fiduciary adhering to statutory data minimization, verified consent logs, and localized grievance redressal frameworks.
+          </p>
+        </div>
+
+        <!-- Tile 2 -->
+        <div class="theme-surface rounded-3xl p-8 border theme-border hover:shadow-menti transition-shadow">
+          <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 text-brand-accent flex items-center justify-center text-2xl font-bold mb-6">
+            📜
+          </div>
+          <h3 class="text-xl font-bold theme-heading mb-2">100% Client IP Ownership</h3>
+          <p class="text-sm theme-muted leading-relaxed">
+            Every commit, schema, and document belongs entirely to you. Full copyright transfer certificates issued upon monthly invoice settlement.
+          </p>
+        </div>
+
+        <!-- Tile 3 -->
+        <div class="theme-surface rounded-3xl p-8 border theme-border hover:shadow-menti transition-shadow">
+          <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 text-brand-accent flex items-center justify-center text-2xl font-bold mb-6">
+            🏛️
+          </div>
+          <h3 class="text-xl font-bold theme-heading mb-2">GSTIN Tax Credit Invoicing</h3>
+          <p class="text-sm theme-muted leading-relaxed">
+            Official B2B Tax Invoices with verified GSTIN (36AAACS1234A1Z5) allowing Indian corporate clients to claim seamless 18% input tax credits.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Wide Feature Banner (Bottom of Bento) -->
+      <div class="mt-8 bg-gradient-to-r from-ink-900 to-ink-800 rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-menti-lg border border-ink-700">
+        <div class="space-y-3 max-w-xl">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-accent text-ink-900">
+            ⚡ Zero Technical Debt Guarantee
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            Stop waiting for candidate resumes. Kick off your sprint Monday.
+          </h3>
+          <p class="text-sm text-ink-300 leading-relaxed">
+            Book a 25-minute architecture discovery session with a Principal Engineer. We will review your backlog, suggest immediate optimizations, and outline pod allocation.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <a href="login-client.html" class="px-6 py-3.5 rounded-full text-sm font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all text-center">
+            Client Portal &amp; Discovery →
+          </a>
+          <a href="pricing.html" class="px-6 py-3.5 rounded-full text-sm font-semibold bg-white/10 text-white hover:bg-white/20 transition-all border border-white/20 text-center">
+            View Retainer Plans
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- CLIENT WORKSPACE GATEWAY: ENGINEERING POD SIZING & RETAINER CALCULATOR -->
+  <!-- ========================================================================= -->
+  <section class="py-20 md:py-28 theme-band-canvas border-t theme-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+        <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+          Client Workspace Access
+        </span>
+        <h2 class="text-[clamp(1.5rem,3.8vw,2.75rem)] font-extrabold theme-heading mt-4 tracking-tight break-words">
+          Engineering Pod Sizing &amp; Retainer Calculator
+        </h2>
+        <p class="text-[clamp(0.95rem,1.4vw,1.15rem)] theme-muted mt-2 break-words">
+          Interactive sprint velocity sizing and dynamic retainer calculations are accessible inside the authenticated Client Portal.
+        </p>
+      </div>
+
+      <div class="theme-surface rounded-2xl sm:rounded-3xl p-6 sm:p-12 shadow-menti-lg border theme-border">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/15 text-brand-accent text-xs font-bold">
+              <span>🔐 Authenticated Feature</span>
+              <span>•</span>
+              <span>Client Delivery Portal</span>
+            </div>
+            
+            <h3 class="text-2xl sm:text-3xl font-extrabold theme-heading leading-tight">
+              Calculate squad velocity, sprint deliverables &amp; monthly retainers.
+            </h3>
+            
+            <p class="theme-muted text-sm sm:text-base leading-relaxed">
+              Once signed into your dedicated Client Portal, our interactive engine enables you to model your exact technical requirements across mobile/web apps, modern websites, cloud infrastructure, and 24/7 managed hosting.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-medium theme-heading">
+              <div class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border">
+                <span class="text-brand-accent font-bold">✓</span> Pod scaling: 2 to 8+ Engineers
+              </div>
+              <div class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border">
+                <span class="text-brand-accent font-bold">✓</span> Real-time ₹ INR + 18% GST
+              </div>
+              <div class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border">
+                <span class="text-brand-accent font-bold">✓</span> Weekly vs. Bi-Weekly cadences
+              </div>
+              <div class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border">
+                <span class="text-brand-accent font-bold">✓</span> Instant scope confirmation &amp; SLA
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 theme-inset rounded-2xl p-6 sm:p-8 border theme-border text-center space-y-6">
+            <div class="w-16 h-16 rounded-2xl bg-brand-accent/20 text-brand-accent flex items-center justify-center text-3xl mx-auto shadow-inner">
+              ⚡
+            </div>
+            <div>
+              <h4 class="text-lg font-extrabold theme-heading">Sign In to Calculate</h4>
+              <p class="text-xs theme-muted mt-1 leading-relaxed">
+                Registered enterprise clients access live project sizing, milestones, and invoice settlement.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <a href="login-client.html" class="block w-full py-3.5 px-6 rounded-full text-sm font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all shadow-menti">
+                Sign In to Client Portal &amp; Calculate →
+              </a>
+              <a href="register-client.html" class="block w-full py-3 px-6 rounded-full text-xs font-semibold theme-surface theme-heading border theme-border hover:border-brand-accent transition-all">
+                Register New Client Organization
+              </a>
+            </div>
+
+            <p class="text-[11px] theme-subtle">
+              Looking for employee or candidate access? <a href="portals.html" class="text-brand-accent font-semibold hover:underline">View All 3 Portals</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FREQUENTLY ASKED QUESTIONS (Mentimeter Clean Accordion) -->
+  <!-- ========================================================================= -->
+  <section class="py-24 theme-strip border-t theme-border">
+    <div class="max-w-4xl mx-auto px-6 lg:px-12">
+      
+      <div class="text-center mb-16">
+        <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+          Got Questions?
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold theme-heading mt-4 tracking-tight">
+          Frequently Answered Inquiries
+        </h2>
+      </div>
+
+      <!-- Accordion Items -->
+      <div class="space-y-4">
+        
+        <div class="border theme-border rounded-2xl p-6 theme-surface">
+          <button type="button" class="faq-btn w-full flex items-center justify-between text-left gap-4">
+            <span class="font-bold text-base sm:text-lg theme-heading">What is the typical ramp-up time for a dedicated engineering pod?</span>
+            <span class="faq-icon text-xl theme-muted font-bold transition-transform">+</span>
+          </button>
+          <div class="faq-content hidden mt-4 text-sm theme-muted leading-relaxed border-t theme-divider pt-4">
+            Our dedicated engineering pods are staffed with pre-vetted senior architects and full-stack engineers. They deploy directly into your repository, Slack, and Jira within 5 business days after initial scoping.
+          </div>
+        </div>
+
+        <div class="border theme-border rounded-2xl p-6 theme-surface">
+          <button type="button" class="faq-btn w-full flex items-center justify-between text-left gap-4">
+            <span class="font-bold text-base sm:text-lg theme-heading">How does SiPro guarantee 100% intellectual property ownership?</span>
+            <span class="faq-icon text-xl theme-muted font-bold transition-transform">+</span>
+          </button>
+          <div class="faq-content hidden mt-4 text-sm theme-muted leading-relaxed border-t theme-divider pt-4">
+            All code, commits, architectural diagrams, and documentation created during the retainer are 100% client-owned. Full copyright transfer takes place upon monthly invoice settlement with signed legal documentation.
+          </div>
+        </div>
+
+        <div class="border theme-border rounded-2xl p-6 theme-surface">
+          <button type="button" class="faq-btn w-full flex items-center justify-between text-left gap-4">
+            <span class="font-bold text-base sm:text-lg theme-heading">How do we claim 18% GST input tax credits in India?</span>
+            <span class="faq-icon text-xl theme-muted font-bold transition-transform">+</span>
+          </button>
+          <div class="faq-content hidden mt-4 text-sm theme-muted leading-relaxed border-t theme-divider pt-4">
+            SiPro Technologies is a registered MSME entity with verified GSTIN (36AAACS1234A1Z5). We issue compliant GST e-invoices with your corporate GSTIN so your accounting team can claim 100% input tax credits on all services.
+          </div>
+        </div>
+
+        <div class="border theme-border rounded-2xl p-6 theme-surface">
+          <button type="button" class="faq-btn w-full flex items-center justify-between text-left gap-4">
+            <span class="font-bold text-base sm:text-lg theme-heading">What compliance standards do your systems adhere to?</span>
+            <span class="faq-icon text-xl theme-muted font-bold transition-transform">+</span>
+          </button>
+          <div class="faq-content hidden mt-4 text-sm theme-muted leading-relaxed border-t theme-divider pt-4">
+            All systems strictly comply with India's Digital Personal Data Protection (DPDP) Act 2023, featuring consent audit trails and statutory Data Protection Officer (DPO) mechanisms. Furthermore, our cloud configurations adhere to ISO 27001 and SOC-2 control matrices.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- CAREERS SPOTLIGHT SECTION (Section Anchor: #careers) -->
+  <!-- ========================================================================= -->
+  <section id="careers" class="py-20 md:py-28 theme-strip border-t theme-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+          Join SiPro Technologies
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold theme-heading mt-4 tracking-tight">
+          Build high-concurrency systems with world-class engineers.
+        </h2>
+        <p class="text-base sm:text-lg theme-muted mt-3 max-w-2xl mx-auto leading-relaxed">
+          We are expanding our senior engineering squads and apprentice developer pods in Hanamkonda, Telangana and remote global time zones.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="p-6 rounded-2xl theme-surface border theme-border shadow-menti-sm">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-accent">Infrastructure</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-brand-accent/15 text-brand-accent font-semibold">Full-Time</span>
+          </div>
+          <h3 class="text-lg font-bold theme-heading mb-1">Senior Cloud &amp; Kubernetes Architect</h3>
+          <p class="text-xs theme-muted mb-4">GCP/AWS, Terraform, Zero-Trust Mesh &amp; Istio orchestration.</p>
+          <a href="careers.html" class="text-xs font-bold text-brand-accent hover:underline inline-flex items-center gap-1">
+            Apply via Careers Portal →
+          </a>
+        </div>
+
+        <div class="p-6 rounded-2xl theme-surface border theme-border shadow-menti-sm">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-accent">Full-Stack</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-brand-accent/15 text-brand-accent font-semibold">Full-Time</span>
+          </div>
+          <h3 class="text-lg font-bold theme-heading mb-1">Staff Software Engineer (TypeScript/Node)</h3>
+          <p class="text-xs theme-muted mb-4">High-throughput microservices, PostgreSQL &amp; distributed queues.</p>
+          <a href="careers.html" class="text-xs font-bold text-brand-accent hover:underline inline-flex items-center gap-1">
+            Apply via Careers Portal →
+          </a>
+        </div>
+
+        <div class="p-6 rounded-2xl theme-surface border theme-border shadow-menti-sm">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Talent Acceleration</span>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-semibold">Cohort Track</span>
+          </div>
+          <h3 class="text-lg font-bold theme-heading mb-1">Engineering Apprentice &amp; Intern Program</h3>
+          <p class="text-xs theme-muted mb-4">Intensive 6-month hands-on production code deployment curriculum.</p>
+          <a href="careers.html" class="text-xs font-bold text-brand-accent hover:underline inline-flex items-center gap-1">
+            Apply via Careers Portal →
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="careers.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all shadow-menti text-center">
+          Explore All 6 Open Roles on Careers Page →
+        </a>
+        <a href="login-candidate.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold theme-surface theme-heading hover:border-brand-accent border theme-border transition-all text-center">
+          Candidate Portal Sign In
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- CONTACT & CONSULTATION SECTION (Section Anchor: #contact) -->
+  <!-- ========================================================================= -->
+  <section id="contact" class="py-20 md:py-28 theme-band-canvas border-t theme-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-extrabold uppercase tracking-widest theme-chip px-3 py-1 rounded-full border theme-border">
+            Connect With Engineering Leadership
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold theme-heading tracking-tight leading-[1.15]">
+            Have an RFP or require architectural review?
+          </h2>
+          <p class="text-base sm:text-lg theme-muted leading-relaxed">
+            Directly connect with our Principal Architects. Whether exploring pod sizing, cloud security audits, or full-cycle product delivery, we are ready to assist.
+          </p>
+
+          <div class="space-y-3 text-sm">
+            <div class="flex items-center gap-3">
+              <span class="text-lg">✉️</span>
+              <div>
+                <span class="font-bold theme-heading">General &amp; Architecture Inquiries:</span>
+                <a href="mailto:contact@sipro.tech" class="text-brand-accent font-mono ml-1 hover:underline">contact@sipro.tech</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">🛡️</span>
+              <div>
+                <span class="font-bold theme-heading">24/7 Managed Cloud Emergency SRE:</span>
+                <a href="mailto:support@sipro.tech" class="text-brand-accent font-mono ml-1 hover:underline">support@sipro.tech</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📍</span>
+              <div>
+                <span class="font-bold theme-heading">Subedari, Hanamkonda, Warangal Urban, Telangana 506001, India</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="contact.html" class="px-8 py-3.5 rounded-full text-sm font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all shadow-menti">
+              Open Consultation Form &amp; Hub Details →
+            </a>
+            <a href="login-client.html" class="px-8 py-3.5 rounded-full text-sm font-semibold theme-surface theme-heading hover:border-brand-accent border theme-border transition-all">
+              Client Portal Sign In
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 p-8 rounded-3xl theme-surface border theme-border shadow-menti-lg">
+          <h3 class="text-xl font-bold theme-heading mb-2">Architectural Scoping &amp; Pod SLA</h3>
+          <p class="text-xs sm:text-sm theme-muted mb-6 leading-relaxed">
+            Submit inquiries with full confidence. We provide an initial technical scope document and commercial proposal within 24 business hours.
+          </p>
+          <div class="space-y-4 text-xs sm:text-sm">
+            <div class="flex items-start gap-3 p-3 rounded-xl theme-inset border theme-border">
+              <span class="text-brand-accent font-bold">✓</span>
+              <div>
+                <strong class="theme-heading">5-Day Pod Kickoff SLA:</strong>
+                <span class="theme-muted">Pre-vetted engineering squads onboarded directly into your Jira/GitHub environment.</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl theme-inset border theme-border">
+              <span class="text-brand-accent font-bold">✓</span>
+              <div>
+                <strong class="theme-heading">100% IP &amp; Code Ownership:</strong>
+                <span class="theme-muted">Full assignment of rights and repositories upon monthly invoice settlement.</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl theme-inset border theme-border">
+              <span class="text-brand-accent font-bold">✓</span>
+              <div>
+                <strong class="theme-heading">GST &amp; DPDP Compliant:</strong>
+                <span class="theme-muted">Official Indian B2B GST tax invoices &amp; DPDP 2023 consent architecture.</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 pt-6 border-t theme-divider flex justify-between items-center text-xs theme-muted">
+            <span>Prefer a quick direct email?</span>
+            <a href="mailto:contact@sipro.tech" class="font-bold text-brand-accent hover:underline">contact@sipro.tech</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- B2B Technology Consulting & Solutions -->
-    <section class="section alt" id="services-overview">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">B2B Solutions & Delivery</span>
-            <h2>Core Engineering Practices & Retainers</h2>
-          </div>
-          <p>Production-grade technology consulting, dedicated development pods, and scalable cloud engineering for global enterprises.</p>
-        </div>
+  <!-- ========================================================================= -->
+  <!-- BOTTOM HIGH-IMPACT CTA STRIP (Mentimeter Signature Friendly Light Canvas) -->
+  <!-- ========================================================================= -->
+  <section class="py-24 theme-band-canvas border-t theme-border">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold theme-chip border theme-border shadow-menti-sm">
+        🚀 Let's Build Together
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold theme-heading mt-6 tracking-tight">
+        Ready to accelerate your technical roadmap?
+      </h2>
+      <p class="text-base sm:text-lg theme-muted mt-4 max-w-xl mx-auto leading-relaxed">
+        Join leading enterprises partnering with SiPro Technologies for high-velocity engineering pods and resilient cloud systems.
+      </p>
 
-        <div class="grid three">
-          <article class="card">
-            <span class="tag">Web & Platforms</span>
-            <h3>Custom Web & Software Engineering</h3>
-            <p>High-throughput full-stack systems, modern reactive architectures, resilient TypeScript/React/Node backends, and 100% intellectual property assignment.</p>
-            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px">
-              <span class="pill">TypeScript</span>
-              <span class="pill">Next.js</span>
-              <span class="pill">Microfrontends</span>
-            </div>
-            <div style="margin-top:20px;">
-              <a href="services-custom-software.html" class="btn btn-ghost">Explore Software Engineering →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <span class="tag indigo">Cloud & SRE</span>
-            <h3>Cloud Infrastructure & DevOps</h3>
-            <p>Kubernetes multi-cloud GKE/EKS clusters, automated Terraform/CI/CD pipelines, SLA-backed observability, and zero-downtime Canary deployments.</p>
-            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px">
-              <span class="pill">Kubernetes</span>
-              <span class="pill">Terraform</span>
-              <span class="pill">mTLS & Vault</span>
-            </div>
-            <div style="margin-top:20px;">
-              <a href="services-cloud-architecture.html" class="btn btn-ghost">Explore Cloud & DevOps →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <span class="tag emerald">Integration & AI</span>
-            <h3>API & Automation Architecture</h3>
-            <p>gRPC/REST API gateways, Kafka event streaming meshes, asynchronous worker queues, and secure LLM/RAG workflows with strict enterprise governance.</p>
-            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px">
-              <span class="pill">Kafka</span>
-              <span class="pill">gRPC / REST</span>
-              <span class="pill">pgvector</span>
-            </div>
-            <div style="margin-top:20px;">
-              <a href="services-api-automation.html" class="btn btn-ghost">Explore API Automation →</a>
-            </div>
-          </article>
-        </div>
-
-        <!-- Consultation Banner -->
-        <div class="interactive-panel" style="margin-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;background:linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(34,211,238,0.05) 100%);border:1px solid rgba(99,102,241,0.25);border-radius:16px;padding:24px 28px;">
-          <div>
-            <h4 style="font-size:18px;color:var(--text);margin-bottom:4px">Ready to accelerate your technical roadmap?</h4>
-            <p style="font-size:13px;color:var(--muted);margin:0">Partner with our registered MSME engineering consulting practice for rapid sprint velocity.</p>
-          </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <a href="contact.html" class="btn btn-primary">Schedule Consultation</a>
-            <button type="button" class="btn btn-ghost" data-auth-trigger="signin">Client Portal Sign In</button>
-          </div>
-        </div>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="login-client.html" class="w-full sm:w-auto px-8 py-4 rounded-full text-base font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all shadow-menti text-center">
+          Client Portal Sign In →
+        </a>
+        <a href="pricing.html" class="w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold theme-surface theme-heading hover:border-brand-accent border theme-border transition-all text-center">
+          Compare Retainer Tiers
+        </a>
       </div>
-    </section>
-  </main>
 
+      <p class="text-xs theme-subtle mt-6">
+        No long-term lock-in • 5-day pod kick-off • Direct access to Principal Architects
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- DYNAMIC FOOTER (Telangana, India · MSME UDYAM & Complete Hierarchy) -->
+  <!-- ========================================================================= -->
   <div data-footer></div>
+
+  <!-- Global Navigation, Command Palette, Modals & Theme Controller -->
   <script src="sipro.js"></script>
-  <script>
-    // FAQ Accordion interaction
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const isOpen = item.classList.toggle('open');
-        btn.querySelector('.faq-toggle-icon').textContent = isOpen ? '−' : '+';
-      });
-    });
-  </script>
+  <!-- Defer Non-blocking Minified Interactivity Script -->
+  <script defer src="/js/landing.min.js"></script>
 </body>
 </html>

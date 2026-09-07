@@ -1,126 +1,298 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact Us | SiPro Technologies</title>
-  <meta name="description" content="Get in touch with SiPro Technologies for cloud architecture, enterprise web platforms, and engineering inquiries.">
+  <title>Contact &amp; Architecture Inquiries | SiPro Technologies</title>
+  <meta name="description" content="Connect with SiPro Technologies principal architects. Inquire about dedicated engineering pods, cloud architecture reviews, or visit our technology hubs in Telangana and worldwide.">
+  <link rel="canonical" href="https://sipro.tech/contact.html">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/tailwind.min.css">
   <link rel="stylesheet" href="sipro.css">
+
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light');
+    }
+  </script>
+
+  <!-- Structured Data: ContactPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact SiPro Technologies",
+    "url": "https://sipro.tech/contact.html",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "SiPro Technologies",
+      "url": "https://sipro.tech",
+      "logo": "https://sipro.tech/favicon.svg",
+      "email": "contact@sipro.tech",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Subedari",
+        "addressLocality": "Hanamkonda",
+        "addressRegion": "Telangana",
+        "postalCode": "506001",
+        "addressCountry": "IN"
+      }
+    }
+  }
+  </script>
 </head>
-<body data-page="contact.html">
+
+<body data-page="contact.html" class="theme-canvas font-sans antialiased selection:bg-brand-accent selection:text-ink-900 min-h-screen flex flex-col">
+
   <div data-header></div>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <span class="eyebrow">Direct Engineering Channel</span>
-        <h1>Bring us your <em>complex architecture.</em></h1>
-        <p class="lead">Tell us what you are building, scaling, or migrating. Our senior technical team will respond with an architectural review and actionable delivery estimate.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container grid two">
-        <form class="form-card" data-contact>
-          <h2 style="font-size:22px;margin-bottom:20px">Send an Engineering Inquiry</h2>
-          <div class="form-grid">
-            <label class="field">
-              <span>Full Name *</span>
-              <input name="name" required placeholder="e.g. Arjun Sharma">
-            </label>
-            <label class="field">
-              <span>Work Email *</span>
-              <input name="email" type="email" required placeholder="you@company.com">
-            </label>
-            <label class="field">
-              <span>Company / Organization</span>
-              <input name="company" placeholder="e.g. Acme Corp">
-            </label>
-            <label class="field">
-              <span>Domain of Interest</span>
-              <select name="service">
-                <option>Cloud Architecture & Microservices</option>
-                <option>Enterprise Web Development</option>
-                <option>Intelligent Automation & AI</option>
-                <option>Cybersecurity & DevOps Audits</option>
-                <option>Talent Acceleration Programs</option>
-              </select>
-            </label>
-            <label class="field full">
-              <span>Project Scope & Requirements *</span>
-              <textarea name="message" required minlength="10" placeholder="Please outline your technical stack, timeline, or current bottlenecks."></textarea>
-            </label>
-          </div>
-          <button class="btn btn-primary btn-lg" type="submit">Submit Inquiry</button>
-        </form>
-
-        <aside class="card" style="height:fit-content">
-          <span class="eyebrow">Global Operations</span>
-          <h2>SiPro Technologies</h2>
-          <p style="margin-bottom:24px">Hanamkonda, Telangana, India</p>
-
-          <div class="signal-list">
-            <div class="signal">
-              <span>General & Business</span>
-              <div style="display:flex;align-items:center;gap:8px">
-                <strong><a href="mailto:contact@sipro.tech" style="color:var(--cyan);font-size:15px">contact@sipro.tech</a></strong>
-                <button type="button" class="copy-pill" data-copy="contact@sipro.tech" data-copy-label="Email" title="Copy Email">Copy</button>
-              </div>
-            </div>
-            <div class="signal">
-              <span>Technical & SLA Support</span>
-              <div style="display:flex;align-items:center;gap:8px">
-                <strong><a href="mailto:support@sipro.tech" style="color:var(--cyan);font-size:15px">support@sipro.tech</a></strong>
-                <button type="button" class="copy-pill" data-copy="support@sipro.tech" data-copy-label="Support Email" title="Copy Email">Copy</button>
-              </div>
-            </div>
-            <div class="signal">
-              <span>GST Identification Number</span>
-              <div style="display:flex;align-items:center;gap:8px">
-                <strong style="font-family:monospace;font-size:14px">36AAACS1234A1Z5</strong>
-                <button type="button" class="copy-pill" data-copy="36AAACS1234A1Z5" data-copy-label="GSTIN" title="Copy GSTIN">Copy</button>
-              </div>
-            </div>
-            <div class="signal">
-              <span>Response Window</span>
-              <strong style="font-size:15px">Within 24 Hours</strong>
-            </div>
-            <div class="signal">
-              <span>Operating Hours</span>
-              <strong style="font-size:15px">Mon–Fri · 9am–7pm IST</strong>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Interactive Scope Estimator -->
-    <section class="section alt">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Interactive Estimator</span>
-            <h2>Estimate your dedicated delivery pod.</h2>
-          </div>
-          <p>Adjust dedicated engineers and engagement length to preview monthly retainer costs.</p>
+  <main class="flex-grow">
+    <!-- Contact Hero Section -->
+    <section class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden theme-strip border-b theme-border">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full theme-surface border theme-border shadow-menti-sm text-xs font-semibold theme-heading mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+          <span>Architect Consultation &amp; Scoping</span>
+          <span class="opacity-40">•</span>
+          <span class="text-brand-accent font-bold">5-Day Pod Kickoff SLA</span>
         </div>
-        <div class="estimator">
-          <div class="estimate-row">
-            <label for="engineers">Dedicated Full-Stack Engineers: <strong id="engineers-value" style="color:var(--cyan)">2</strong></label>
-            <output id="estimate-total" class="estimate-total">₹1,35,000</output>
-            <input id="engineers" type="range" min="1" max="8" value="2">
+        
+        <h1 class="text-[clamp(2rem,5vw,3.75rem)] font-extrabold theme-heading tracking-tight leading-[1.15] max-w-4xl mx-auto">
+          Start your engagement with our Principal Architects
+        </h1>
+        <p class="text-[clamp(1rem,1.5vw,1.2rem)] theme-muted mt-4 max-w-2xl mx-auto leading-relaxed">
+          Whether you need a dedicated engineering squad, high-concurrency cloud migration, or a modern web application, our engineering leadership is ready to connect.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Contact & Consultation Grid -->
+    <section class="py-16 md:py-24 theme-band-canvas">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          <!-- Left Column: Direct Channels & Hubs -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="theme-surface rounded-2xl p-7 border theme-border shadow-menti-sm space-y-6">
+              <h2 class="text-xl font-extrabold theme-heading">Direct Engagement Channels</h2>
+              
+              <div class="space-y-4 text-sm">
+                <div class="flex items-start gap-3.5 p-3.5 rounded-xl theme-inset border theme-border">
+                  <span class="text-2xl">✉️</span>
+                  <div>
+                    <div class="font-bold theme-heading">Architecture &amp; New RFPs</div>
+                    <a href="mailto:contact@sipro.tech" class="text-brand-accent hover:underline font-mono text-xs">contact@sipro.tech</a>
+                    <p class="text-xs theme-subtle mt-0.5">Response within 24 business hours</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3.5 p-3.5 rounded-xl theme-inset border theme-border">
+                  <span class="text-2xl">🛡️</span>
+                  <div>
+                    <div class="font-bold theme-heading">24/7 Managed Cloud SRE</div>
+                    <a href="mailto:support@sipro.tech" class="text-brand-accent hover:underline font-mono text-xs">support@sipro.tech</a>
+                    <p class="text-xs theme-subtle mt-0.5">P1 Critical SLA &lt; 15 minutes</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3.5 p-3.5 rounded-xl theme-inset border theme-border">
+                  <span class="text-2xl">🔐</span>
+                  <div>
+                    <div class="font-bold theme-heading">Existing Enterprise Clients</div>
+                    <p class="text-xs theme-muted">Track sprints, invoices, and sprint velocity</p>
+                    <a href="login-client.html" class="inline-block mt-2 text-xs font-bold text-brand-accent hover:underline">
+                      Sign in to Client Delivery Portal →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regional Technology Hubs -->
+            <div class="theme-surface rounded-2xl p-7 border theme-border shadow-menti-sm space-y-5">
+              <h2 class="text-xl font-extrabold theme-heading">Regional Delivery Hubs</h2>
+              
+              <div class="space-y-4 text-xs sm:text-sm">
+                <div class="p-3.5 rounded-xl theme-inset border theme-border">
+                  <div class="font-bold theme-heading flex items-center justify-between">
+                    <span>📍 Telangana Delivery Hub</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold">Primary R&amp;D</span>
+                  </div>
+                  <p class="theme-muted mt-1 leading-relaxed">
+                    Subedari, Hanamkonda, Warangal Urban, Telangana 506001, India
+                  </p>
+                  <a href="locations-hyderabad.html" class="inline-block mt-2 text-xs font-bold text-brand-accent hover:underline">
+                    View Regional Gateway Details →
+                  </a>
+                </div>
+
+                <div class="p-3.5 rounded-xl theme-inset border theme-border">
+                  <div class="font-bold theme-heading flex items-center justify-between">
+                    <span>🌐 Distributed Global Pods</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 font-semibold">24/7 Follow-the-Sun</span>
+                  </div>
+                  <p class="theme-muted mt-1 leading-relaxed">
+                    Asynchronous delivery pods bridging North America, EMEA, and APAC time zones.
+                  </p>
+                  <a href="locations-global.html" class="inline-block mt-2 text-xs font-bold text-brand-accent hover:underline">
+                    View Global Delivery Architecture →
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="estimate-row">
-            <label for="months">Project Duration: <strong id="months-value" style="color:var(--cyan)">3 months</strong></label>
-            <input id="months" type="range" min="1" max="12" value="3">
+
+          <!-- Right Column: Interactive Consultation & Scoping Form -->
+          <div class="lg:col-span-7 theme-surface rounded-2xl p-7 sm:p-10 border theme-border shadow-menti-lg">
+            <div class="mb-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-brand-accent">Inquiry Form</span>
+              <h2 class="text-2xl font-extrabold theme-heading mt-1">Request Architectural Consultation</h2>
+              <p class="text-xs sm:text-sm theme-muted mt-1">
+                Tell us about your technical goals. We respond with a preliminary feasibility note and sprint timeline.
+              </p>
+            </div>
+
+            <form id="contact-inquiry-form" class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider theme-muted mb-2">
+                    Full Name <span class="text-red-400">*</span>
+                  </label>
+                  <input type="text" id="contact-name" name="name" required placeholder="e.g. Anand Sharma" class="w-full px-4 py-3 rounded-xl theme-inset border theme-border theme-heading text-sm focus:border-brand-accent focus:outline-none transition-all">
+                </div>
+
+                <div>
+                  <label for="contact-email" class="block text-xs font-bold uppercase tracking-wider theme-muted mb-2">
+                    Work Email <span class="text-red-400">*</span>
+                  </label>
+                  <input type="email" id="contact-email" name="email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl theme-inset border theme-border theme-heading text-sm focus:border-brand-accent focus:outline-none transition-all">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-org" class="block text-xs font-bold uppercase tracking-wider theme-muted mb-2">
+                    Company / Organization
+                  </label>
+                  <input type="text" id="contact-org" name="organization" placeholder="e.g. Acme FinTech" class="w-full px-4 py-3 rounded-xl theme-inset border theme-border theme-heading text-sm focus:border-brand-accent focus:outline-none transition-all">
+                </div>
+
+                <div>
+                  <label for="contact-track" class="block text-xs font-bold uppercase tracking-wider theme-muted mb-2">
+                    Technical Track
+                  </label>
+                  <select id="contact-track" name="track" class="w-full px-4 py-3 rounded-xl theme-inset border theme-border theme-heading text-sm focus:border-brand-accent focus:outline-none transition-all">
+                    <option value="cloud">Cloud Architecture &amp; Kubernetes</option>
+                    <option value="apps">Mobile &amp; Web Applications</option>
+                    <option value="websites">Modern Performance Websites</option>
+                    <option value="hosting">24/7 Managed Cloud Hosting &amp; SRE</option>
+                    <option value="squad">Dedicated Engineering Pod (Full Squad)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-timeline" class="block text-xs font-bold uppercase tracking-wider theme-muted mb-2">
+                  Anticipated Kickoff Timeline
+                </label>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                  <label class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border cursor-pointer">
+                    <input type="radio" name="timeline" value="immediate" checked class="accent-brand-accent">
+                    <span>Immediate (&lt; 2 wks)</span>
+                  </label>
+                  <label class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border cursor-pointer">
+                    <input type="radio" name="timeline" value="1month" class="accent-brand-accent">
+                    <span>1 Month</span>
+                  </label>
+                  <label class="flex items-center gap-2 p-2.5 rounded-xl theme-inset border theme-border cursor-pointer">
+                    <input type="radio" name="timeline" value="exploratory" class="accent-brand-accent">
+                    <span>Exploratory RFP</span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider theme-muted mb-2">
+                  Project Description &amp; Technical Scope <span class="text-red-400">*</span>
+                </label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Briefly describe your high-level architecture, required tech stack, or scaling challenges..." class="w-full px-4 py-3 rounded-xl theme-inset border theme-border theme-heading text-sm focus:border-brand-accent focus:outline-none transition-all"></textarea>
+              </div>
+
+              <div id="contact-status-msg" style="display:none;" class="p-3.5 rounded-xl text-sm font-semibold"></div>
+
+              <button type="submit" id="contact-submit-btn" class="w-full py-4 px-6 rounded-full text-sm font-bold bg-brand-accent text-ink-900 hover:bg-[#00D0A5] transition-all shadow-menti">
+                Submit Consultation Request →
+              </button>
+
+              <p class="text-[11px] theme-subtle text-center">
+                Strict confidentiality guaranteed. IP and project briefs protected under reciprocal mutual NDA standards.
+              </p>
+            </form>
           </div>
-          <p style="font-size:13px;color:var(--muted);margin-top:14px">Base model: engineers × duration with 10% discount on 3+ month commitments. GST calculated at checkout.</p>
+
         </div>
       </div>
     </section>
   </main>
 
   <div data-footer></div>
+
   <script src="sipro.js"></script>
+  <script>
+    document.getElementById('contact-inquiry-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('contact-submit-btn');
+      const statusBox = document.getElementById('contact-status-msg');
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting Consultation Request...';
+
+      const formData = new FormData(form);
+      const payload = {
+        form_id: 'contact',
+        name: formData.get('name'),
+        email: formData.get('email'),
+        organization: formData.get('organization') || '',
+        track: formData.get('track'),
+        timeline: formData.get('timeline'),
+        message: formData.get('message'),
+        _rules: {
+          name: { required: true },
+          email: { required: true, type: 'email' },
+          message: { required: true }
+        }
+      };
+
+      try {
+        const res = await fetch('/api/forms/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (res.ok && result.success) {
+          statusBox.style.display = 'block';
+          statusBox.className = 'p-3.5 rounded-xl text-sm font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+          statusBox.textContent = '✓ Thank you! Your consultation request has been received. A Principal Architect will reach out within 24 business hours.';
+          form.reset();
+          btn.textContent = 'Request Received Successfully ✓';
+        } else {
+          throw new Error(result.errors?.join(', ') || result.error || 'Failed to submit inquiry');
+        }
+      } catch (err) {
+        statusBox.style.display = 'block';
+        statusBox.className = 'p-3.5 rounded-xl text-sm font-semibold bg-red-500/15 text-red-400 border border-red-500/30';
+        statusBox.textContent = '⚠️ ' + (err.message || 'Could not submit request. Please email us directly at contact@sipro.tech');
+        btn.disabled = false;
+        btn.textContent = 'Submit Consultation Request →';
+      }
+    });
+  </script>
 </body>
 </html>
