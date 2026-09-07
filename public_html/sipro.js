@@ -522,9 +522,9 @@ function renderHeader() {
     <header class="site-header">
       <div class="container">
         <div class="header-nav">
-          <a class="brand" href="/">
-            <div class="brand-badge">SP</div>
-            <span class="brand-name">SiPro<span class="brand-tech">Tech</span></span>
+          <a class="brand" href="/" aria-label="SiPro Technologies Home">
+            <img src="/logo.svg" alt="SiPro Technologies" class="brand-logo-img dark-only" width="210" height="38" />
+            <img src="/logo-light.svg" alt="SiPro Technologies" class="brand-logo-img light-only" width="210" height="38" />
           </a>
 
           <!-- Enterprise Mega-Menu Desktop Navigation (Accenture/Wipro Style) -->
@@ -571,9 +571,9 @@ function renderHeader() {
       <!-- Mobile Slide-Over Glassmorphic Drawer -->
       <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
         <div class="mobile-drawer-header">
-          <a class="brand" href="/">
-            <div class="brand-badge" style="width:32px;height:32px;font-size:14px">SP</div>
-            <span class="brand-name" style="font-size:17px">SiPro<span class="brand-tech">Tech</span></span>
+          <a class="brand" href="/" aria-label="SiPro Technologies Home">
+            <img src="/logo.svg" alt="SiPro Technologies" class="brand-logo-img dark-only" width="180" height="34" />
+            <img src="/logo-light.svg" alt="SiPro Technologies" class="brand-logo-img light-only" width="180" height="34" />
           </a>
           <button class="mobile-drawer-close" type="button" aria-label="Close navigation drawer">
             ${ICONS.close}
@@ -831,9 +831,9 @@ function renderFooter() {
       <div class="container">
         <div class="footer-content">
           <div class="footer-brand">
-            <a class="brand" href="/">
-              <div class="brand-badge">SP</div>
-              <span class="brand-name">SiPro<span class="brand-tech">Tech</span></span>
+            <a class="brand" href="/" aria-label="SiPro Technologies Home">
+              <img src="/logo.svg" alt="SiPro Technologies" class="brand-logo-img footer-logo dark-only" width="220" height="40" />
+              <img src="/logo-light.svg" alt="SiPro Technologies" class="brand-logo-img footer-logo light-only" width="220" height="40" />
             </a>
             <p>Cloud Architecture, Enterprise Web Systems, Microservices, and Intelligent Automation.</p>
             <p style="margin-top:12px;font-size:13px;color:var(--muted)">Hanamkonda, Telangana · Operating Globally</p>
@@ -3602,6 +3602,7 @@ function initDPDPConsent() {
   `;
 
   document.body.appendChild(banner);
+  document.body.classList.add('has-cookie-banner');
   requestAnimationFrame(() => {
     banner.classList.add('show');
   });
@@ -3613,6 +3614,8 @@ function initDPDPConsent() {
       fiduciary: 'SiPro Technologies (MSME Registered)',
       dpo: 'grievance@sipro.tech'
     }));
+    document.body.classList.remove('has-cookie-banner');
+    window.dispatchEvent(new CustomEvent('dpdp:consent-saved', { detail: { level } }));
     banner.classList.remove('show');
     setTimeout(() => banner.remove(), 400);
     showToast(`Privacy preferences recorded (${level}).`, 'success');

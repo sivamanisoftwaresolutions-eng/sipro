@@ -264,7 +264,7 @@ async function initDatabase() {
 initDatabase();
 
 // Middleware
-app.use(compression());
+app.use(compression() as any);
 app.use(cors());
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
@@ -1113,6 +1113,82 @@ app.post('/api/v1/ai/chat', async (req: Request, res: Response) => {
   }
 });
 
+// ==========================================================================
+// SiteMind AI Assistant Integration Endpoints
+// ==========================================================================
+app.get(['/api/sitemind/config', '/api/v1/widget/:key/config'], (req: Request, res: Response) => {
+  res.json({
+    success: true,
+    data: {
+      widgetKey: req.params.key || 'sipro-tech-assistant',
+      name: 'SiPro Technologies AI Assistant',
+      brandColor: '#2563eb',
+      greeting: 'Namaste! I am your SiPro technical advisor powered by SiteMind AI. How can I assist your engineering pod, cloud infrastructure, or DPDP compliance inquiry today?',
+      disclaimer: 'Powered by SiteMind AI. Chat interactions are used solely to assist your inquiries in accordance with our Privacy Policy. Do not share confidential credentials.',
+      category: 'functional',
+      supportedTopics: ['Dedicated Pods', 'Cloud Architecture', 'DPDP Act 2023 Compliance', 'GST Tax Invoicing', 'Sprint Kickoff']
+    }
+  });
+});
+
+app.post(['/api/sitemind/chat', '/api/v1/widget/:key/chat'], async (req: Request, res: Response) => {
+  const { question, message, conversationId, widgetKey } = req.body || {};
+  const query = question || message;
+
+  if (!query || typeof query !== 'string' || !query.trim()) {
+    return res.status(400).json({ success: false, error: 'Query is required.' });
+  }
+
+  const systemInstruction = `You are an elite enterprise technical advisor representing SiPro Technologies, an MSME-registered enterprise cloud architecture and software engineering consultancy based in Hanamkonda, Telangana, India.
+Your mission is to provide concise, accurate, actionable, and professional answers regarding:
+- SiPro's dedicated engineering pods (Sprint Pod at ₹1.2L / $1,450, Dedicated Pod at ₹2.4L / $2,900, Enterprise Architecture at ₹4.8L / $5,800).
+- Strict India Digital Personal Data Protection (DPDP) Act 2023 compliance, Data Fiduciary obligations, and 100% intellectual property (IP) transfer upon invoice clearance.
+- Enterprise cloud architectures across Kubernetes (GKE/EKS), Istio, Go, TypeScript/Next.js, Citus-sharded PostgreSQL, and Kafka.
+- 5-day kickoff sprints and 18% GST tax-compliant invoicing (GSTIN: 36AAACS1234A1Z5).
+- Direct contact: contact@sipro.tech.
+Keep responses polished, formatted in clear markdown with bullet points, and under 160 words when possible.`;
+
+  try {
+    const ai = getGeminiClient();
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.5-flash',
+      contents: String(query),
+      config: {
+        systemInstruction
+      }
+    });
+
+    res.json({
+      success: true,
+      text: response.text || '',
+      answer: response.text || '',
+      conversationId: conversationId || 'sm_' + Date.now(),
+      disclaimer: 'Powered by SiteMind AI. Chat interactions are used solely to assist your inquiries in accordance with our Privacy Policy. Do not share confidential credentials.'
+    });
+  } catch (err: any) {
+    let fallback = 'Thank you for your question. SiPro Technologies provides dedicated engineering pods, cloud-native architectures (Kubernetes/PostgreSQL), and complete DPDP Act 2023 data fiduciary compliance.';
+    const q = query.toLowerCase();
+
+    if (q.includes('pric') || q.includes('cost') || q.includes('tier') || q.includes('retainer') || q.includes('rate') || q.includes('fee')) {
+      fallback = '**SiPro Engineering Retainer Tiers:**\n\n- **Sprint Pod:** ₹1,20,000 / $1,450 per 2-week sprint\n- **Dedicated Pod:** ₹2,40,000 / $2,900 per month (Full engineering squad: Senior Lead + 2 Engineers)\n- **Enterprise Architecture:** ₹4,80,000 / $5,800 per month (Kubernetes multi-region failover, 24/7 SLA, DPDP audits)\n\nAll invoices are 18% GST compliant for corporate input credit (GSTIN: `36AAACS1234A1Z5`).';
+    } else if (q.includes('dpdp') || q.includes('privacy') || q.includes('gdpr') || q.includes('ip')) {
+      fallback = '**DPDP Act 2023 & Compliance Guarantee:**\n\nSiPro Technologies operates as an MSME-registered Data Fiduciary under the Digital Personal Data Protection Act 2023.\n- **100% IP & Copyright Transfer:** Full source code ownership transferred on payment.\n- **Statutory Governance:** Verifiable consent logs and Grievance Officer (`grievance@sipro.tech`). Manage rights anytime via our Privacy Rights Portal.';
+    } else if (q.includes('cloud') || q.includes('kubernetes') || q.includes('stack') || q.includes('architecture')) {
+      fallback = '**Enterprise Cloud Stack:**\n\n- **Orchestration:** Kubernetes (GKE / AWS EKS), Istio Service Mesh, ArgoCD\n- **Microservices:** Go, TypeScript (Node/Next.js 15), Python FastAPI\n- **Data Layer:** PostgreSQL with Citus sharding, Redis caching, Apache Kafka event meshes';
+    } else if (q.includes('5-day') || q.includes('kickoff') || q.includes('timeline')) {
+      fallback = '**5-Day Pod Kickoff Process:**\n\n1. Day 1: Architecture scoping\n2. Day 2: Lead architect & developer pairing\n3. Day 3: Repo access & credential setup\n4. Day 4: Backlog grooming & sprint 1 commit plan\n5. Day 5: Active sprint kickoff with live code delivery';
+    }
+
+    res.json({
+      success: true,
+      text: fallback,
+      answer: fallback,
+      conversationId: conversationId || 'sm_' + Date.now(),
+      disclaimer: 'Powered by SiteMind AI. Chat interactions are used solely to assist your inquiries in accordance with our Privacy Policy. Do not share confidential credentials.'
+    });
+  }
+});
+
 // 2. AI Image Generation & Editing
 app.post('/api/v1/ai/image', async (req: Request, res: Response) => {
   const { prompt, image, mimeType, aspectRatio, imageSize } = req.body || {};
@@ -1376,8 +1452,10 @@ app.use(express.static(publicDir, {
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.html')) {
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-    } else if (filePath.match(/\.(css|js|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$/)) {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (filePath.match(/\.(css|js|svg)$/)) {
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    } else if (filePath.match(/\.(woff2?|ttf|eot|png|jpg|jpeg|gif|webp|ico)$/)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400, must-revalidate');
     }
   }
 }));

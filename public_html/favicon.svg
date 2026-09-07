@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="fav-grad-s" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+    <linearGradient id="fav-grad-p" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <radialGradient id="fav-ocean" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="40%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </radialGradient>
+  </defs>
+  <!-- Dark Navy Pill Background for Favicon Distinction -->
+  <rect width="256" height="256" rx="56" fill="#0f172a" />
+  
+  <!-- Outer Subtle Tech Border -->
+  <rect x="2" y="2" width="252" height="252" rx="54" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3" />
+
+  <!-- S glyph -->
+  <path d="M 108,72 C 108,52 92,42 72,42 C 48,42 32,54 32,74 C 32,106 102,94 102,122 C 102,140 86,152 62,152 C 36,152 22,136 20,116 L 42,112 C 44,124 52,134 64,134 C 76,134 84,126 84,114 C 84,82 14,94 14,66 C 14,46 32,28 70,28 C 102,28 124,44 126,72 Z" fill="url(#fav-grad-s)" />
+  
+  <!-- P glyph -->
+  <path d="M 130,30 L 194,30 C 224,30 244,48 244,82 C 244,116 224,134 194,134 L 156,134 L 156,176 L 130,176 Z M 156,50 L 156,114 L 192,114 C 210,114 220,102 220,82 C 220,62 210,50 192,50 Z" fill="url(#fav-grad-p)" />
+
+  <!-- Constellation Nodes & Connecting Link Lines -->
+  <g stroke="#ffffff" stroke-width="1.2" opacity="0.65">
+    <line x1="50" y1="46" x2="80" y2="36" />
+    <line x1="80" y1="36" x2="106" y2="58" />
+    <line x1="106" y1="58" x2="68" y2="76" />
+    <line x1="68" y1="76" x2="34" y2="76" />
+    <line x1="34" y1="76" x2="56" y2="104" />
+    <line x1="56" y1="104" x2="94" y2="114" />
+    <line x1="94" y1="114" x2="72" y2="142" />
+
+    <line x1="140" y1="40" x2="180" y2="34" />
+    <line x1="180" y1="34" x2="226" y2="54" />
+    <line x1="226" y1="54" x2="236" y2="82" />
+    <line x1="236" y1="82" x2="210" y2="118" />
+    <line x1="210" y1="118" x2="164" y2="124" />
+    <line x1="140" y1="40" x2="140" y2="100" />
+    <line x1="140" y1="100" x2="140" y2="168" />
+  </g>
+  <g fill="#ffffff" opacity="0.9">
+    <circle cx="50" cy="46" r="2.8" />
+    <circle cx="80" cy="36" r="2.8" />
+    <circle cx="106" cy="58" r="3" />
+    <circle cx="68" cy="76" r="2.8" />
+    <circle cx="56" cy="104" r="2.8" />
+    <circle cx="94" cy="114" r="3" />
+    <circle cx="72" cy="142" r="3" />
+    
+    <circle cx="140" cy="40" r="2.8" />
+    <circle cx="180" cy="34" r="3" />
+    <circle cx="226" cy="54" r="3.2" />
+    <circle cx="236" cy="82" r="3.5" />
+    <circle cx="210" cy="118" r="3" />
+    <circle cx="164" cy="124" r="2.8" />
+    <circle cx="140" cy="168" r="3" />
+  </g>
+
+  <!-- Mini Earth Globe Dot Accent -->
+  <g transform="translate(196, 196)">
+    <circle cx="0" cy="0" r="28" fill="#38bdf8" opacity="0.3" />
+    <circle cx="0" cy="0" r="24" fill="url(#fav-ocean)" />
+    <!-- Continents -->
+    <path d="M -12,-8 C -8,-14 0,-12 4,-8 C 2,-2 -4,2 -6,8 C -12,4 -14,-2 -12,-8 Z" fill="#10b981" opacity="0.95" />
+    <circle cx="8" cy="4" r="4" fill="#10b981" opacity="0.9" />
+    <circle cx="0" cy="0" r="24" stroke="rgba(56,189,248,0.7)" stroke-width="1.5" fill="none" />
+    <circle cx="-5" cy="-6" r="6" fill="#ffffff" opacity="0.3" />
+  </g>
+</svg>

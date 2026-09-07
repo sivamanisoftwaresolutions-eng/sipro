@@ -155,6 +155,38 @@ html.light .site-header {
   text-decoration: none;
 }
 
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.brand-logo-img.dark-only {
+  display: block;
+}
+.brand-logo-img.light-only {
+  display: none;
+}
+
+html.light .brand-logo-img.dark-only {
+  display: none;
+}
+html.light .brand-logo-img.light-only {
+  display: block;
+}
+
+.brand-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.brand-logo-img.footer-logo {
+  height: 42px;
+  max-width: 240px;
+}
+
 .brand-badge {
   display: flex;
   align-items: center;
@@ -761,7 +793,7 @@ html.light .theme-toggle-btn .icon-moon {
   position: fixed;
   inset: 0;
   background: rgba(2, 6, 23, 0.9);
-  z-index: 9998;
+  z-index: 50;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -782,7 +814,7 @@ html.light .theme-toggle-btn .icon-moon {
   height: 100vh;
   background: #080e1e;
   border-left: 1px solid rgba(255, 255, 255, 0.12);
-  z-index: 9999;
+  z-index: 50;
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
@@ -1560,7 +1592,7 @@ html.light .mobile-drawer-footer {
 }
 
 /* ==========================================================================
-   Hero & Standard Section Styles
+   Hero & Standard Section Styles (Contextual Enterprise Background Assets)
    ========================================================================== */
 .hero {
   padding: 88px 0 72px;
@@ -1568,9 +1600,9 @@ html.light .mobile-drawer-footer {
   overflow: hidden;
   background-color: #070d1e;
   background-image: 
-    linear-gradient(180deg, rgba(7, 13, 30, 0.72) 0%, rgba(7, 13, 30, 0.88) 60%, rgba(7, 13, 30, 0.98) 100%),
-    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.22), transparent 60%),
-    url('assets/hero-cityscape.jpg');
+    linear-gradient(180deg, rgba(7, 13, 30, 0.45) 0%, rgba(7, 13, 30, 0.65) 50%, rgba(7, 13, 30, 0.92) 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.30), transparent 60%),
+    url('/assets/images/hero-cloud-skyline.jpg');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -1579,9 +1611,176 @@ html.light .mobile-drawer-footer {
 html.light .hero {
   background-color: #f8fafc;
   background-image: 
-    linear-gradient(180deg, rgba(248, 250, 252, 0.90) 0%, rgba(248, 250, 252, 0.96) 60%, #ffffff 100%),
-    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.12), transparent 60%),
-    url('assets/hero-cityscape.jpg');
+    linear-gradient(180deg, rgba(248, 250, 252, 0.70) 0%, rgba(248, 250, 252, 0.85) 60%, #ffffff 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.15), transparent 60%),
+    url('/assets/images/hero-cloud-skyline.jpg');
+}
+
+/* Contextual Hero Variants */
+.hero.hero-cloud {
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.50) 0%, rgba(7, 13, 30, 0.68) 50%, rgba(7, 13, 30, 0.92) 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(14, 165, 233, 0.30), transparent 60%),
+    url('/assets/images/cloud-datacenter.jpg');
+}
+html.light .hero.hero-cloud {
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.70) 0%, rgba(248, 250, 252, 0.85) 60%, #ffffff 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(14, 165, 233, 0.15), transparent 60%),
+    url('/assets/images/cloud-datacenter.jpg');
+}
+
+.hero.hero-software {
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.50) 0%, rgba(7, 13, 30, 0.68) 50%, rgba(7, 13, 30, 0.92) 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.30), transparent 60%),
+    url('/assets/images/software-engineering-pod.jpg');
+}
+html.light .hero.hero-software {
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.70) 0%, rgba(248, 250, 252, 0.85) 60%, #ffffff 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.15), transparent 60%),
+    url('/assets/images/software-engineering-pod.jpg');
+}
+
+.hero.hero-talent {
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.50) 0%, rgba(7, 13, 30, 0.68) 50%, rgba(7, 13, 30, 0.92) 100%),
+    radial-gradient(ellipse at 20% 50%, rgba(245, 158, 11, 0.25), transparent 60%),
+    url('/assets/images/talent-academy-lab.jpg');
+}
+html.light .hero.hero-talent {
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.70) 0%, rgba(248, 250, 252, 0.85) 60%, #ffffff 100%),
+    radial-gradient(ellipse at 20% 50%, rgba(245, 158, 11, 0.15), transparent 60%),
+    url('/assets/images/talent-academy-lab.jpg');
+}
+
+.hero.hero-global {
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.50) 0%, rgba(7, 13, 30, 0.68) 50%, rgba(7, 13, 30, 0.92) 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.30), transparent 60%),
+    url('/assets/images/global-network-cyber.jpg');
+}
+html.light .hero.hero-global {
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.70) 0%, rgba(248, 250, 252, 0.85) 60%, #ffffff 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.15), transparent 60%),
+    url('/assets/images/global-network-cyber.jpg');
+}
+
+/* Specialized Section Atmospheric Backgrounds (Rich Photographic Visibility) */
+.home-hero-bg {
+  background-color: #070d1e;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.45) 0%, rgba(7, 13, 30, 0.65) 50%, rgba(7, 13, 30, 0.92) 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.35), transparent 60%),
+    url('/assets/images/hero-cloud-skyline.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+html.light .home-hero-bg {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.70) 0%, rgba(248, 250, 252, 0.85) 60%, #ffffff 100%),
+    radial-gradient(ellipse at 70% 30%, rgba(99, 102, 241, 0.15), transparent 60%),
+    url('/assets/images/hero-cloud-skyline.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.capability-navigator-bg {
+  background-color: #070d1e;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.65) 0%, rgba(7, 13, 30, 0.82) 100%),
+    radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.25), transparent 50%),
+    url('/assets/images/cloud-datacenter.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+html.light .capability-navigator-bg {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.80) 0%, rgba(248, 250, 252, 0.92) 100%),
+    radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.12), transparent 50%),
+    url('/assets/images/cloud-datacenter.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bento-banner-bg {
+  background-image: 
+    linear-gradient(135deg, rgba(15, 23, 42, 0.72) 0%, rgba(7, 13, 30, 0.85) 100%),
+    url('/assets/images/software-engineering-pod.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.careers-spotlight-bg {
+  background-color: #070d1e;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.65) 0%, rgba(7, 13, 30, 0.82) 100%),
+    radial-gradient(ellipse at 20% 50%, rgba(245, 158, 11, 0.20), transparent 50%),
+    url('/assets/images/talent-academy-lab.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+html.light .careers-spotlight-bg {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.80) 0%, rgba(248, 250, 252, 0.92) 100%),
+    radial-gradient(ellipse at 20% 50%, rgba(245, 158, 11, 0.10), transparent 50%),
+    url('/assets/images/talent-academy-lab.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contact-section-bg {
+  background-color: #070d1e;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.65) 0%, rgba(7, 13, 30, 0.84) 100%),
+    radial-gradient(ellipse at 80% 40%, rgba(99, 102, 241, 0.25), transparent 60%),
+    url('/assets/images/global-network-cyber.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+html.light .contact-section-bg {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.80) 0%, rgba(248, 250, 252, 0.92) 100%),
+    radial-gradient(ellipse at 80% 40%, rgba(99, 102, 241, 0.10), transparent 60%),
+    url('/assets/images/global-network-cyber.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cta-banner-bg {
+  background-color: #070d1e;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.60) 0%, rgba(7, 13, 30, 0.80) 100%),
+    radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.30), transparent 70%),
+    url('/assets/images/hero-cloud-skyline.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+html.light .cta-banner-bg {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.75) 0%, rgba(248, 250, 252, 0.90) 100%),
+    radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.15), transparent 70%),
+    url('/assets/images/hero-cloud-skyline.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 .hero-grid {
@@ -1898,6 +2097,23 @@ html.light .section.alt {
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
+  position: relative;
+  background-color: #070d1e;
+  background-image: 
+    linear-gradient(180deg, rgba(7, 13, 30, 0.84) 0%, rgba(7, 13, 30, 0.94) 100%),
+    radial-gradient(ellipse at 50% 30%, rgba(99, 102, 241, 0.18), transparent 70%),
+    url('/assets/images/cloud-datacenter.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+html.light .auth-page-shell {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(180deg, rgba(248, 250, 252, 0.90) 0%, rgba(248, 250, 252, 0.96) 100%),
+    radial-gradient(ellipse at 50% 30%, rgba(99, 102, 241, 0.10), transparent 70%),
+    url('/assets/images/cloud-datacenter.jpg');
 }
 
 .auth-modal-backdrop {
@@ -1906,7 +2122,7 @@ html.light .section.alt {
   background: rgba(2, 6, 23, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  z-index: 10000;
+  z-index: 70;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4212,7 +4428,7 @@ html.light .celebration-card {
   right: 24px;
   max-width: 960px;
   margin: 0 auto;
-  z-index: 999;
+  z-index: 60;
   background: rgba(17, 24, 39, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -4551,7 +4767,7 @@ html.light .pricing-auth-gate-box {
   background: rgba(10, 15, 30, 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 99999;
+  z-index: 70;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -5124,7 +5340,7 @@ html.light .deliverable-meta-grid {
   background: rgba(5, 10, 25, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 99999;
+  z-index: 70;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5350,7 +5566,7 @@ html.light .deliverable-meta-grid {
 .ai-studio-modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 70;
   background: rgba(3, 7, 18, 0.82);
   backdrop-filter: blur(12px);
   display: none;
@@ -5748,6 +5964,37 @@ html.light .ai-studio-preview-box {
   }
 }
 
+/* ==========================================================================
+   SiteMind AI Assistant Widget Cadence & Cookie Banner Coordination
+   Z-Index Hierarchy:
+   - Normal page sections: < 40
+   - SiteMind Widget: 40
+   - Mobile Navigation Drawer: 50
+   - Cookie Consent Banner: 60
+   - Compliance Modals / Popups: 70
+   ========================================================================== */
+#sitemind-widget-container {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  z-index: 40 !important;
+}
 
+#sitemind-widget-panel {
+  z-index: 40 !important;
+}
 
-
+/* Cookie Banner Collision Safeguard on Mobile Viewports */
+@media (max-width: 768px) {
+  body.has-cookie-banner #sitemind-widget-trigger,
+  body.has-cookie-banner .sitemind-trigger-btn,
+  #sitemind-widget-container[data-cookie-banner-active="true"] #sitemind-widget-trigger,
+  #sitemind-widget-container[data-cookie-banner-active="true"] .sitemind-trigger-btn,
+  .dpdp-consent-banner.show ~ #sitemind-widget-container #sitemind-widget-trigger {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(24px) scale(0.9) !important;
+    visibility: hidden !important;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease !important;
+  }
+}
